@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kermanager/api/api_response.dart';
-import 'package:kermanager/data/sign_in_response.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:kermanager/api/api_response.dart';
+import 'package:kermanager/providers/auth_provider.dart';
+import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/auth_service.dart';
+import 'package:kermanager/data/sign_in_response.dart';
+import 'package:kermanager/router/auth/routes.dart';
+import 'package:kermanager/api/api_constants.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -29,6 +36,18 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       );
     } else {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.setString(
+        ApiConstants.tokenKey,
+        response.data!.token,
+      );
+      Provider.of<AuthProvider>(context, listen: false).setUser(
+        response.data!.id,
+        response.data!.name,
+        response.data!.email,
+        response.data!.role,
+      );
+      context.go(ManagerRoutes.dashboard);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Sign in successful'),
@@ -64,6 +83,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 'Sign In',
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                context.push(AuthRoutes.signUp);
+              },
+              child: const Text(
+                'Sign Up',
+              ),
+            )
           ],
         ),
       ),

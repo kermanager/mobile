@@ -1,5 +1,6 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/get_me_response.dart';
 import 'package:kermanager/data/sign_in_request.dart';
 import 'package:kermanager/data/sign_in_response.dart';
 import 'package:kermanager/data/sign_up_request.dart';
@@ -42,6 +43,17 @@ class AuthService {
       (data) {
         SignInResponse signInResponse = SignInResponse.fromJson(data);
         return signInResponse;
+      },
+    );
+  }
+
+  Future<ApiResponse<GetMeResponse>> getMe() async {
+    return _apiService.get<GetMeResponse>(
+      "me",
+      null,
+      (data) {
+        GetMeResponse getMeResponse = GetMeResponse.fromJson(data);
+        return getMeResponse;
       },
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:kermanager/services/auth_service.dart';
 import 'package:kermanager/api/api_response.dart';
@@ -32,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       );
     } else {
+      context.pop();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Sign up successful'),
@@ -79,6 +81,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'Sign Up',
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                context.pop();
+              },
+              child: const Text(
+                'Sign In',
+              ),
+            )
           ],
         ),
       ),
