@@ -116,7 +116,7 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         context.push(
-                          ManagerRoutes.kermesseUsers,
+                          ManagerRoutes.kermesseUserList,
                           extra: {
                             "kermesseId": data.id,
                           },
@@ -125,15 +125,36 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                       child: const Text("Users"),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(
+                          ManagerRoutes.kermesseStandList,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
                       child: const Text("Stands"),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(
+                          ManagerRoutes.kermesseTombolaList,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
                       child: const Text("Tombolas"),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(
+                          ManagerRoutes.kermesseInteractionList,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
                       child: const Text("Interactions"),
                     )
                   ],

@@ -6,7 +6,10 @@ import 'package:kermanager/screens/manager/dashboard_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_create_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_details_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_edit_screen.dart';
+import 'package:kermanager/screens/manager/kermesse_interaction_list_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_list_screen.dart';
+import 'package:kermanager/screens/manager/kermesse_stand_list_screen.dart';
+import 'package:kermanager/screens/manager/kermesse_tombola_list_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_user_list_screen.dart';
 import 'package:kermanager/screens/manager/profile_screen.dart';
 
@@ -75,12 +78,48 @@ class ManagerRouter {
             },
           ),
           GoRoute(
-            path: ManagerRoutes.kermesseUsers,
+            path: ManagerRoutes.kermesseUserList,
             pageBuilder: (context, state) {
               final params =
                   GoRouterState.of(context).extra as Map<String, int>;
               return NoTransitionPage(
                 child: KermesseUserListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.kermesseStandList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseStandListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.kermesseTombolaList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseTombolaListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.kermesseInteractionList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseInteractionListScreen(
                   kermesseId: params['kermesseId']!,
                 ),
               );
