@@ -95,8 +95,8 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                         ? Column(
                             children: [
                               ElevatedButton(
-                                onPressed: () {
-                                  context.push(
+                                onPressed: () async {
+                                  await context.push(
                                     ManagerRoutes.kermesseEdit,
                                     extra: {
                                       "kermesseId": data.id,
