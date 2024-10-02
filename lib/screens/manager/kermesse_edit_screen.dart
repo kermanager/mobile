@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
-import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/text_input.dart';
 
-class KermesseDetailsScreen extends StatefulWidget {
+class KermesseEditScreen extends StatefulWidget {
   final int kermesseId;
 
-  const KermesseDetailsScreen({
+  const KermesseEditScreen({
     super.key,
     required this.kermesseId,
   });
 
   @override
-  State<KermesseDetailsScreen> createState() => _KermesseDetailsScreenState();
+  State<KermesseEditScreen> createState() => _KermesseEditScreenState();
 }
 
-class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
+class _KermesseEditScreenState extends State<KermesseEditScreen> {
   final Key _key = UniqueKey();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   final KermesseService _kermesseService = KermesseService();
 
@@ -34,9 +36,12 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
     return response.data!;
   }
 
-  Future<void> _end() async {
-    ApiResponse<Null> response =
-        await _kermesseService.end(id: widget.kermesseId);
+  Future<void> _submit() async {
+    ApiResponse<Null> response = await _kermesseService.edit(
+      id: widget.kermesseId,
+      name: _nameController.text,
+      description: _descriptionController.text,
+    );
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -46,15 +51,11 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Kermesse Ended successfully'),
+          content: Text('Kermesse edited successfully'),
         ),
       );
-      _refresh();
+      context.pop();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -64,7 +65,7 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Kermesse Details",
+            "Kermesse Edit",
           ),
           FutureBuilder<KermesseDetailsResponse>(
             key: _key,
@@ -87,32 +88,20 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.description),
-                    Text(data.status),
-                    data.status == "STARTED"
-                        ? Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.push(
-                                    ManagerRoutes.kermesseEdit,
-                                    extra: {
-                                      "kermesseId": data.id,
-                                    },
-                                  );
-                                  _refresh();
-                                },
-                                child: const Text("Edit"),
-                              ),
-                              ElevatedButton(
-                                onPressed: _end,
-                                child: const Text("End"),
-                              )
-                            ],
-                          )
-                        : const SizedBox.shrink(),
+                    TextInput(
+                      hintText: "Name",
+                      controller: _nameController,
+                      defaultValue: data.name,
+                    ),
+                    TextInput(
+                      hintText: "Description",
+                      controller: _descriptionController,
+                      defaultValue: data.name,
+                    ),
+                    ElevatedButton(
+                      onPressed: _submit,
+                      child: const Text('Save'),
+                    ),
                   ],
                 );
               }
@@ -124,5 +113,12 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 }
