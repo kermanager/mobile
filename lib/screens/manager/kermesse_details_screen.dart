@@ -113,6 +113,29 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                             ],
                           )
                         : const SizedBox.shrink(),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.push(
+                          ManagerRoutes.kermesseUsers,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
+                      child: const Text("Users"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Stands"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Tombolas"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Interactions"),
+                    )
                   ],
                 );
               }
