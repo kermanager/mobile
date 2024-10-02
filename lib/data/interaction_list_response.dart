@@ -62,8 +62,8 @@ class InteractionListItem {
   final int kermesseId;
   final String type;
   final String status;
-  final String credit;
-  final String point;
+  final int credit;
+  final int point;
   final InteractionUser user;
   final InteractionStand stand;
 

@@ -49,7 +49,12 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              context.push(ManagerRoutes.kermesseCreate);
+              context.push(
+                ManagerRoutes.kermesseTombolaCreate,
+                extra: {
+                  "kermesseId": widget.kermesseId,
+                },
+              );
               _refresh();
             },
             child: const Text('Create'),

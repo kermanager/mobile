@@ -5,7 +5,7 @@ class TombolaListItem {
   final int kermesseId;
   final String name;
   final String status;
-  final String price;
+  final int price;
   final String gift;
 
   TombolaListItem({
