@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kermanager/router/child/routes.dart';
+import 'package:kermanager/router/parent/routes.dart';
+import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -47,7 +50,15 @@ class _SignInScreenState extends State<SignInScreen> {
         response.data!.email,
         response.data!.role,
       );
-      context.go(ManagerRoutes.dashboard);
+      if (response.data!.role == "MANAGER") {
+        context.go(ManagerRoutes.dashboard);
+      } else if (response.data!.role == "STAND_HOLDER") {
+        context.go(StandHolderRoutes.dashboard);
+      } else if (response.data!.role == "PARENT") {
+        context.go(ParentRoutes.dashboard);
+      } else if (response.data!.role == "CHILD") {
+        context.go(ChildRoutes.dashboard);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Sign in successful'),

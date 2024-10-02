@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:kermanager/router/auth/routes.dart';
+import 'package:kermanager/providers/auth_provider.dart';
+import 'package:kermanager/api/api_constants.dart';
+
+class SignOutButton extends StatefulWidget {
+  const SignOutButton({super.key});
+
+  @override
+  State<SignOutButton> createState() => _SignOutButtonState();
+}
+
+class _SignOutButtonState extends State<SignOutButton> {
+  Future<void> _signOut() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.remove(ApiConstants.tokenKey);
+    Provider.of<AuthProvider>(context, listen: false).setUser(-1, "", "", "");
+    context.go(AuthRoutes.signIn);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Signed out successfully"),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: _signOut,
+      child: const Text("Sign Out"),
+    );
+  }
+}

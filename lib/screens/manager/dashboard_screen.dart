@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/widgets/sign_out_button.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -12,8 +13,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: Text(
-          'Dashboard Manager',
+        child: Column(
+          children: [
+            Text(
+              'Dashboard Manager',
+            ),
+            SignOutButton(),
+          ],
         ),
       ),
     );
