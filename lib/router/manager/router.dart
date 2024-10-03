@@ -16,6 +16,8 @@ import 'package:kermanager/screens/manager/kermesse_tombola_edit_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_tombola_list_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_user_list_screen.dart';
 import 'package:kermanager/screens/manager/profile_screen.dart';
+import 'package:kermanager/screens/manager/ticket_details_screen.dart';
+import 'package:kermanager/screens/manager/ticket_list_screen.dart';
 
 class ManagerRouter {
   static StatefulShellRoute routes = StatefulShellRoute.indexedStack(
@@ -176,6 +178,28 @@ class ManagerRouter {
                 child: KermesseInteractionDetailsScreen(
                   kermesseId: params['kermesseId']!,
                   interactionId: params['interactionId']!,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: ManagerRoutes.ticketList,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TicketListScreen(),
+            ),
+          ),
+          GoRoute(
+            path: ManagerRoutes.ticketDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: TicketDetailsScreen(
+                  ticketId: params['ticketId']!,
                 ),
               );
             },

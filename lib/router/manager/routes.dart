@@ -17,4 +17,6 @@ class ManagerRoutes {
       '/manager/kermesse-interaction-list';
   static const String kermesseInteractionDetails =
       '/manager/kermesse-interaction-details';
+  static const String ticketList = '/manager/ticket-list';
+  static const String ticketDetails = '/manager/ticket-details';
 }

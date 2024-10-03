@@ -37,6 +37,10 @@ class ManagerBottomNavigation extends StatelessWidget {
             icon: Icon(Icons.person),
             label: 'Kermesses',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Tickets',
+          ),
         ],
       ),
     );
