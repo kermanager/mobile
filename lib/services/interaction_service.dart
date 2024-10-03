@@ -1,5 +1,6 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/interaction_details_response.dart';
 import 'package:kermanager/data/interaction_list_response.dart';
 
 class InteractionService {
@@ -15,6 +16,20 @@ class InteractionService {
         InteractionListResponse interactionListResponse =
             InteractionListResponse.fromJson(data);
         return interactionListResponse.interactions;
+      },
+    );
+  }
+
+  Future<ApiResponse<InteractionDetailsResponse>> details({
+    required int interactionId,
+  }) async {
+    return _apiService.get<InteractionDetailsResponse>(
+      "interactions/$interactionId",
+      null,
+      (data) {
+        InteractionDetailsResponse interactionDetailsResponse =
+            InteractionDetailsResponse.fromJson(data);
+        return interactionDetailsResponse;
       },
     );
   }

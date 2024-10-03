@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/interaction_list_response.dart';
+import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/interaction_service.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
@@ -68,6 +70,15 @@ class _KermesseInteractionListScreenState
                       return ListTile(
                         title: Text(item.user.name),
                         subtitle: Text(item.credit.toString()),
+                        onTap: () async {
+                          await context.push(
+                            ManagerRoutes.kermesseInteractionDetails,
+                            extra: {
+                              "kermesseId": widget.kermesseId,
+                              "interactionId": item.id,
+                            },
+                          );
+                        },
                       );
                     },
                   );

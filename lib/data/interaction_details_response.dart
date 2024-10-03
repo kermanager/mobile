@@ -57,7 +57,34 @@ class InteractionStand {
   }
 }
 
-class InteractionListItem {
+class InteractionKermesse {
+  final int id;
+  final String name;
+  final String description;
+  final String status;
+
+  InteractionKermesse({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.status,
+  });
+
+  factory InteractionKermesse.fromMap(Map<String, dynamic> json) {
+    return InteractionKermesse(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      status: json['status'],
+    );
+  }
+
+  factory InteractionKermesse.fromJson(String source) {
+    return InteractionKermesse.fromMap(json.decode(source));
+  }
+}
+
+class InteractionDetailsResponse {
   final int id;
   final String type;
   final String status;
@@ -65,8 +92,9 @@ class InteractionListItem {
   final int point;
   final InteractionUser user;
   final InteractionStand stand;
+  final InteractionKermesse kermesse;
 
-  InteractionListItem({
+  InteractionDetailsResponse({
     required this.id,
     required this.type,
     required this.status,
@@ -74,10 +102,11 @@ class InteractionListItem {
     required this.point,
     required this.user,
     required this.stand,
+    required this.kermesse,
   });
 
-  factory InteractionListItem.fromMap(Map<String, dynamic> json) {
-    return InteractionListItem(
+  factory InteractionDetailsResponse.fromMap(Map<String, dynamic> json) {
+    return InteractionDetailsResponse(
       id: json['id'],
       type: json['type'],
       status: json['status'],
@@ -85,29 +114,11 @@ class InteractionListItem {
       point: json['point'],
       user: InteractionUser.fromMap(json['user']),
       stand: InteractionStand.fromMap(json['stand']),
+      kermesse: InteractionKermesse.fromMap(json['kermesse']),
     );
   }
 
-  factory InteractionListItem.fromJson(String source) {
-    return InteractionListItem.fromMap(json.decode(source));
-  }
-}
-
-class InteractionListResponse {
-  final List<InteractionListItem> interactions;
-
-  InteractionListResponse({
-    required this.interactions,
-  });
-
-  factory InteractionListResponse.fromList(List<dynamic> list) {
-    return InteractionListResponse(
-      interactions:
-          list.map((item) => InteractionListItem.fromMap(item)).toList(),
-    );
-  }
-
-  factory InteractionListResponse.fromJson(String source) {
-    return InteractionListResponse.fromList(json.decode(source));
+  factory InteractionDetailsResponse.fromJson(String source) {
+    return InteractionDetailsResponse.fromMap(json.decode(source));
   }
 }

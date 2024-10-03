@@ -15,4 +15,6 @@ class ManagerRoutes {
   static const String kermesseTombolaEdit = '/manager/kermesse-tombola-edit';
   static const String kermesseInteractionList =
       '/manager/kermesse-interaction-list';
+  static const String kermesseInteractionDetails =
+      '/manager/kermesse-interaction-details';
 }
