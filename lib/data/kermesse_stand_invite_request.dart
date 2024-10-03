@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-class StandInviteRequest {
+class KermesseStandInviteRequest {
   final int standId;
 
-  StandInviteRequest({
+  KermesseStandInviteRequest({
     required this.standId,
   });
 

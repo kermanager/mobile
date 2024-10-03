@@ -1,6 +1,5 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
-import 'package:kermanager/data/stand_invite_request.dart';
 import 'package:kermanager/data/stand_list_response.dart';
 
 class StandService {
@@ -25,21 +24,6 @@ class StandService {
         StandListResponse standListResponse = StandListResponse.fromJson(data);
         return standListResponse.stands;
       },
-    );
-  }
-
-  Future<ApiResponse<Null>> invite({
-    required int kermesseId,
-    required int standId,
-  }) async {
-    StandInviteRequest body = StandInviteRequest(
-      standId: standId,
-    );
-
-    return _apiService.patch(
-      "kermesses/$kermesseId/stands",
-      body.toJson(),
-      (_) => null,
     );
   }
 }

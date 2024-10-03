@@ -4,6 +4,8 @@ import 'package:kermanager/data/kermesse_create_request.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
 import 'package:kermanager/data/kermesse_edit_request.dart';
 import 'package:kermanager/data/kermesse_list_response.dart';
+import 'package:kermanager/data/kermesse_stand_invite_request.dart';
+import 'package:kermanager/data/kermesse_user_invite_request.dart';
 
 class KermesseService {
   final ApiService _apiService = ApiService();
@@ -71,6 +73,36 @@ class KermesseService {
     return _apiService.patch(
       "kermesses/$id/end",
       "",
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> inviteStand({
+    required int kermesseId,
+    required int standId,
+  }) async {
+    KermesseStandInviteRequest body = KermesseStandInviteRequest(
+      standId: standId,
+    );
+
+    return _apiService.patch(
+      "kermesses/$kermesseId/stands",
+      body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> inviteUser({
+    required int kermesseId,
+    required int userId,
+  }) async {
+    KermesseUserInviteRequest body = KermesseUserInviteRequest(
+      userId: userId,
+    );
+
+    return _apiService.patch(
+      "kermesses/$kermesseId/users",
+      body.toJson(),
       (_) => null,
     );
   }

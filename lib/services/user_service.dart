@@ -17,4 +17,17 @@ class UserService {
       },
     );
   }
+
+  Future<ApiResponse<List<UserListItem>>> listInviteKermesse({
+    required int kermesseId,
+  }) {
+    return _apiService.get<List<UserListItem>>(
+      "kermesses/$kermesseId/users",
+      null,
+      (data) {
+        UserListResponse userListResponse = UserListResponse.fromJson(data);
+        return userListResponse.users;
+      },
+    );
+  }
 }

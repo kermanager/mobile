@@ -48,7 +48,12 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await context.push(ManagerRoutes.kermesseCreate);
+              await context.push(
+                ManagerRoutes.kermesseUserInvite,
+                extra: {
+                  'kermesseId': widget.kermesseId,
+                },
+              );
               _refresh();
             },
             child: const Text('Invite'),

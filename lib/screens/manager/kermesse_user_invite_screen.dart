@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:kermanager/api/api_response.dart';
-import 'package:kermanager/data/stand_list_response.dart';
+import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
-import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
-class KermesseStandInviteScreen extends StatefulWidget {
+class KermesseUserInviteScreen extends StatefulWidget {
   final int kermesseId;
 
-  const KermesseStandInviteScreen({
+  const KermesseUserInviteScreen({
     super.key,
     required this.kermesseId,
   });
 
   @override
-  State<KermesseStandInviteScreen> createState() =>
-      _KermesseStandInviteScreenState();
+  State<KermesseUserInviteScreen> createState() =>
+      _KermesseUserInviteScreenState();
 }
 
-class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
+class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
   final Key _key = UniqueKey();
 
-  final StandService _standService = StandService();
+  final UserService _userService = UserService();
   final KermesseService _kermesseService = KermesseService();
 
-  Future<List<StandListItem>> _getAll() async {
-    ApiResponse<List<StandListItem>> response = await _standService.list(
-      isFree: true,
-    );
+  Future<List<UserListItem>> _getAll() async {
+    ApiResponse<List<UserListItem>> response =
+        await _userService.listInviteKermesse(kermesseId: widget.kermesseId);
     if (response.error != null) {
       throw Exception(response.error);
     }
     return response.data!;
   }
 
-  Future<void> _invite(int standId) async {
-    ApiResponse<Null> response = await _kermesseService.inviteStand(
+  Future<void> _invite(int userId) async {
+    ApiResponse<Null> response = await _kermesseService.inviteUser(
       kermesseId: widget.kermesseId,
-      standId: standId,
+      userId: userId,
     );
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +47,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Stand invited successfully'),
+          content: Text('User invited successfully'),
         ),
       );
       _refresh();
@@ -66,10 +65,10 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Kermesse Stand Invite",
+            "Kermesse User Invite",
           ),
           Expanded(
-            child: FutureBuilder<List<StandListItem>>(
+            child: FutureBuilder<List<UserListItem>>(
               key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
@@ -89,10 +88,10 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      StandListItem item = snapshot.data![index];
+                      UserListItem item = snapshot.data![index];
                       return ListTile(
                         title: Text(item.name),
-                        subtitle: Text(item.type),
+                        subtitle: Text(item.email),
                         leading: ElevatedButton(
                           onPressed: () async {
                             await _invite(item.id);
@@ -104,7 +103,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
                   );
                 }
                 return const Center(
-                  child: Text('No stands found'),
+                  child: Text('No users found'),
                 );
               },
             ),

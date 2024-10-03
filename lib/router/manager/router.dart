@@ -15,6 +15,7 @@ import 'package:kermanager/screens/manager/kermesse_tombola_create_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_tombola_details_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_tombola_edit_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_tombola_list_screen.dart';
+import 'package:kermanager/screens/manager/kermesse_user_invite_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_user_list_screen.dart';
 import 'package:kermanager/screens/manager/profile_screen.dart';
 import 'package:kermanager/screens/manager/ticket_details_screen.dart';
@@ -91,6 +92,18 @@ class ManagerRouter {
                   GoRouterState.of(context).extra as Map<String, int>;
               return NoTransitionPage(
                 child: KermesseUserListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.kermesseUserInvite,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseUserInviteScreen(
                   kermesseId: params['kermesseId']!,
                 ),
               );
