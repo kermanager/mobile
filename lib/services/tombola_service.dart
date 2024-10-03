@@ -1,6 +1,8 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
 import 'package:kermanager/data/tombola_create_request.dart';
+import 'package:kermanager/data/tombola_details_response.dart';
+import 'package:kermanager/data/tombola_edit_request.dart';
 import 'package:kermanager/data/tombola_list_response.dart';
 
 class TombolaService {
@@ -16,6 +18,20 @@ class TombolaService {
         TombolaListResponse tombolaListResponse =
             TombolaListResponse.fromJson(data);
         return tombolaListResponse.tombolas;
+      },
+    );
+  }
+
+  Future<ApiResponse<TombolaDetailsResponse>> details({
+    required int tombolaId,
+  }) async {
+    return _apiService.get<TombolaDetailsResponse>(
+      "tombolas/$tombolaId",
+      null,
+      (data) {
+        TombolaDetailsResponse tombolaDetailsResponse =
+            TombolaDetailsResponse.fromJson(data);
+        return tombolaDetailsResponse;
       },
     );
   }
@@ -36,6 +52,33 @@ class TombolaService {
     return _apiService.post(
       "tombolas",
       body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> edit({
+    required int id,
+    required String name,
+    required int price,
+    required String gift,
+  }) async {
+    TombolaEditRequest body = TombolaEditRequest(
+      name: name,
+      price: price,
+      gift: gift,
+    );
+
+    return _apiService.patch(
+      "tombolas/$id",
+      body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> end({required int tombolaId}) async {
+    return _apiService.patch(
+      "tombolas/$tombolaId/end",
+      "",
       (_) => null,
     );
   }

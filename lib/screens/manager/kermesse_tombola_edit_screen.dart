@@ -1,34 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
-import 'package:kermanager/data/kermesse_details_response.dart';
-import 'package:kermanager/services/kermesse_service.dart';
+import 'package:kermanager/data/tombola_details_response.dart';
+import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
-class KermesseEditScreen extends StatefulWidget {
+class KermesseTombolaEditScreen extends StatefulWidget {
   final int kermesseId;
+  final int tombolaId;
 
-  const KermesseEditScreen({
+  const KermesseTombolaEditScreen({
     super.key,
+    required this.tombolaId,
     required this.kermesseId,
   });
 
   @override
-  State<KermesseEditScreen> createState() => _KermesseEditScreenState();
+  State<KermesseTombolaEditScreen> createState() =>
+      _KermesseTombolaEditScreenState();
 }
 
-class _KermesseEditScreenState extends State<KermesseEditScreen> {
+class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
   final Key _key = UniqueKey();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _giftController = TextEditingController();
 
-  final KermesseService _kermesseService = KermesseService();
+  final TombolaService _tombolaService = TombolaService();
 
-  Future<KermesseDetailsResponse> _get() async {
-    ApiResponse<KermesseDetailsResponse> response =
-        await _kermesseService.details(
-      kermesseId: widget.kermesseId,
+  Future<TombolaDetailsResponse> _get() async {
+    ApiResponse<TombolaDetailsResponse> response =
+        await _tombolaService.details(
+      tombolaId: widget.tombolaId,
     );
     if (response.error != null) {
       throw Exception(response.error);
@@ -37,10 +41,11 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
   }
 
   Future<void> _submit() async {
-    ApiResponse<Null> response = await _kermesseService.edit(
-      id: widget.kermesseId,
+    ApiResponse<Null> response = await _tombolaService.edit(
+      id: widget.tombolaId,
       name: _nameController.text,
-      description: _descriptionController.text,
+      price: int.parse(_priceController.text),
+      gift: _giftController.text,
     );
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -51,7 +56,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Kermesse edited successfully'),
+          content: Text('Tombola edited successfully'),
         ),
       );
       context.pop();
@@ -65,9 +70,9 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Kermesse Edit",
+            "Kermesse Tombola Edit",
           ),
-          FutureBuilder<KermesseDetailsResponse>(
+          FutureBuilder<TombolaDetailsResponse>(
             key: _key,
             future: _get(),
             builder: (context, snapshot) {
@@ -84,7 +89,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
                 );
               }
               if (snapshot.hasData) {
-                KermesseDetailsResponse data = snapshot.data!;
+                TombolaDetailsResponse data = snapshot.data!;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -94,9 +99,14 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
                       defaultValue: data.name,
                     ),
                     TextInput(
-                      hintText: "Description",
-                      controller: _descriptionController,
-                      defaultValue: data.description,
+                      hintText: "Price",
+                      controller: _priceController,
+                      defaultValue: data.price.toString(),
+                    ),
+                    TextInput(
+                      hintText: "Gift",
+                      controller: _giftController,
+                      defaultValue: data.gift,
                     ),
                     ElevatedButton(
                       onPressed: _submit,
@@ -118,7 +128,8 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
   @override
   void dispose() {
     _nameController.dispose();
-    _descriptionController.dispose();
+    _priceController.dispose();
+    _giftController.dispose();
     super.dispose();
   }
 }

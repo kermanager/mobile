@@ -84,6 +84,15 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
                       return ListTile(
                         title: Text(item.name),
                         subtitle: Text(item.gift),
+                        onTap: () {
+                          context.push(
+                            ManagerRoutes.kermesseTombolaDetails,
+                            extra: {
+                              "tombolaId": item.id,
+                              "kermesseId": widget.kermesseId,
+                            },
+                          );
+                        },
                       );
                     },
                   );
