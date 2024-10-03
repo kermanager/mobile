@@ -31,7 +31,6 @@ class ApiService {
       // Failure case
       return ApiResponse(error: response.body);
     } catch (error) {
-      print("ERROR: $error");
       // Failure case
       return ApiResponse(error: 'INTERNAL_SERVER_ERROR');
     }
@@ -102,6 +101,7 @@ class ApiService {
       // Failure case
       return ApiResponse(error: response.body);
     } catch (error) {
+      print("ERROR: $error");
       // Failure case
       return ApiResponse(error: 'INTERNAL_SERVER_ERROR');
     }

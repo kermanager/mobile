@@ -1,37 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_list_response.dart';
-import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
-class KermesseStandListScreen extends StatefulWidget {
+class KermesseStandInviteScreen extends StatefulWidget {
   final int kermesseId;
 
-  const KermesseStandListScreen({
+  const KermesseStandInviteScreen({
     super.key,
     required this.kermesseId,
   });
 
   @override
-  State<KermesseStandListScreen> createState() =>
-      _KermesseStandListScreenState();
+  State<KermesseStandInviteScreen> createState() =>
+      _KermesseStandInviteScreenState();
 }
 
-class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
+class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
   final Key _key = UniqueKey();
 
   final StandService _standService = StandService();
 
   Future<List<StandListItem>> _getAll() async {
     ApiResponse<List<StandListItem>> response = await _standService.list(
-      kermesseId: widget.kermesseId,
+      isFree: true,
     );
     if (response.error != null) {
       throw Exception(response.error);
     }
     return response.data!;
+  }
+
+  Future<void> _invite(int standId) async {
+    ApiResponse<Null> response = await _standService.invite(
+      kermesseId: widget.kermesseId,
+      standId: standId,
+    );
+    if (response.error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.error!),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Stand invited successfully'),
+        ),
+      );
+      _refresh();
+    }
   }
 
   void _refresh() {
@@ -45,19 +64,7 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Kermesse Stand List",
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await context.push(
-                ManagerRoutes.kermesseStandInvite,
-                extra: {
-                  'kermesseId': widget.kermesseId,
-                },
-              );
-              _refresh();
-            },
-            child: const Text('Invite'),
+            "Kermesse Stand Invite",
           ),
           Expanded(
             child: FutureBuilder<List<StandListItem>>(
@@ -84,6 +91,12 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
                       return ListTile(
                         title: Text(item.name),
                         subtitle: Text(item.type),
+                        leading: ElevatedButton(
+                          onPressed: () async {
+                            await _invite(item.id);
+                          },
+                          child: const Text('Invite'),
+                        ),
                       );
                     },
                   );
