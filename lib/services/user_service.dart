@@ -1,5 +1,7 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/user_details_response.dart';
+import 'package:kermanager/data/user_edit_request.dart';
 import 'package:kermanager/data/user_list_response.dart';
 
 class UserService {
@@ -28,6 +30,37 @@ class UserService {
         UserListResponse userListResponse = UserListResponse.fromJson(data);
         return userListResponse.users;
       },
+    );
+  }
+
+  Future<ApiResponse<UserDetailsResponse>> details({
+    required int userId,
+  }) async {
+    return _apiService.get<UserDetailsResponse>(
+      "users/$userId",
+      null,
+      (data) {
+        UserDetailsResponse userDetailsResponse =
+            UserDetailsResponse.fromJson(data);
+        return userDetailsResponse;
+      },
+    );
+  }
+
+  Future<ApiResponse<Null>> edit({
+    required int userId,
+    required String password,
+    required String newPassword,
+  }) async {
+    UserEditRequest body = UserEditRequest(
+      password: password,
+      newPassword: newPassword,
+    );
+
+    return _apiService.patch(
+      "users/$userId",
+      body.toJson(),
+      (_) => null,
     );
   }
 }

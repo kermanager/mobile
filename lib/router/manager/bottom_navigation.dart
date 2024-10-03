@@ -31,15 +31,15 @@ class ManagerBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
             label: 'Kermesses',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Tickets',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:kermanager/providers/auth_provider.dart';
+import 'package:kermanager/providers/auth_user.dart';
 import 'package:kermanager/router/manager/bottom_navigation.dart';
 
 import 'package:kermanager/router/manager/routes.dart';
@@ -17,9 +19,11 @@ import 'package:kermanager/screens/manager/kermesse_tombola_edit_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_tombola_list_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_user_invite_screen.dart';
 import 'package:kermanager/screens/manager/kermesse_user_list_screen.dart';
-import 'package:kermanager/screens/manager/profile_screen.dart';
 import 'package:kermanager/screens/manager/ticket_details_screen.dart';
 import 'package:kermanager/screens/manager/ticket_list_screen.dart';
+import 'package:kermanager/screens/manager/user_details_screen.dart';
+import 'package:kermanager/screens/manager/user_edit_screen.dart';
+import 'package:provider/provider.dart';
 
 class ManagerRouter {
   static StatefulShellRoute routes = StatefulShellRoute.indexedStack(
@@ -33,16 +37,6 @@ class ManagerRouter {
             path: ManagerRoutes.dashboard,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: DashboardScreen(),
-            ),
-          ),
-        ],
-      ),
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-            path: ManagerRoutes.profile,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ProfileScreen(),
             ),
           ),
         ],
@@ -226,6 +220,34 @@ class ManagerRouter {
               return NoTransitionPage(
                 child: TicketDetailsScreen(
                   ticketId: params['ticketId']!,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: ManagerRoutes.userDetails,
+            pageBuilder: (context, state) {
+              AuthUser user =
+                  Provider.of<AuthProvider>(context, listen: false).user;
+              return NoTransitionPage(
+                child: UserDetailsScreen(
+                  userId: user.id,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.userEdit,
+            pageBuilder: (context, state) {
+              AuthUser user =
+                  Provider.of<AuthProvider>(context, listen: false).user;
+              return NoTransitionPage(
+                child: UserEditScreen(
+                  userId: user.id,
                 ),
               );
             },
