@@ -35,6 +35,10 @@ class ParentBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
+            label: 'Children',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
             label: 'Tickets',
           ),
           BottomNavigationBarItem(

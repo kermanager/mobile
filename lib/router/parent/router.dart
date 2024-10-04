@@ -4,6 +4,8 @@ import 'package:kermanager/providers/auth_user.dart';
 
 import 'package:kermanager/router/parent/bottom_navigation.dart';
 import 'package:kermanager/router/parent/routes.dart';
+import 'package:kermanager/screens/parent/children_details_screen.dart';
+import 'package:kermanager/screens/parent/children_list_screen.dart';
 import 'package:kermanager/screens/parent/dashboard_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_details_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_list_screen.dart';
@@ -13,7 +15,6 @@ import 'package:kermanager/screens/parent/kermesse_user_list_screen.dart';
 import 'package:kermanager/screens/parent/ticket_details_screen.dart';
 import 'package:kermanager/screens/parent/ticket_list_screen.dart';
 import 'package:kermanager/screens/parent/user_credit_edit_screen.dart';
-import 'package:kermanager/screens/parent/user_credit_send_screen.dart';
 import 'package:kermanager/screens/parent/user_details_screen.dart';
 import 'package:kermanager/screens/parent/user_edit_screen.dart';
 import 'package:provider/provider.dart';
@@ -96,6 +97,28 @@ class ParentRouter {
       StatefulShellBranch(
         routes: [
           GoRoute(
+            path: ParentRoutes.childrenList,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ChildrenListScreen(),
+            ),
+          ),
+          GoRoute(
+            path: ParentRoutes.childrenDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: ChildrenDetailsScreen(
+                  userId: params['userId']!,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
             path: ParentRoutes.ticketList,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: TicketListScreen(),
@@ -148,18 +171,6 @@ class ParentRouter {
                   Provider.of<AuthProvider>(context, listen: false).user;
               return NoTransitionPage(
                 child: UserCreditEditScreen(
-                  userId: user.id,
-                ),
-              );
-            },
-          ),
-          GoRoute(
-            path: ParentRoutes.userCreditSend,
-            pageBuilder: (context, state) {
-              AuthUser user =
-                  Provider.of<AuthProvider>(context, listen: false).user;
-              return NoTransitionPage(
-                child: UserCreditSendScreen(
                   userId: user.id,
                 ),
               );

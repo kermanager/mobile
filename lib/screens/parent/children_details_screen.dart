@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
-import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/text_input.dart';
 
-class UserDetailsScreen extends StatefulWidget {
+class ChildrenDetailsScreen extends StatefulWidget {
   final int userId;
 
-  const UserDetailsScreen({
+  const ChildrenDetailsScreen({
     super.key,
     required this.userId,
   });
 
   @override
-  State<UserDetailsScreen> createState() => _UserDetailsScreenState();
+  State<ChildrenDetailsScreen> createState() => _ChildrenDetailsScreenState();
 }
 
-class _UserDetailsScreenState extends State<UserDetailsScreen> {
+class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
   final Key _key = UniqueKey();
+  final TextEditingController _amountController = TextEditingController();
 
   final UserService _userService = UserService();
 
@@ -33,6 +33,31 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     return response.data!;
   }
 
+  Future<void> _send() async {
+    ApiResponse<Null> response = await _userService.sendCredit(
+      childId: widget.userId,
+      amount: int.parse(_amountController.text),
+    );
+    if (response.error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.error!),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Credit sent successfully'),
+        ),
+      );
+      _refresh();
+    }
+  }
+
+  void _refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Screen(
@@ -40,7 +65,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Profile",
+            "Children Details",
           ),
           FutureBuilder<UserDetailsResponse>(
             key: _key,
@@ -68,21 +93,13 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     Text(data.email),
                     Text(data.role),
                     Text(data.credit.toString()),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          ParentRoutes.userEdit,
-                        );
-                      },
-                      child: const Text("Update password"),
+                    TextInput(
+                      hintText: "Amount",
+                      controller: _amountController,
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          ParentRoutes.userCreditEdit,
-                        );
-                      },
-                      child: const Text("Buy credit"),
+                      onPressed: _send,
+                      child: const Text("Send credit"),
                     ),
                   ],
                 );
@@ -95,5 +112,11 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    super.dispose();
   }
 }

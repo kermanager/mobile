@@ -3,7 +3,6 @@ class ParentRoutes {
   static const String userDetails = '/parent/user-details';
   static const String userEdit = '/parent/user-edit';
   static const String userCreditEdit = '/parent/user-credit-edit';
-  static const String userCreditSend = '/parent/user-credit-send';
   static const String kermesseList = '/parent/kermesse-list';
   static const String kermesseDetails = '/parent/kermesse-details';
   static const String kermesseUserList = '/parent/kermesse-user-list';
@@ -11,4 +10,6 @@ class ParentRoutes {
   static const String kermesseStandDetails = '/parent/kermesse-stand-details';
   static const String ticketList = '/parent/ticket-list';
   static const String ticketDetails = '/parent/ticket-details';
+  static const String childrenList = '/parent/children-list';
+  static const String childrenDetails = '/parent/children-details';
 }
