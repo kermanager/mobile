@@ -5,6 +5,10 @@ import 'package:kermanager/providers/auth_user.dart';
 import 'package:kermanager/router/stand_holder/bottom_navigation.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/screens/stand_holder/dashboard_screen.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_details_screen.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_interaction_details_screen.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_interaction_list_screen.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_list_screen.dart';
 import 'package:kermanager/screens/stand_holder/user_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/user_edit_screen.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +26,53 @@ class StandHolderRouter {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: DashboardScreen(),
             ),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: StandHolderRoutes.kermesseList,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: KermesseListScreen(),
+            ),
+          ),
+          GoRoute(
+            path: StandHolderRoutes.kermesseDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: StandHolderRoutes.kermesseInteractionList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseInteractionListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: StandHolderRoutes.kermesseInteractionDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseInteractionDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                  interactionId: params['interactionId']!,
+                ),
+              );
+            },
           ),
         ],
       ),

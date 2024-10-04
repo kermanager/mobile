@@ -2,6 +2,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
 import 'package:kermanager/data/interaction_create_request.dart';
 import 'package:kermanager/data/interaction_details_response.dart';
+import 'package:kermanager/data/interaction_end_request.dart';
 import 'package:kermanager/data/interaction_list_response.dart';
 
 class InteractionService {
@@ -48,6 +49,21 @@ class InteractionService {
 
     return _apiService.post(
       "interactions",
+      body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> end({
+    required int interactionId,
+    required int point,
+  }) async {
+    InteractionEndRequest body = InteractionEndRequest(
+      point: point,
+    );
+
+    return _apiService.patch(
+      "interactions/$interactionId",
       body.toJson(),
       (_) => null,
     );
