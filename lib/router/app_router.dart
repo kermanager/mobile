@@ -38,6 +38,15 @@ class AppRouter {
             return ChildRoutes.dashboard;
           }
         }
+        if (isLogged && user.role == "STAND_HOLDER" && !user.hasStand) {
+          return StandHolderRoutes.standCreate;
+        }
+        if (isLogged &&
+            user.role == "STAND_HOLDER" &&
+            user.hasStand &&
+            state.fullPath!.startsWith("/stand-holder/stand-create")) {
+          return StandHolderRoutes.standDetails;
+        }
         return state.fullPath;
       },
       routes: [

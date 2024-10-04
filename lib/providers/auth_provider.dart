@@ -29,4 +29,17 @@ class AuthProvider extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void setHasStand(
+    bool hasStand,
+  ) {
+    _user = AuthUser(
+      id: _user.id,
+      name: _user.name,
+      email: _user.email,
+      role: _user.role,
+      hasStand: hasStand,
+    );
+    notifyListeners();
+  }
 }
