@@ -29,6 +29,10 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
     return response.data!;
   }
 
+  void _refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenList(
@@ -37,6 +41,15 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
         children: [
           const Text(
             "Children List",
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await context.push(
+                ParentRoutes.childrenInvite,
+              );
+              _refresh();
+            },
+            child: const Text('Invite'),
           ),
           Expanded(
             child: FutureBuilder<List<UserListItem>>(

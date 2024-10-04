@@ -3,6 +3,7 @@ import 'package:kermanager/api/api_service.dart';
 import 'package:kermanager/data/user_credit_send_request.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/data/user_edit_request.dart';
+import 'package:kermanager/data/user_invite_request.dart';
 import 'package:kermanager/data/user_list_response.dart';
 
 class UserService {
@@ -93,6 +94,22 @@ class UserService {
 
     return _apiService.patch(
       "users/pay",
+      body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> invite({
+    required String name,
+    required String email,
+  }) async {
+    UserInviteRequest body = UserInviteRequest(
+      name: name,
+      email: email,
+    );
+
+    return _apiService.post(
+      "users/invite",
       body.toJson(),
       (_) => null,
     );

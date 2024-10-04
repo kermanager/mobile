@@ -16,4 +16,5 @@ class ParentRoutes {
   static const String ticketDetails = '/parent/ticket-details';
   static const String childrenList = '/parent/children-list';
   static const String childrenDetails = '/parent/children-details';
+  static const String childrenInvite = '/parent/children-invite';
 }
