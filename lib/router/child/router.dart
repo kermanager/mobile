@@ -5,6 +5,8 @@ import 'package:kermanager/providers/auth_user.dart';
 import 'package:kermanager/router/child/bottom_navigation.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/screens/child/dashboard_screen.dart';
+import 'package:kermanager/screens/child/ticket_details_screen.dart';
+import 'package:kermanager/screens/child/ticket_list_screen.dart';
 import 'package:kermanager/screens/child/user_details_screen.dart';
 import 'package:kermanager/screens/child/user_edit_screen.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,28 @@ class ChildRouter {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: DashboardScreen(),
             ),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: ChildRoutes.ticketList,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TicketListScreen(),
+            ),
+          ),
+          GoRoute(
+            path: ChildRoutes.ticketDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: TicketDetailsScreen(
+                  ticketId: params['ticketId']!,
+                ),
+              );
+            },
           ),
         ],
       ),
