@@ -18,12 +18,14 @@ class AuthProvider extends ChangeNotifier {
     String name,
     String email,
     String role,
+    bool hasStand,
   ) {
     _user = AuthUser(
       id: id,
       name: name,
       email: email,
       role: role,
+      hasStand: hasStand,
     );
     notifyListeners();
   }

@@ -49,6 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
         response.data!.name,
         response.data!.email,
         response.data!.role,
+        response.data!.hasStand,
       );
       if (response.data!.role == "MANAGER") {
         context.go(ManagerRoutes.dashboard);

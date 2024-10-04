@@ -5,12 +5,14 @@ class GetMeResponse {
   final String name;
   final String email;
   final String role;
+  final bool hasStand;
 
   GetMeResponse({
     required this.id,
     required this.name,
     required this.email,
     required this.role,
+    required this.hasStand,
   });
 
   factory GetMeResponse.fromMap(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class GetMeResponse {
       name: json['name'],
       email: json['email'],
       role: json['role'],
+      hasStand: json['has_stand'],
     );
   }
 

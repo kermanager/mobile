@@ -5,12 +5,14 @@ class AuthUser {
   final String name;
   final String email;
   final String role;
+  final bool hasStand;
 
   AuthUser({
     required this.id,
     required this.name,
     required this.email,
     required this.role,
+    required this.hasStand,
   });
 
   factory AuthUser.getEmpty() {
@@ -19,6 +21,7 @@ class AuthUser {
       name: '',
       email: '',
       role: '',
+      hasStand: false,
     );
   }
 
@@ -28,9 +31,11 @@ class AuthUser {
       name: json['name'],
       email: json['email'],
       role: json['role'],
+      hasStand: json['has_stand'],
     );
   }
 
-  factory AuthUser.fromJson(String source) =>
-      AuthUser.fromMap(json.decode(source));
+  factory AuthUser.fromJson(String source) {
+    return AuthUser.fromMap(json.decode(source));
+  }
 }

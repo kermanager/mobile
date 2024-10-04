@@ -6,6 +6,7 @@ class SignInResponse {
   final String email;
   final String role;
   final String token;
+  final bool hasStand;
 
   SignInResponse({
     required this.id,
@@ -13,6 +14,7 @@ class SignInResponse {
     required this.email,
     required this.role,
     required this.token,
+    required this.hasStand,
   });
 
   factory SignInResponse.fromMap(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class SignInResponse {
       email: json['email'],
       role: json['role'],
       token: json['token'],
+      hasStand: json['has_stand'],
     );
   }
 
