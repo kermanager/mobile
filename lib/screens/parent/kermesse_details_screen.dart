@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
-import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/widgets/screen.dart';
@@ -117,7 +116,7 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         context.push(
-                          ManagerRoutes.kermesseInteractionList,
+                          ParentRoutes.kermesseInteractionList,
                           extra: {
                             "kermesseId": data.id,
                           },

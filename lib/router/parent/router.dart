@@ -8,6 +8,8 @@ import 'package:kermanager/screens/parent/children_details_screen.dart';
 import 'package:kermanager/screens/parent/children_list_screen.dart';
 import 'package:kermanager/screens/parent/dashboard_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_details_screen.dart';
+import 'package:kermanager/screens/parent/kermesse_interaction_details_screen.dart';
+import 'package:kermanager/screens/parent/kermesse_interaction_list_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_list_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_stand_details_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_stand_list_screen.dart';
@@ -88,6 +90,31 @@ class ParentRouter {
                 child: KermesseStandDetailsScreen(
                   kermesseId: params['kermesseId']!,
                   standId: params['standId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ParentRoutes.kermesseInteractionList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseInteractionListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ParentRoutes.kermesseInteractionDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseInteractionDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                  interactionId: params['interactionId']!,
                 ),
               );
             },
