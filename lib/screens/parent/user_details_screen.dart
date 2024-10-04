@@ -87,7 +87,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         context.push(
-                          ParentRoutes.userEdit,
+                          ParentRoutes.userCreditSend,
                         );
                       },
                       child: const Text("Trasfert credit"),

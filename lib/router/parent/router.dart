@@ -6,6 +6,7 @@ import 'package:kermanager/router/parent/bottom_navigation.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/screens/parent/dashboard_screen.dart';
 import 'package:kermanager/screens/parent/user_credit_edit_screen.dart';
+import 'package:kermanager/screens/parent/user_credit_send_screen.dart';
 import 'package:kermanager/screens/parent/user_details_screen.dart';
 import 'package:kermanager/screens/parent/user_edit_screen.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +60,18 @@ class ParentRouter {
                   Provider.of<AuthProvider>(context, listen: false).user;
               return NoTransitionPage(
                 child: UserCreditEditScreen(
+                  userId: user.id,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ParentRoutes.userCreditSend,
+            pageBuilder: (context, state) {
+              AuthUser user =
+                  Provider.of<AuthProvider>(context, listen: false).user;
+              return NoTransitionPage(
+                child: UserCreditSendScreen(
                   userId: user.id,
                 ),
               );

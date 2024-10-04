@@ -1,5 +1,6 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/user_credit_send_request.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/data/user_edit_request.dart';
 import 'package:kermanager/data/user_list_response.dart';
@@ -25,6 +26,17 @@ class UserService {
   }) {
     return _apiService.get<List<UserListItem>>(
       "kermesses/$kermesseId/users",
+      null,
+      (data) {
+        UserListResponse userListResponse = UserListResponse.fromJson(data);
+        return userListResponse.users;
+      },
+    );
+  }
+
+  Future<ApiResponse<List<UserListItem>>> listChildren() {
+    return _apiService.get<List<UserListItem>>(
+      "users/children",
       null,
       (data) {
         UserListResponse userListResponse = UserListResponse.fromJson(data);
@@ -59,6 +71,22 @@ class UserService {
 
     return _apiService.patch(
       "users/$userId",
+      body.toJson(),
+      (_) => null,
+    );
+  }
+
+  Future<ApiResponse<Null>> sendCredit({
+    required int childId,
+    required int amount,
+  }) async {
+    UserCreditSendRequest body = UserCreditSendRequest(
+      childId: childId,
+      amount: amount,
+    );
+
+    return _apiService.patch(
+      "users/pay",
       body.toJson(),
       (_) => null,
     );
