@@ -34,29 +34,6 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
     return response.data!;
   }
 
-  Future<void> _end() async {
-    ApiResponse<Null> response =
-        await _kermesseService.end(id: widget.kermesseId);
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Kermesse Ended successfully'),
-        ),
-      );
-      _refresh();
-    }
-  }
-
-  void _refresh() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Screen(
