@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kermanager/api/api_constants.dart';
+import 'package:kermanager/api/api_response.dart';
+import 'package:kermanager/providers/auth_provider.dart';
+import 'package:kermanager/router/auth/routes.dart';
+import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/text_input.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class UserEditScreen extends StatefulWidget {
+  final int userId;
+
+  const UserEditScreen({
+    super.key,
+    required this.userId,
+  });
+
+  @override
+  State<UserEditScreen> createState() => _UserEditScreenState();
+}
+
+class _UserEditScreenState extends State<UserEditScreen> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+
+  final UserService _userService = UserService();
+
+  Future<void> _submit() async {
+    ApiResponse<Null> response = await _userService.edit(
+      userId: widget.userId,
+      password: _passwordController.text,
+      newPassword: _newPasswordController.text,
+    );
+    if (response.error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.error!),
+        ),
+      );
+    } else {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.remove(ApiConstants.tokenKey);
+      Provider.of<AuthProvider>(context, listen: false).setUser(-1, "", "", "");
+      context.go(AuthRoutes.signIn);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password edited successfully'),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Screen(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Password Edit",
+          ),
+          TextInput(
+            hintText: "Password",
+            controller: _passwordController,
+          ),
+          TextInput(
+            hintText: "New password",
+            controller: _newPasswordController,
+          ),
+          ElevatedButton(
+            onPressed: _submit,
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _newPasswordController.dispose();
+    super.dispose();
+  }
+}
