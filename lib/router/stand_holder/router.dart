@@ -9,6 +9,8 @@ import 'package:kermanager/screens/stand_holder/kermesse_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_list_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_list_screen.dart';
+import 'package:kermanager/screens/stand_holder/stand_details_screen.dart';
+import 'package:kermanager/screens/stand_holder/stand_edit_screen.dart';
 import 'package:kermanager/screens/stand_holder/user_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/user_edit_screen.dart';
 import 'package:provider/provider.dart';
@@ -73,6 +75,22 @@ class StandHolderRouter {
                 ),
               );
             },
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: StandHolderRoutes.standDetails,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: StandDetailsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: StandHolderRoutes.standEdit,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: StandEditScreen(),
+            ),
           ),
         ],
       ),

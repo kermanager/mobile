@@ -8,4 +8,6 @@ class StandHolderRoutes {
       '/parent/kermesse-interaction-list';
   static const String kermesseInteractionDetails =
       '/parent/kermesse-interaction-details';
+  static const String standDetails = '/stand-holder/stand-details';
+  static const String standEdit = '/stand-holder/stand-edit';
 }

@@ -35,6 +35,10 @@ class StandHolderBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
+            label: 'Stand',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
