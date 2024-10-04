@@ -10,6 +10,8 @@ import 'package:kermanager/screens/parent/kermesse_list_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_stand_details_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_stand_list_screen.dart';
 import 'package:kermanager/screens/parent/kermesse_user_list_screen.dart';
+import 'package:kermanager/screens/parent/ticket_details_screen.dart';
+import 'package:kermanager/screens/parent/ticket_list_screen.dart';
 import 'package:kermanager/screens/parent/user_credit_edit_screen.dart';
 import 'package:kermanager/screens/parent/user_credit_send_screen.dart';
 import 'package:kermanager/screens/parent/user_details_screen.dart';
@@ -85,6 +87,28 @@ class ParentRouter {
                 child: KermesseStandDetailsScreen(
                   kermesseId: params['kermesseId']!,
                   standId: params['standId']!,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+            path: ParentRoutes.ticketList,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TicketListScreen(),
+            ),
+          ),
+          GoRoute(
+            path: ParentRoutes.ticketDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: TicketDetailsScreen(
+                  ticketId: params['ticketId']!,
                 ),
               );
             },

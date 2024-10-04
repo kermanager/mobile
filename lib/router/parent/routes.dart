@@ -9,4 +9,6 @@ class ParentRoutes {
   static const String kermesseUserList = '/parent/kermesse-user-list';
   static const String kermesseStandList = '/parent/kermesse-stand-list';
   static const String kermesseStandDetails = '/parent/kermesse-stand-details';
+  static const String ticketList = '/parent/ticket-list';
+  static const String ticketDetails = '/parent/ticket-details';
 }
