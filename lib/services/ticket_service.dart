@@ -1,5 +1,6 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/ticket_create_request.dart';
 import 'package:kermanager/data/ticket_details_response.dart';
 import 'package:kermanager/data/ticket_list_response.dart';
 
@@ -29,6 +30,20 @@ class TicketService {
             TicketDetailsResponse.fromJson(data);
         return ticketDetailsResponse;
       },
+    );
+  }
+
+  Future<ApiResponse<Null>> create({
+    required int tombolaId,
+  }) async {
+    TicketCreateRequest body = TicketCreateRequest(
+      tombolaId: tombolaId,
+    );
+
+    return _apiService.post(
+      "tickets",
+      body.toJson(),
+      (_) => null,
     );
   }
 }

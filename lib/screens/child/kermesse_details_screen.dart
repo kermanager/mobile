@@ -105,6 +105,17 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         context.push(
+                          ChildRoutes.kermesseTombolaList,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
+                      child: const Text("Tombolas"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.push(
                           ChildRoutes.kermesseInteractionList,
                           extra: {
                             "kermesseId": data.id,

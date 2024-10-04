@@ -10,6 +10,9 @@ class ChildRoutes {
       '/child/kermesse-interaction-list';
   static const String kermesseInteractionDetails =
       '/child/kermesse-interaction-details';
+  static const String kermesseTombolaList = '/child/kermesse-tombola-list';
+  static const String kermesseTombolaDetails =
+      '/child/kermesse-tombola-details';
   static const String ticketList = '/child/ticket-list';
   static const String ticketDetails = '/child/ticket-details';
 }

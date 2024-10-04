@@ -11,6 +11,8 @@ import 'package:kermanager/screens/child/kermesse_interaction_list_screen.dart';
 import 'package:kermanager/screens/child/kermesse_list_screen.dart';
 import 'package:kermanager/screens/child/kermesse_stand_details_screen.dart';
 import 'package:kermanager/screens/child/kermesse_stand_list_screen.dart';
+import 'package:kermanager/screens/child/kermesse_tombola_details_screen.dart';
+import 'package:kermanager/screens/child/kermesse_tombola_list_screen.dart';
 import 'package:kermanager/screens/child/ticket_details_screen.dart';
 import 'package:kermanager/screens/child/ticket_list_screen.dart';
 import 'package:kermanager/screens/child/user_details_screen.dart';
@@ -99,6 +101,31 @@ class ChildRouter {
                 child: KermesseInteractionDetailsScreen(
                   kermesseId: params['kermesseId']!,
                   interactionId: params['interactionId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ChildRoutes.kermesseTombolaList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseTombolaListScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ChildRoutes.kermesseTombolaDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseTombolaDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                  tombolaId: params['tombolaId']!,
                 ),
               );
             },
