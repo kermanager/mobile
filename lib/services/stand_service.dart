@@ -1,5 +1,6 @@
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/api/api_service.dart';
+import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/data/stand_list_response.dart';
 
 class StandService {
@@ -23,6 +24,20 @@ class StandService {
       (data) {
         StandListResponse standListResponse = StandListResponse.fromJson(data);
         return standListResponse.stands;
+      },
+    );
+  }
+
+  Future<ApiResponse<StandDetailsResponse>> details({
+    required int standId,
+  }) async {
+    return _apiService.get<StandDetailsResponse>(
+      "stands/$standId",
+      null,
+      (data) {
+        StandDetailsResponse standDetailsResponse =
+            StandDetailsResponse.fromJson(data);
+        return standDetailsResponse;
       },
     );
   }
