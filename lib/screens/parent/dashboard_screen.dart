@@ -16,7 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             Text(
-              'Dashboard Parent',
+              'Dashboard parent',
             ),
             SignOutButton(),
           ],

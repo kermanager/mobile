@@ -1,4 +1,6 @@
 class ParentRoutes {
   static const String dashboard = '/parent/dashboard';
-  static const String profile = '/parent/profile';
+  static const String userDetails = '/parent/user-details';
+  static const String userEdit = '/parent/user-edit';
+  static const String userCreditEdit = '/parent/user-credit-edit';
 }
