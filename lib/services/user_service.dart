@@ -34,10 +34,16 @@ class UserService {
     );
   }
 
-  Future<ApiResponse<List<UserListItem>>> listChildren() {
+  Future<ApiResponse<List<UserListItem>>> listChildren({
+    int? kermesseId,
+  }) {
+    Map<String, String> params = {};
+    if (kermesseId != null) {
+      params['kermesse_id'] = kermesseId.toString();
+    }
     return _apiService.get<List<UserListItem>>(
       "users/children",
-      null,
+      params,
       (data) {
         UserListResponse userListResponse = UserListResponse.fromJson(data);
         return userListResponse.users;
