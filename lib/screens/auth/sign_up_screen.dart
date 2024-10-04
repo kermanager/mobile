@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:kermanager/services/auth_service.dart';
 import 'package:kermanager/api/api_response.dart';
+import 'package:kermanager/widgets/role_select.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,16 +13,16 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _roleController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String _selectedRole = 'MANAGER';
 
   final AuthService _authService = AuthService();
 
   Future<void> _submit() async {
     ApiResponse<Null> response = await _authService.signUp(
-      role: _roleController.text,
+      role: _selectedRole,
       name: _nameController.text,
       email: _emailController.text,
       password: _passwordController.text,
@@ -51,11 +52,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const Text(
               'Sign Up',
             ),
-            TextField(
-              controller: _roleController,
-              decoration: const InputDecoration(
-                hintText: 'Role',
-              ),
+            RoleSelect(
+              defaultValue: _selectedRole,
+              onChange: (value) {
+                setState(() {
+                  _selectedRole = value;
+                });
+              },
             ),
             TextField(
               controller: _nameController,
@@ -97,7 +100,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose() {
-    _roleController.dispose();
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
