@@ -4,6 +4,7 @@ class ChildRoutes {
   static const String userEdit = '/child/user-edit';
   static const String kermesseList = '/child/kermesse-list';
   static const String kermesseDetails = '/child/kermesse-details';
+  static const String kermesseDashboard = '/child/kermesse-dashboard';
   static const String kermesseStandList = '/child/kermesse-stand-list';
   static const String kermesseStandDetails = '/child/kermesse-stand-details';
   static const String kermesseInteractionList =

@@ -5,6 +5,7 @@ import 'package:kermanager/providers/auth_user.dart';
 import 'package:kermanager/router/child/bottom_navigation.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/screens/child/dashboard_screen.dart';
+import 'package:kermanager/screens/child/kermesse_dashboard_screen.dart';
 import 'package:kermanager/screens/child/kermesse_details_screen.dart';
 import 'package:kermanager/screens/child/kermesse_interaction_details_screen.dart';
 import 'package:kermanager/screens/child/kermesse_interaction_list_screen.dart';
@@ -50,6 +51,18 @@ class ChildRouter {
                   GoRouterState.of(context).extra as Map<String, int>;
               return NoTransitionPage(
                 child: KermesseDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ChildRoutes.kermesseDashboard,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseDashboardScreen(
                   kermesseId: params['kermesseId']!,
                 ),
               );

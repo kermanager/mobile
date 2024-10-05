@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
-import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/widgets/screen.dart';
 
-class KermesseDetailsScreen extends StatefulWidget {
+class KermesseDashboardScreen extends StatefulWidget {
   final int kermesseId;
 
-  const KermesseDetailsScreen({
+  const KermesseDashboardScreen({
     super.key,
     required this.kermesseId,
   });
 
   @override
-  State<KermesseDetailsScreen> createState() => _KermesseDetailsScreenState();
+  State<KermesseDashboardScreen> createState() =>
+      _KermesseDashboardScreenState();
 }
 
-class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
+class _KermesseDashboardScreenState extends State<KermesseDashboardScreen> {
   final KermesseService _kermesseService = KermesseService();
 
   Future<KermesseDetailsResponse> _get() async {
@@ -39,7 +38,7 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Kermesse Details",
+            "Kermesse Dashboard",
           ),
           FutureBuilder<KermesseDetailsResponse>(
             future: _get(),
@@ -61,32 +60,9 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.description),
-                    Text(data.status),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          StandHolderRoutes.kermesseDashboard,
-                          extra: {
-                            "kermesseId": data.id,
-                          },
-                        );
-                      },
-                      child: const Text("Dashboard"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          StandHolderRoutes.kermesseInteractionList,
-                          extra: {
-                            "kermesseId": data.id,
-                          },
-                        );
-                      },
-                      child: const Text("Interactions"),
-                    )
+                    Text("Stand Count: ${data.standCount}"),
+                    Text("Interaction Count: ${data.interactionCount}"),
+                    Text("Interaction Income: ${data.interactionIncome}"),
                   ],
                 );
               }

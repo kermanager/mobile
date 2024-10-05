@@ -68,6 +68,17 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         context.push(
+                          ParentRoutes.kermesseDashboard,
+                          extra: {
+                            "kermesseId": data.id,
+                          },
+                        );
+                      },
+                      child: const Text("Dashboard"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.push(
                           ParentRoutes.kermesseUserList,
                           extra: {
                             "kermesseId": data.id,
