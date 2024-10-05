@@ -19,8 +19,6 @@ class KermesseUserInviteScreen extends StatefulWidget {
 }
 
 class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
-  final Key _key = UniqueKey();
-
   final UserService _userService = UserService();
   final KermesseService _kermesseService = KermesseService();
 
@@ -50,12 +48,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
           content: Text('User invited successfully'),
         ),
       );
-      _refresh();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -69,7 +62,6 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<UserListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

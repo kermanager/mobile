@@ -22,10 +22,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final AuthService _authService = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  final AuthService _authService = AuthService();
 
   Future<void> _submit() async {
     ApiResponse<SignInResponse> response = await _authService.signIn(

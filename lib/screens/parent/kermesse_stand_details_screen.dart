@@ -23,11 +23,10 @@ class KermesseStandDetailsScreen extends StatefulWidget {
 
 class _KermesseInteractionDetailsScreenState
     extends State<KermesseStandDetailsScreen> {
-  final Key _key = UniqueKey();
-  final TextEditingController _quantityController = TextEditingController();
-
   final StandService _standService = StandService();
   final InteractionService _interactionService = InteractionService();
+
+  final TextEditingController _quantityController = TextEditingController();
 
   Future<StandDetailsResponse> _get() async {
     ApiResponse<StandDetailsResponse> response = await _standService.details(
@@ -70,7 +69,6 @@ class _KermesseInteractionDetailsScreenState
             "Stand Details",
           ),
           FutureBuilder<StandDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

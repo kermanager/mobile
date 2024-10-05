@@ -16,9 +16,9 @@ class UserCreditEditScreen extends StatefulWidget {
 }
 
 class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
-  final TextEditingController _creditController = TextEditingController();
-
   final StripeService _stripeService = StripeService();
+
+  final TextEditingController _creditController = TextEditingController();
 
   Future<void> _submit() async {
     await _stripeService.stripePaymentCheckout(

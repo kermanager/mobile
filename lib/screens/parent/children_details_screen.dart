@@ -18,10 +18,9 @@ class ChildrenDetailsScreen extends StatefulWidget {
 }
 
 class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
-  final Key _key = UniqueKey();
-  final TextEditingController _amountController = TextEditingController();
-
   final UserService _userService = UserService();
+
+  final TextEditingController _amountController = TextEditingController();
 
   Future<UserDetailsResponse> _get() async {
     ApiResponse<UserDetailsResponse> response = await _userService.details(
@@ -50,12 +49,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
           content: Text('Credit sent successfully'),
         ),
       );
-      _refresh();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -68,7 +62,6 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
             "Children Details",
           ),
           FutureBuilder<UserDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

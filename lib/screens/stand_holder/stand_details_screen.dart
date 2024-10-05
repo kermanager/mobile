@@ -16,8 +16,6 @@ class StandDetailsScreen extends StatefulWidget {
 }
 
 class _StandDetailsScreenState extends State<StandDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final StandService _standService = StandService();
 
   Future<StandDetailsResponse> _get() async {
@@ -26,10 +24,6 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
       throw Exception(response.error);
     }
     return response.data!;
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -42,7 +36,6 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
             "Stand Details",
           ),
           FutureBuilder<StandDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,11 +62,10 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
                     Text(data.stock.toString()),
                     Text(data.price.toString()),
                     ElevatedButton(
-                      onPressed: () async {
-                        await context.push(
+                      onPressed: () {
+                        context.push(
                           StandHolderRoutes.standEdit,
                         );
-                        _refresh();
                       },
                       child: const Text('Edit'),
                     ),

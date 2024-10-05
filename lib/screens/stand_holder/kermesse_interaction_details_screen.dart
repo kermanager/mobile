@@ -22,10 +22,9 @@ class KermesseInteractionDetailsScreen extends StatefulWidget {
 
 class _KermesseInteractionDetailsScreenState
     extends State<KermesseInteractionDetailsScreen> {
-  final Key _key = UniqueKey();
-  final TextEditingController _pointController = TextEditingController();
-
   final InteractionService _interactionService = InteractionService();
+
+  final TextEditingController _pointController = TextEditingController();
 
   Future<InteractionDetailsResponse> _get() async {
     ApiResponse<InteractionDetailsResponse> response =
@@ -55,12 +54,7 @@ class _KermesseInteractionDetailsScreenState
           content: Text('Interaction ended successfully'),
         ),
       );
-      _refresh();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -73,7 +67,6 @@ class _KermesseInteractionDetailsScreenState
             "Interaction Details",
           ),
           FutureBuilder<InteractionDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

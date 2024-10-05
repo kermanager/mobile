@@ -23,7 +23,6 @@ class KermesseStandDetailsScreen extends StatefulWidget {
 
 class _KermesseInteractionDetailsScreenState
     extends State<KermesseStandDetailsScreen> {
-  final Key _key = UniqueKey();
   final TextEditingController _quantityController = TextEditingController();
 
   final StandService _standService = StandService();
@@ -70,7 +69,6 @@ class _KermesseInteractionDetailsScreenState
             "Stand Details",
           ),
           FutureBuilder<StandDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

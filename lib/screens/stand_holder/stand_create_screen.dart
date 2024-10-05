@@ -17,13 +17,13 @@ class StandCreateScreen extends StatefulWidget {
 }
 
 class _StandCreateScreenState extends State<StandCreateScreen> {
+  final StandService _standService = StandService();
+
   String _selectedType = "ACTIVITY";
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _stockController = TextEditingController();
-
-  final StandService _standService = StandService();
 
   Future<void> _submit() async {
     ApiResponse<Null> response = await _standService.create(

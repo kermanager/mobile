@@ -22,8 +22,6 @@ class KermesseTombolaDetailsScreen extends StatefulWidget {
 
 class _KermesseTombolaDetailsScreenState
     extends State<KermesseTombolaDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final TombolaService _tombolaService = TombolaService();
   final TicketService _ticketService = TicketService();
 
@@ -54,12 +52,7 @@ class _KermesseTombolaDetailsScreenState
           content: Text('Participation successful'),
         ),
       );
-      _refresh();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -72,7 +65,6 @@ class _KermesseTombolaDetailsScreenState
             "Tombola Details",
           ),
           FutureBuilder<TombolaDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

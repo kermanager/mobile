@@ -16,13 +16,12 @@ class StandEditScreen extends StatefulWidget {
 }
 
 class _StandEditScreenState extends State<StandEditScreen> {
-  final Key _key = UniqueKey();
+  final StandService _standService = StandService();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _stockController = TextEditingController();
-
-  final StandService _standService = StandService();
 
   Future<StandDetailsResponse> _get() async {
     ApiResponse<StandDetailsResponse> response = await _standService.current();
@@ -65,7 +64,6 @@ class _StandEditScreenState extends State<StandEditScreen> {
             "Stand Edit",
           ),
           FutureBuilder<StandDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

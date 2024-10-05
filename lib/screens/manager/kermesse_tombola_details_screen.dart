@@ -23,8 +23,6 @@ class KermesseTombolaDetailsScreen extends StatefulWidget {
 
 class _KermesseTombolaDetailsScreenState
     extends State<KermesseTombolaDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final TombolaService _tombolaService = TombolaService();
 
   Future<TombolaDetailsResponse> _get() async {
@@ -53,12 +51,7 @@ class _KermesseTombolaDetailsScreenState
           content: Text('Tombola ended successfully'),
         ),
       );
-      _refresh();
     }
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -71,7 +64,6 @@ class _KermesseTombolaDetailsScreenState
             "Tombola Details",
           ),
           FutureBuilder<TombolaDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -100,15 +92,14 @@ class _KermesseTombolaDetailsScreenState
                         ? Column(
                             children: [
                               ElevatedButton(
-                                onPressed: () async {
-                                  await context.push(
+                                onPressed: () {
+                                  context.push(
                                     ManagerRoutes.kermesseTombolaEdit,
                                     extra: {
                                       "kermesseId": widget.kermesseId,
                                       "tombolaId": widget.tombolaId,
                                     },
                                   );
-                                  _refresh();
                                 },
                                 child: const Text("Edit"),
                               ),

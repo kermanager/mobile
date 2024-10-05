@@ -17,8 +17,6 @@ class TicketDetailsScreen extends StatefulWidget {
 }
 
 class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final TicketService _ticketService = TicketService();
 
   Future<TicketDetailsResponse> _get() async {
@@ -41,7 +39,6 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
             "Ticket Details",
           ),
           FutureBuilder<TicketDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

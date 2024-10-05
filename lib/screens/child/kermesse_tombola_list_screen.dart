@@ -20,8 +20,6 @@ class KermesseTombolaListScreen extends StatefulWidget {
 }
 
 class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
-  final Key _key = UniqueKey();
-
   final TombolaService _tombolaService = TombolaService();
 
   Future<List<TombolaListItem>> _getAll() async {
@@ -45,7 +43,6 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<TombolaListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

@@ -19,8 +19,6 @@ class KermesseUserListScreen extends StatefulWidget {
 }
 
 class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
-  final Key _key = UniqueKey();
-
   final UserService _userService = UserService();
 
   Future<List<UserListItem>> _getAll() async {
@@ -33,10 +31,6 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
     return response.data!;
   }
 
-  void _refresh() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScreenList(
@@ -47,20 +41,18 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
             "Kermesse User List",
           ),
           ElevatedButton(
-            onPressed: () async {
-              await context.push(
+            onPressed: () {
+              context.push(
                 ManagerRoutes.kermesseUserInvite,
                 extra: {
                   'kermesseId': widget.kermesseId,
                 },
               );
-              _refresh();
             },
             child: const Text('Invite'),
           ),
           Expanded(
             child: FutureBuilder<List<UserListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

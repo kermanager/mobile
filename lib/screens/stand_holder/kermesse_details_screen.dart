@@ -19,8 +19,6 @@ class KermesseDetailsScreen extends StatefulWidget {
 }
 
 class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final KermesseService _kermesseService = KermesseService();
 
   Future<KermesseDetailsResponse> _get() async {
@@ -44,7 +42,6 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
             "Kermesse Details",
           ),
           FutureBuilder<KermesseDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

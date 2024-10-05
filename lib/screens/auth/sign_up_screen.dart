@@ -13,12 +13,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final AuthService _authService = AuthService();
+
+  String _selectedRole = 'MANAGER';
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String _selectedRole = 'MANAGER';
-
-  final AuthService _authService = AuthService();
 
   Future<void> _submit() async {
     ApiResponse<Null> response = await _authService.signUp(

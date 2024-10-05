@@ -16,8 +16,6 @@ class ChildrenListScreen extends StatefulWidget {
 }
 
 class _ChildrenListScreenState extends State<ChildrenListScreen> {
-  final Key _key = UniqueKey();
-
   final UserService _userService = UserService();
 
   Future<List<UserListItem>> _getAll() async {
@@ -27,10 +25,6 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
       throw Exception(response.error);
     }
     return response.data!;
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -43,17 +37,15 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
             "Children List",
           ),
           ElevatedButton(
-            onPressed: () async {
-              await context.push(
+            onPressed: () {
+              context.push(
                 ParentRoutes.childrenInvite,
               );
-              _refresh();
             },
             child: const Text('Invite'),
           ),
           Expanded(
             child: FutureBuilder<List<UserListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

@@ -23,10 +23,10 @@ class UserEditScreen extends StatefulWidget {
 }
 
 class _UserEditScreenState extends State<UserEditScreen> {
+  final UserService _userService = UserService();
+
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-
-  final UserService _userService = UserService();
 
   Future<void> _submit() async {
     ApiResponse<Null> response = await _userService.edit(

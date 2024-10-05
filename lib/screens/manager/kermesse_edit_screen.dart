@@ -19,11 +19,10 @@ class KermesseEditScreen extends StatefulWidget {
 }
 
 class _KermesseEditScreenState extends State<KermesseEditScreen> {
-  final Key _key = UniqueKey();
+  final KermesseService _kermesseService = KermesseService();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-
-  final KermesseService _kermesseService = KermesseService();
 
   Future<KermesseDetailsResponse> _get() async {
     ApiResponse<KermesseDetailsResponse> response =
@@ -68,7 +67,6 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
             "Kermesse Edit",
           ),
           FutureBuilder<KermesseDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

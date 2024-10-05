@@ -22,12 +22,11 @@ class KermesseTombolaEditScreen extends StatefulWidget {
 }
 
 class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
-  final Key _key = UniqueKey();
+  final TombolaService _tombolaService = TombolaService();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _giftController = TextEditingController();
-
-  final TombolaService _tombolaService = TombolaService();
 
   Future<TombolaDetailsResponse> _get() async {
     ApiResponse<TombolaDetailsResponse> response =
@@ -73,7 +72,6 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
             "Kermesse Tombola Edit",
           ),
           FutureBuilder<TombolaDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

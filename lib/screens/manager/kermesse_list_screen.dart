@@ -15,8 +15,6 @@ class KermesseListScreen extends StatefulWidget {
 }
 
 class _KermesseListScreenState extends State<KermesseListScreen> {
-  final Key _key = UniqueKey();
-
   final KermesseService _kermesseService = KermesseService();
 
   Future<List<KermesseListItem>> _getAll() async {
@@ -26,10 +24,6 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
       throw Exception(response.error);
     }
     return response.data!;
-  }
-
-  void _refresh() {
-    setState(() {});
   }
 
   @override
@@ -42,15 +36,13 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
             "Kermesse List",
           ),
           ElevatedButton(
-            onPressed: () async {
-              await context.push(ManagerRoutes.kermesseCreate);
-              _refresh();
+            onPressed: () {
+              context.push(ManagerRoutes.kermesseCreate);
             },
             child: const Text('Create'),
           ),
           Expanded(
             child: FutureBuilder<List<KermesseListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

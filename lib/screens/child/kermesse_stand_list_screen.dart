@@ -20,8 +20,6 @@ class KermesseStandListScreen extends StatefulWidget {
 }
 
 class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
-  final Key _key = UniqueKey();
-
   final StandService _standService = StandService();
 
   Future<List<StandListItem>> _getAll() async {
@@ -45,7 +43,6 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<StandListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

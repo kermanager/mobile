@@ -19,8 +19,6 @@ class UserDetailsScreen extends StatefulWidget {
 }
 
 class _UserDetailsScreenState extends State<UserDetailsScreen> {
-  final Key _key = UniqueKey();
-
   final UserService _userService = UserService();
 
   Future<UserDetailsResponse> _get() async {
@@ -43,7 +41,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             "Profile",
           ),
           FutureBuilder<UserDetailsResponse>(
-            key: _key,
             future: _get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

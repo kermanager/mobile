@@ -21,8 +21,6 @@ class KermesseInteractionListScreen extends StatefulWidget {
 
 class _KermesseInteractionListScreenState
     extends State<KermesseInteractionListScreen> {
-  final Key _key = UniqueKey();
-
   final InteractionService _interactionService = InteractionService();
 
   Future<List<InteractionListItem>> _getAll() async {
@@ -47,7 +45,6 @@ class _KermesseInteractionListScreenState
           ),
           Expanded(
             child: FutureBuilder<List<InteractionListItem>>(
-              key: _key,
               future: _getAll(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
