@@ -63,6 +63,7 @@ class InteractionListItem {
   final String status;
   final int credit;
   final int point;
+  final DateTime createdAt;
   final InteractionUser user;
   final InteractionStand stand;
 
@@ -72,6 +73,7 @@ class InteractionListItem {
     required this.status,
     required this.credit,
     required this.point,
+    required this.createdAt,
     required this.user,
     required this.stand,
   });
@@ -83,6 +85,7 @@ class InteractionListItem {
       status: json['status'],
       credit: json['credit'],
       point: json['point'],
+      createdAt: DateTime.parse(json['created_at']),
       user: InteractionUser.fromMap(json['user']),
       stand: InteractionStand.fromMap(json['stand']),
     );

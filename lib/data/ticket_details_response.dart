@@ -87,6 +87,7 @@ class TicketKermesse {
 class TicketDetailsResponse {
   final int id;
   final bool isWinner;
+  final DateTime createdAt;
   final TicketUser user;
   final TicketTombola tombola;
   final TicketKermesse kermesse;
@@ -94,6 +95,7 @@ class TicketDetailsResponse {
   TicketDetailsResponse({
     required this.id,
     required this.isWinner,
+    required this.createdAt,
     required this.user,
     required this.tombola,
     required this.kermesse,
@@ -103,6 +105,7 @@ class TicketDetailsResponse {
     return TicketDetailsResponse(
       id: json['id'],
       isWinner: json['is_winner'],
+      createdAt: DateTime.parse(json['created_at']),
       user: TicketUser.fromMap(json['user']),
       tombola: TicketTombola.fromMap(json['tombola']),
       kermesse: TicketKermesse.fromMap(json['kermesse']),
