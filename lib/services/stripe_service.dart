@@ -1,12 +1,10 @@
 import "dart:convert";
 
 import "package:http/http.dart" as http;
+import "package:kermanager/api/api_constants.dart";
 import "package:stripe_checkout/stripe_checkout.dart";
 
 class StripeService {
-  final String _secretKey = "your_secret_key";
-  final String _publishableKey = "your_publishable_key";
-
   Future<dynamic> createCheckoutSession(
     int userId,
     int credit,
@@ -22,7 +20,7 @@ class StripeService {
     final response = await http.post(
       url,
       headers: {
-        "Authorization": "Bearer $_secretKey",
+        "Authorization": "Bearer ${ApiConstants.stripeScretKey}",
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body:
@@ -48,7 +46,7 @@ class StripeService {
     final result = await redirectToCheckout(
       context: context,
       sessionId: checkoutId,
-      publishableKey: _publishableKey,
+      publishableKey: ApiConstants.stripePublishableKey,
       successUrl: "https://example.com/success",
       canceledUrl: "https://example.com/cancel",
     );
