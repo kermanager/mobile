@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class StandHolderBottomNavigation extends StatelessWidget {
+class StandHolderBottomNavigation extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
 
   const StandHolderBottomNavigation({
@@ -9,20 +9,39 @@ class StandHolderBottomNavigation extends StatelessWidget {
     required this.navigationShell,
   });
 
+  @override
+  State<StandHolderBottomNavigation> createState() =>
+      _StandHolderBottomNavigationState();
+}
+
+class _StandHolderBottomNavigationState
+    extends State<StandHolderBottomNavigation> {
   void _goBranch(int index) {
-    navigationShell.goBranch(
+    widget.navigationShell.goBranch(
       index,
-      initialLocation: index == navigationShell.currentIndex,
+      initialLocation: index == widget.navigationShell.currentIndex,
     );
+  }
+
+  Future<void> _refreshData() async {
+    await Future.delayed(const Duration(milliseconds: 1));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: navigationShell,
+      body: FutureBuilder<void>(
+        future: _refreshData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return widget.navigationShell;
+          }
+          return Container();
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: navigationShell.currentIndex,
+        currentIndex: widget.navigationShell.currentIndex,
         onTap: _goBranch,
         items: const [
           BottomNavigationBarItem(

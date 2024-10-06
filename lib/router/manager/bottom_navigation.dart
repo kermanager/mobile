@@ -29,7 +29,6 @@ class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: widget.navigationShell,
       body: FutureBuilder<void>(
         future: _refreshData(),
         builder: (context, snapshot) {
