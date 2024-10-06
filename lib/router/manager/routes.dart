@@ -1,5 +1,4 @@
 class ManagerRoutes {
-  static const String dashboard = '/manager/dashboard';
   static const String userDetails = '/manager/user-details';
   static const String userEdit = '/manager/user-edit';
   static const String kermesseList = '/manager/kermesse-list';

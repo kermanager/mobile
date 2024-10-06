@@ -29,13 +29,13 @@ class AppRouter {
         }
         if (isLogged && state.fullPath!.startsWith("/auth")) {
           if (user.role == "MANAGER") {
-            return ManagerRoutes.dashboard;
+            return ManagerRoutes.kermesseList;
           } else if (user.role == "STAND_HOLDER") {
-            return StandHolderRoutes.dashboard;
+            return StandHolderRoutes.kermesseList;
           } else if (user.role == "PARENT") {
-            return ParentRoutes.dashboard;
+            return ParentRoutes.kermesseList;
           } else if (user.role == "CHILD") {
-            return ChildRoutes.dashboard;
+            return ChildRoutes.kermesseList;
           }
         }
         if (isLogged && user.role == "STAND_HOLDER" && !user.hasStand) {

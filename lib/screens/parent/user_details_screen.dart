@@ -6,6 +6,7 @@ import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/sign_out_button.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   final int userId;
@@ -68,6 +69,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     },
                     child: const Text("Buy credit"),
                   ),
+                  const SignOutButton(),
                 ],
               );
             },

@@ -4,7 +4,6 @@ import 'package:kermanager/providers/auth_user.dart';
 
 import 'package:kermanager/router/child/bottom_navigation.dart';
 import 'package:kermanager/router/child/routes.dart';
-import 'package:kermanager/screens/child/dashboard_screen.dart';
 import 'package:kermanager/screens/child/kermesse_dashboard_screen.dart';
 import 'package:kermanager/screens/child/kermesse_details_screen.dart';
 import 'package:kermanager/screens/child/kermesse_interaction_details_screen.dart';
@@ -26,16 +25,6 @@ class ChildRouter {
       return ChildBottomNavigation(navigationShell: navigationShell);
     },
     branches: [
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-            path: ChildRoutes.dashboard,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DashboardScreen(),
-            ),
-          ),
-        ],
-      ),
       StatefulShellBranch(
         routes: [
           GoRoute(

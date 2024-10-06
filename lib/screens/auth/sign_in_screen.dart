@@ -52,13 +52,13 @@ class _SignInScreenState extends State<SignInScreen> {
         response.data!.hasStand,
       );
       if (response.data!.role == "MANAGER") {
-        context.go(ManagerRoutes.dashboard);
+        context.go(ManagerRoutes.kermesseList);
       } else if (response.data!.role == "STAND_HOLDER") {
-        context.go(StandHolderRoutes.dashboard);
+        context.go(StandHolderRoutes.kermesseList);
       } else if (response.data!.role == "PARENT") {
-        context.go(ParentRoutes.dashboard);
+        context.go(ParentRoutes.kermesseList);
       } else if (response.data!.role == "CHILD") {
-        context.go(ChildRoutes.dashboard);
+        context.go(ChildRoutes.kermesseList);
       }
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -46,7 +46,7 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
         ),
       );
       Provider.of<AuthProvider>(context, listen: false).setHasStand(true);
-      context.go(StandHolderRoutes.dashboard);
+      context.go(StandHolderRoutes.kermesseList);
     }
   }
 

@@ -43,10 +43,6 @@ class _ParentBottomNavigationState extends State<ParentBottomNavigation> {
         onTap: _goBranch,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Kermesses',
           ),
