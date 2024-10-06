@@ -9,11 +9,14 @@ class TombolaService {
   final ApiService _apiService = ApiService();
 
   Future<ApiResponse<List<TombolaListItem>>> list({int? kermesseId}) {
+    Map<String, String> params = {};
+    if (kermesseId != null) {
+      params['kermesse_id'] = kermesseId.toString();
+    }
+
     return _apiService.get<List<TombolaListItem>>(
       "tombolas",
-      {
-        'kermesse_id': kermesseId?.toString() ?? '',
-      },
+      params,
       (data) {
         TombolaListResponse tombolaListResponse =
             TombolaListResponse.fromJson(data);

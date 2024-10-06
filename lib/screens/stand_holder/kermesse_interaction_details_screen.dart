@@ -55,7 +55,12 @@ class _KermesseInteractionDetailsScreenState
           content: Text('Interaction ended successfully'),
         ),
       );
+      _refresh();
     }
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 
   @override

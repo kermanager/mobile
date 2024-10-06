@@ -10,11 +10,14 @@ class UserService {
   final ApiService _apiService = ApiService();
 
   Future<ApiResponse<List<UserListItem>>> list({int? kermesseId}) {
+    Map<String, String> params = {};
+    if (kermesseId != null) {
+      params['kermesse_id'] = kermesseId.toString();
+    }
+
     return _apiService.get<List<UserListItem>>(
       "users",
-      {
-        'kermesse_id': kermesseId?.toString() ?? '',
-      },
+      params,
       (data) {
         UserListResponse userListResponse = UserListResponse.fromJson(data);
         return userListResponse.users;

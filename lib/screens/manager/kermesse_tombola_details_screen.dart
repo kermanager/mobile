@@ -52,7 +52,12 @@ class _KermesseTombolaDetailsScreenState
           content: Text('Tombola ended successfully'),
         ),
       );
+      _refresh();
     }
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 
   @override

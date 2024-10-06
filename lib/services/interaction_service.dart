@@ -9,11 +9,14 @@ class InteractionService {
   final ApiService _apiService = ApiService();
 
   Future<ApiResponse<List<InteractionListItem>>> list({int? kermesseId}) {
+    Map<String, String> params = {};
+    if (kermesseId != null) {
+      params['kermesse_id'] = kermesseId.toString();
+    }
+
     return _apiService.get<List<InteractionListItem>>(
       "interactions",
-      {
-        'kermesse_id': kermesseId?.toString() ?? '',
-      },
+      params,
       (data) {
         InteractionListResponse interactionListResponse =
             InteractionListResponse.fromJson(data);

@@ -48,7 +48,12 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
           content: Text('Kermesse Ended successfully'),
         ),
       );
+      _refresh();
     }
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 
   @override
