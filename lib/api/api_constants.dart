@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String apiBaseUrl = '10.0.2.2:3000';
+  static const String apiBaseUrl = 'ker-manager-4cb239a4979e.herokuapp.com';
   static const String tokenKey = 'kermanager-token';
   static const String stripeScretKey =
       'sk_test_51NUvqBAlzW5ZDZ2b3YLub6whrxThinoTNFfTN6m3bWX4HJlSJUXPd0BNzdF7KGSx7vCavmzUTvMvymhDEWgYmz6800bjbq721P';
