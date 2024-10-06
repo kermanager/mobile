@@ -30,7 +30,7 @@ class _KermesseInteractionDetailsScreenState
       interactionId: widget.interactionId,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }

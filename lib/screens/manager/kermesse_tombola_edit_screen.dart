@@ -36,7 +36,7 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
       tombolaId: widget.tombolaId,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }
@@ -51,7 +51,7 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.error!),
+          content: Text(response.errorMessage),
         ),
       );
     } else {

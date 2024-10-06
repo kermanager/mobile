@@ -27,7 +27,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
     ApiResponse<List<UserListItem>> response =
         await _userService.listInviteKermesse(kermesseId: widget.kermesseId);
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }
@@ -40,7 +40,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.error!),
+          content: Text(response.errorMessage),
         ),
       );
     } else {

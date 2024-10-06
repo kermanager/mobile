@@ -28,7 +28,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
       isFree: true,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }
@@ -41,7 +41,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.error!),
+          content: Text(response.errorMessage),
         ),
       );
     } else {

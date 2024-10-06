@@ -27,7 +27,7 @@ class _KermesseDashboardScreenState extends State<KermesseDashboardScreen> {
       kermesseId: widget.kermesseId,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }

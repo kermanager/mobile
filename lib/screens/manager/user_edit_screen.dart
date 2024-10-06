@@ -37,7 +37,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.error!),
+          content: Text(response.errorMessage),
         ),
       );
     } else {

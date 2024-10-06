@@ -28,7 +28,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
       userId: widget.userId,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }

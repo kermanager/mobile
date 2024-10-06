@@ -31,7 +31,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
       kermesseId: widget.kermesseId,
     );
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }
@@ -45,7 +45,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.error!),
+          content: Text(response.errorMessage),
         ),
       );
     } else {

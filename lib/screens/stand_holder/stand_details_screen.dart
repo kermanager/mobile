@@ -22,7 +22,7 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
   Future<StandDetailsResponse> _get() async {
     ApiResponse<StandDetailsResponse> response = await _standService.current();
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }

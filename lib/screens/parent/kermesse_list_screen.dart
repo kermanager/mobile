@@ -22,7 +22,7 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
     ApiResponse<List<KermesseListItem>> response =
         await _kermesseService.list();
     if (response.error != null) {
-      throw Exception(response.error);
+      throw Exception(response.errorMessage);
     }
     return response.data!;
   }
