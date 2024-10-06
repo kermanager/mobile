@@ -45,7 +45,7 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
               builder: (context, item) {
                 return ListTile(
                   title: Text(item.name),
-                  subtitle: Text(item.role),
+                  subtitle: Text("${item.role} - ${item.points}"),
                 );
               },
             ),

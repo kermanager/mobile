@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
@@ -49,6 +50,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
           content: Text('User invited successfully'),
         ),
       );
+      context.pop();
     }
   }
 
