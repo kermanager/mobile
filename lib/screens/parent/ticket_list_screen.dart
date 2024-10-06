@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/ticket_list_response.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/ticket_service.dart';
+import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class TicketListScreen extends StatefulWidget {
@@ -34,43 +35,20 @@ class _TicketListScreenState extends State<TicketListScreen> {
             "Ticket List",
           ),
           Expanded(
-            child: FutureBuilder<List<TicketListItem>>(
-              future: _getAll(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      snapshot.error.toString(),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      TicketListItem item = snapshot.data![index];
-                      return ListTile(
-                        title: Text(item.isWinner ? 'Winner' : 'Loser'),
-                        subtitle: Text(item.user.name),
-                        onTap: () {
-                          context.push(
-                            ParentRoutes.ticketDetails,
-                            extra: {
-                              "ticketId": item.id,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                }
-                return const Center(
-                  child: Text('No tickets found'),
+            child: ListFutureBuilder<TicketListItem>(
+              future: _getAll,
+              builder: (context, item) {
+                return ListTile(
+                  title: Text(item.isWinner ? 'Winner' : 'Loser'),
+                  subtitle: Text(item.user.name),
+                  onTap: () {
+                    context.push(
+                      ParentRoutes.ticketDetails,
+                      extra: {
+                        "ticketId": item.id,
+                      },
+                    );
+                  },
                 );
               },
             ),

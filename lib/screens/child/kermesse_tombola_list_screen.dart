@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_list_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseTombolaListScreen extends StatefulWidget {
@@ -42,44 +43,21 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
             "Kermesse Tombola List",
           ),
           Expanded(
-            child: FutureBuilder<List<TombolaListItem>>(
-              future: _getAll(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      snapshot.error.toString(),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      TombolaListItem item = snapshot.data![index];
-                      return ListTile(
-                        title: Text(item.name),
-                        subtitle: Text(item.gift),
-                        onTap: () {
-                          context.push(
-                            ChildRoutes.kermesseTombolaDetails,
-                            extra: {
-                              "tombolaId": item.id,
-                              "kermesseId": widget.kermesseId,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                }
-                return const Center(
-                  child: Text('No tombolas found'),
+            child: ListFutureBuilder<TombolaListItem>(
+              future: _getAll,
+              builder: (context, item) {
+                return ListTile(
+                  title: Text(item.name),
+                  subtitle: Text(item.gift),
+                  onTap: () {
+                    context.push(
+                      ChildRoutes.kermesseTombolaDetails,
+                      extra: {
+                        "tombolaId": item.id,
+                        "kermesseId": widget.kermesseId,
+                      },
+                    );
+                  },
                 );
               },
             ),

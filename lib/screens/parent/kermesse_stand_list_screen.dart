@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_list_response.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseStandListScreen extends StatefulWidget {
@@ -42,44 +43,21 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
             "Kermesse Stand List",
           ),
           Expanded(
-            child: FutureBuilder<List<StandListItem>>(
-              future: _getAll(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      snapshot.error.toString(),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      StandListItem item = snapshot.data![index];
-                      return ListTile(
-                        title: Text(item.name),
-                        subtitle: Text(item.type),
-                        onTap: () {
-                          context.push(
-                            ParentRoutes.kermesseStandDetails,
-                            extra: {
-                              "kermesseId": widget.kermesseId,
-                              "standId": item.id,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                }
-                return const Center(
-                  child: Text('No stands found'),
+            child: ListFutureBuilder<StandListItem>(
+              future: _getAll,
+              builder: (context, item) {
+                return ListTile(
+                  title: Text(item.name),
+                  subtitle: Text(item.type),
+                  onTap: () {
+                    context.push(
+                      ParentRoutes.kermesseStandDetails,
+                      extra: {
+                        "kermesseId": widget.kermesseId,
+                        "standId": item.id,
+                      },
+                    );
+                  },
                 );
               },
             ),

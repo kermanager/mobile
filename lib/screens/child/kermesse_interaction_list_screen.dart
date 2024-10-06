@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/interaction_list_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/interaction_service.dart';
+import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseInteractionListScreen extends StatefulWidget {
@@ -44,44 +45,21 @@ class _KermesseInteractionListScreenState
             "Kermesse Interaction List",
           ),
           Expanded(
-            child: FutureBuilder<List<InteractionListItem>>(
-              future: _getAll(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      snapshot.error.toString(),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      InteractionListItem item = snapshot.data![index];
-                      return ListTile(
-                        title: Text(item.user.name),
-                        subtitle: Text(item.credit.toString()),
-                        onTap: () async {
-                          await context.push(
-                            ChildRoutes.kermesseInteractionDetails,
-                            extra: {
-                              "kermesseId": widget.kermesseId,
-                              "interactionId": item.id,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                }
-                return const Center(
-                  child: Text('No interactions found'),
+            child: ListFutureBuilder<InteractionListItem>(
+              future: _getAll,
+              builder: (context, item) {
+                return ListTile(
+                  title: Text(item.user.name),
+                  subtitle: Text(item.credit.toString()),
+                  onTap: () {
+                    context.push(
+                      ChildRoutes.kermesseInteractionDetails,
+                      extra: {
+                        "kermesseId": widget.kermesseId,
+                        "interactionId": item.id,
+                      },
+                    );
+                  },
                 );
               },
             ),
