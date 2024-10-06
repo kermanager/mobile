@@ -3,8 +3,8 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/interaction_details_response.dart';
 import 'package:kermanager/services/interaction_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
 
 class KermesseInteractionDetailsScreen extends StatefulWidget {
   final int kermesseId;
@@ -83,7 +83,7 @@ class _KermesseInteractionDetailsScreenState
                   data.type == "ACTIVITY" && data.status == "STARTED"
                       ? Column(
                           children: [
-                            TextInput(
+                            NumberInput(
                               controller: _pointController,
                               defaultValue: "0",
                               hintText: "Point",

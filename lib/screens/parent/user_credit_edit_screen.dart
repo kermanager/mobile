@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kermanager/services/stripe_service.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
 
 class UserCreditEditScreen extends StatefulWidget {
   final int userId;
@@ -58,7 +58,7 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
           const Text(
             "Credit Edit",
           ),
-          TextInput(
+          NumberInput(
             controller: _creditController,
             hintText: "Points",
           ),

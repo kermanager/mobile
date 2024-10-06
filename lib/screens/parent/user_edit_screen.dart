@@ -5,8 +5,8 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/providers/auth_provider.dart';
 import 'package:kermanager/router/auth/routes.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/password_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -63,11 +63,11 @@ class _UserEditScreenState extends State<UserEditScreen> {
           const Text(
             "Password Edit",
           ),
-          TextInput(
+          PasswordInput(
             hintText: "Password",
             controller: _passwordController,
           ),
-          TextInput(
+          PasswordInput(
             hintText: "New password",
             controller: _newPasswordController,
           ),

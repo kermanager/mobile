@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:kermanager/services/auth_service.dart';
 import 'package:kermanager/api/api_response.dart';
+import 'package:kermanager/widgets/password_input.dart';
 import 'package:kermanager/widgets/role_select.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -72,11 +73,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Email',
               ),
             ),
-            TextField(
+            PasswordInput(
+              hintText: "Password",
               controller: _passwordController,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-              ),
             ),
             ElevatedButton(
               onPressed: _submit,

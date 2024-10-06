@@ -3,8 +3,8 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
 
 class ChildrenDetailsScreen extends StatefulWidget {
   final int userId;
@@ -73,7 +73,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
                   Text(data.email),
                   Text(data.role),
                   Text(data.credit.toString()),
-                  TextInput(
+                  NumberInput(
                     hintText: "Amount",
                     controller: _amountController,
                   ),

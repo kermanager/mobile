@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/providers/auth_provider.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/stand_type_select.dart';
 import 'package:kermanager/widgets/text_input.dart';
@@ -75,11 +76,11 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
             hintText: "Description",
             controller: _descriptionController,
           ),
-          TextInput(
+          NumberInput(
             hintText: "Price",
             controller: _priceController,
           ),
-          TextInput(
+          NumberInput(
             hintText: "Stock",
             controller: _stockController,
           ),

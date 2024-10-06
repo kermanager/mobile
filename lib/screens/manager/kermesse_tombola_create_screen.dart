@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseTombolaCreateScreen extends StatefulWidget {
@@ -63,11 +64,9 @@ class _KermesseTombolaCreateScreenState
               hintText: 'Name',
             ),
           ),
-          TextField(
+          NumberInput(
+            hintText: "Price",
             controller: _priceController,
-            decoration: const InputDecoration(
-              hintText: 'Price',
-            ),
           ),
           TextField(
             controller: _giftController,

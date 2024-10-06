@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
+import 'package:kermanager/widgets/password_input.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -83,11 +84,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 hintText: 'Email',
               ),
             ),
-            TextField(
+            PasswordInput(
+              hintText: "Password",
               controller: _passwordController,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-              ),
             ),
             ElevatedButton(
               onPressed: _submit,

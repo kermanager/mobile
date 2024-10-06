@@ -4,8 +4,8 @@ import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/interaction_service.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
 
 class KermesseStandDetailsScreen extends StatefulWidget {
   final int kermesseId;
@@ -85,13 +85,13 @@ class _KermesseInteractionDetailsScreenState
                       ? SizedBox(
                           width: 0,
                           height: 0,
-                          child: TextInput(
+                          child: NumberInput(
                             defaultValue: "1",
                             controller: _quantityController,
                             hintText: "Quantity",
                           ),
                         )
-                      : TextInput(
+                      : NumberInput(
                           defaultValue: "1",
                           controller: _quantityController,
                           hintText: "Quantity",

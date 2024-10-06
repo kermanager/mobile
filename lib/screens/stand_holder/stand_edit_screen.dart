@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
@@ -80,12 +81,12 @@ class _StandEditScreenState extends State<StandEditScreen> {
                     controller: _descriptionController,
                     defaultValue: data.description,
                   ),
-                  TextInput(
+                  NumberInput(
                     hintText: "Price",
                     controller: _priceController,
                     defaultValue: data.price.toString(),
                   ),
-                  TextInput(
+                  NumberInput(
                     hintText: "Stock",
                     controller: _stockController,
                     defaultValue: data.stock.toString(),

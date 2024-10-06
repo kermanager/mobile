@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
@@ -83,7 +84,7 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
                     controller: _nameController,
                     defaultValue: data.name,
                   ),
-                  TextInput(
+                  NumberInput(
                     hintText: "Price",
                     controller: _priceController,
                     defaultValue: data.price.toString(),
