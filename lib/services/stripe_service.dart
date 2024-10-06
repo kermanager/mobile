@@ -13,9 +13,10 @@ class StripeService {
 
     String lineItems = "";
     lineItems += "&line_items[0][price_data][product_data][name]=Credit";
-    lineItems += "&line_items[0][price_data][unit_amount]=1";
+    lineItems +=
+        "&line_items[0][price_data][unit_amount]=${(credit * 100).round()}";
     lineItems += "&line_items[0][price_data][currency]=EUR";
-    lineItems += "&line_items[0][quantity]=$credit";
+    lineItems += "&line_items[0][quantity]=1";
 
     final response = await http.post(
       url,

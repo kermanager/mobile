@@ -59,8 +59,8 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
             "Credit Edit",
           ),
           TextInput(
-            hintText: "Points",
             controller: _creditController,
+            hintText: "Points",
           ),
           ElevatedButton(
             onPressed: _submit,
