@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
@@ -63,55 +64,37 @@ class _StandEditScreenState extends State<StandEditScreen> {
           const Text(
             "Stand Edit",
           ),
-          FutureBuilder<StandDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
+          DetailsFutureBuilder<StandDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextInput(
+                    hintText: "Name",
+                    controller: _nameController,
+                    defaultValue: data.name,
                   ),
-                );
-              }
-              if (snapshot.hasData) {
-                StandDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextInput(
-                      hintText: "Name",
-                      controller: _nameController,
-                      defaultValue: data.name,
-                    ),
-                    TextInput(
-                      hintText: "Description",
-                      controller: _descriptionController,
-                      defaultValue: data.description,
-                    ),
-                    TextInput(
-                      hintText: "Price",
-                      controller: _priceController,
-                      defaultValue: data.price.toString(),
-                    ),
-                    TextInput(
-                      hintText: "Stock",
-                      controller: _stockController,
-                      defaultValue: data.stock.toString(),
-                    ),
-                    ElevatedButton(
-                      onPressed: _submit,
-                      child: const Text('Save'),
-                    ),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                  TextInput(
+                    hintText: "Description",
+                    controller: _descriptionController,
+                    defaultValue: data.description,
+                  ),
+                  TextInput(
+                    hintText: "Price",
+                    controller: _priceController,
+                    defaultValue: data.price.toString(),
+                  ),
+                  TextInput(
+                    hintText: "Stock",
+                    controller: _stockController,
+                    defaultValue: data.stock.toString(),
+                  ),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    child: const Text('Save'),
+                  ),
+                ],
               );
             },
           ),

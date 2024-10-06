@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class UserDetailsScreen extends StatefulWidget {
@@ -40,52 +41,34 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
           const Text(
             "Profile",
           ),
-          FutureBuilder<UserDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
+          DetailsFutureBuilder<UserDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.name),
+                  Text(data.email),
+                  Text(data.role),
+                  Text(data.credit.toString()),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(
+                        ParentRoutes.userEdit,
+                      );
+                    },
+                    child: const Text("Update password"),
                   ),
-                );
-              }
-              if (snapshot.hasData) {
-                UserDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.email),
-                    Text(data.role),
-                    Text(data.credit.toString()),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          ParentRoutes.userEdit,
-                        );
-                      },
-                      child: const Text("Update password"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          ParentRoutes.userCreditEdit,
-                        );
-                      },
-                      child: const Text("Buy credit"),
-                    ),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(
+                        ParentRoutes.userCreditEdit,
+                      );
+                    },
+                    child: const Text("Buy credit"),
+                  ),
+                ],
               );
             },
           ),

@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class StandDetailsScreen extends StatefulWidget {
@@ -35,45 +36,27 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
           const Text(
             "Stand Details",
           ),
-          FutureBuilder<StandDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
+          DetailsFutureBuilder<StandDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.type),
+                  Text(data.name),
+                  Text(data.description),
+                  Text(data.stock.toString()),
+                  Text(data.price.toString()),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(
+                        StandHolderRoutes.standEdit,
+                      );
+                    },
+                    child: const Text('Edit'),
                   ),
-                );
-              }
-              if (snapshot.hasData) {
-                StandDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.type),
-                    Text(data.name),
-                    Text(data.description),
-                    Text(data.stock.toString()),
-                    Text(data.price.toString()),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          StandHolderRoutes.standEdit,
-                        );
-                      },
-                      child: const Text('Edit'),
-                    ),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                ],
               );
             },
           ),

@@ -3,6 +3,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/services/ticket_service.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseTombolaDetailsScreen extends StatefulWidget {
@@ -64,40 +65,22 @@ class _KermesseTombolaDetailsScreenState
           const Text(
             "Tombola Details",
           ),
-          FutureBuilder<TombolaDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
-                  ),
-                );
-              }
-              if (snapshot.hasData) {
-                TombolaDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.price.toString()),
-                    Text(data.gift),
-                    Text(data.status),
-                    ElevatedButton(
-                      onPressed: _participate,
-                      child: const Text("Participate"),
-                    )
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+          DetailsFutureBuilder<TombolaDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.name),
+                  Text(data.price.toString()),
+                  Text(data.gift),
+                  Text(data.status),
+                  ElevatedButton(
+                    onPressed: _participate,
+                    child: const Text("Participate"),
+                  )
+                ],
               );
             },
           ),

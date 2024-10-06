@@ -3,6 +3,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseUserInviteScreen extends StatefulWidget {
@@ -61,41 +62,18 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
             "Kermesse User Invite",
           ),
           Expanded(
-            child: FutureBuilder<List<UserListItem>>(
-              future: _getAll(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      snapshot.error.toString(),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      UserListItem item = snapshot.data![index];
-                      return ListTile(
-                        title: Text(item.name),
-                        subtitle: Text(item.email),
-                        leading: ElevatedButton(
-                          onPressed: () async {
-                            await _invite(item.id);
-                          },
-                          child: const Text('Invite'),
-                        ),
-                      );
+            child: ListFutureBuilder<UserListItem>(
+              future: _getAll,
+              builder: (context, item) {
+                return ListTile(
+                  title: Text(item.name),
+                  subtitle: Text(item.email),
+                  leading: ElevatedButton(
+                    onPressed: () async {
+                      await _invite(item.id);
                     },
-                  );
-                }
-                return const Center(
-                  child: Text('No users found'),
+                    child: const Text('Invite'),
+                  ),
                 );
               },
             ),

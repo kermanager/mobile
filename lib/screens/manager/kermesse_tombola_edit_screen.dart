@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
@@ -71,50 +72,32 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
           const Text(
             "Kermesse Tombola Edit",
           ),
-          FutureBuilder<TombolaDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
+          DetailsFutureBuilder<TombolaDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextInput(
+                    hintText: "Name",
+                    controller: _nameController,
+                    defaultValue: data.name,
                   ),
-                );
-              }
-              if (snapshot.hasData) {
-                TombolaDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextInput(
-                      hintText: "Name",
-                      controller: _nameController,
-                      defaultValue: data.name,
-                    ),
-                    TextInput(
-                      hintText: "Price",
-                      controller: _priceController,
-                      defaultValue: data.price.toString(),
-                    ),
-                    TextInput(
-                      hintText: "Gift",
-                      controller: _giftController,
-                      defaultValue: data.gift,
-                    ),
-                    ElevatedButton(
-                      onPressed: _submit,
-                      child: const Text('Save'),
-                    ),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                  TextInput(
+                    hintText: "Price",
+                    controller: _priceController,
+                    defaultValue: data.price.toString(),
+                  ),
+                  TextInput(
+                    hintText: "Gift",
+                    controller: _giftController,
+                    defaultValue: data.gift,
+                  ),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    child: const Text('Save'),
+                  ),
+                ],
               );
             },
           ),

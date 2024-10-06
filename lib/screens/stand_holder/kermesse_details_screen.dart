@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseDetailsScreen extends StatefulWidget {
@@ -41,57 +42,39 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
           const Text(
             "Kermesse Details",
           ),
-          FutureBuilder<KermesseDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
+          DetailsFutureBuilder<KermesseDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.name),
+                  Text(data.description),
+                  Text(data.status),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(
+                        StandHolderRoutes.kermesseDashboard,
+                        extra: {
+                          "kermesseId": data.id,
+                        },
+                      );
+                    },
+                    child: const Text("Dashboard"),
                   ),
-                );
-              }
-              if (snapshot.hasData) {
-                KermesseDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.description),
-                    Text(data.status),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          StandHolderRoutes.kermesseDashboard,
-                          extra: {
-                            "kermesseId": data.id,
-                          },
-                        );
-                      },
-                      child: const Text("Dashboard"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.push(
-                          StandHolderRoutes.kermesseInteractionList,
-                          extra: {
-                            "kermesseId": data.id,
-                          },
-                        );
-                      },
-                      child: const Text("Interactions"),
-                    )
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(
+                        StandHolderRoutes.kermesseInteractionList,
+                        extra: {
+                          "kermesseId": data.id,
+                        },
+                      );
+                    },
+                    child: const Text("Interactions"),
+                  )
+                ],
               );
             },
           ),

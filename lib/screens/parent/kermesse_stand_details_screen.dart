@@ -3,6 +3,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/interaction_service.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_input.dart';
 
@@ -68,56 +69,38 @@ class _KermesseInteractionDetailsScreenState
           const Text(
             "Stand Details",
           ),
-          FutureBuilder<StandDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
-                  ),
-                );
-              }
-              if (snapshot.hasData) {
-                StandDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.type),
-                    Text(data.name),
-                    Text(data.description),
-                    Text(data.price.toString()),
-                    Text(data.stock.toString()),
-                    data.type == "ACTIVITY"
-                        ? SizedBox(
-                            width: 0,
-                            height: 0,
-                            child: TextInput(
-                              defaultValue: "1",
-                              controller: _quantityController,
-                              hintText: "Quantity",
-                            ),
-                          )
-                        : TextInput(
+          DetailsFutureBuilder<StandDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.type),
+                  Text(data.name),
+                  Text(data.description),
+                  Text(data.price.toString()),
+                  Text(data.stock.toString()),
+                  data.type == "ACTIVITY"
+                      ? SizedBox(
+                          width: 0,
+                          height: 0,
+                          child: TextInput(
                             defaultValue: "1",
                             controller: _quantityController,
                             hintText: "Quantity",
                           ),
-                    ElevatedButton(
-                      onPressed: _participate,
-                      child: const Text("Participate"),
-                    ),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+                        )
+                      : TextInput(
+                          defaultValue: "1",
+                          controller: _quantityController,
+                          hintText: "Quantity",
+                        ),
+                  ElevatedButton(
+                    onPressed: _participate,
+                    child: const Text("Participate"),
+                  ),
+                ],
               );
             },
           ),

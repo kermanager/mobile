@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseDashboardScreen extends StatefulWidget {
@@ -40,34 +41,16 @@ class _KermesseDashboardScreenState extends State<KermesseDashboardScreen> {
           const Text(
             "Kermesse Dashboard",
           ),
-          FutureBuilder<KermesseDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
-                  ),
-                );
-              }
-              if (snapshot.hasData) {
-                KermesseDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Stand Count: ${data.standCount}"),
-                    Text("Interaction Count: ${data.interactionCount}"),
-                    Text("Interaction Income: ${data.interactionIncome}"),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+          DetailsFutureBuilder<KermesseDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Stand Count: ${data.standCount}"),
+                  Text("Interaction Count: ${data.interactionCount}"),
+                  Text("Interaction Income: ${data.interactionIncome}"),
+                ],
               );
             },
           ),

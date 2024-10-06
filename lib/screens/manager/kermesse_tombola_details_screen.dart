@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseTombolaDetailsScreen extends StatefulWidget {
@@ -63,58 +64,40 @@ class _KermesseTombolaDetailsScreenState
           const Text(
             "Tombola Details",
           ),
-          FutureBuilder<TombolaDetailsResponse>(
-            future: _get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
-                  ),
-                );
-              }
-              if (snapshot.hasData) {
-                TombolaDetailsResponse data = snapshot.data!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.id.toString()),
-                    Text(data.name),
-                    Text(data.price.toString()),
-                    Text(data.gift),
-                    Text(data.status),
-                    data.status == "STARTED"
-                        ? Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.push(
-                                    ManagerRoutes.kermesseTombolaEdit,
-                                    extra: {
-                                      "kermesseId": widget.kermesseId,
-                                      "tombolaId": widget.tombolaId,
-                                    },
-                                  );
-                                },
-                                child: const Text("Edit"),
-                              ),
-                              ElevatedButton(
-                                onPressed: _end,
-                                child: const Text("End"),
-                              )
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                );
-              }
-              return const Center(
-                child: Text('Something went wrong'),
+          DetailsFutureBuilder<TombolaDetailsResponse>(
+            future: _get,
+            builder: (context, data) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(data.id.toString()),
+                  Text(data.name),
+                  Text(data.price.toString()),
+                  Text(data.gift),
+                  Text(data.status),
+                  data.status == "STARTED"
+                      ? Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                context.push(
+                                  ManagerRoutes.kermesseTombolaEdit,
+                                  extra: {
+                                    "kermesseId": widget.kermesseId,
+                                    "tombolaId": widget.tombolaId,
+                                  },
+                                );
+                              },
+                              child: const Text("Edit"),
+                            ),
+                            ElevatedButton(
+                              onPressed: _end,
+                              child: const Text("End"),
+                            )
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                ],
               );
             },
           ),
