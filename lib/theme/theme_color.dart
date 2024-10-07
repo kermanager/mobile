@@ -9,4 +9,6 @@ class ThemeColor {
   static const Color gray200 = Color(0xFFE8E8E8);
   static const Color gray300 = Color(0xFFBDBDBD);
   static const Color gray400 = Color(0xFF666666);
+  static const Color red100 = Color(0xFFFFEEED);
+  static const Color red200 = Color(0xFFe74c3c);
 }
