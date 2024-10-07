@@ -5,7 +5,6 @@ import 'package:kermanager/data/kermesse_list_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
-
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseListScreen extends StatefulWidget {

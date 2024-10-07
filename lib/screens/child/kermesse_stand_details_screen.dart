@@ -8,8 +8,9 @@ import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/icon_box.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/widgets/quantity_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseStandDetailsScreen extends StatefulWidget {
@@ -29,6 +30,8 @@ class KermesseStandDetailsScreen extends StatefulWidget {
 
 class _KermesseInteractionDetailsScreenState
     extends State<KermesseStandDetailsScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _quantityController = TextEditingController();
 
   final StandService _standService = StandService();
@@ -45,23 +48,25 @@ class _KermesseInteractionDetailsScreenState
   }
 
   Future<void> _participate() async {
-    ApiResponse<Null> response = await _interactionService.create(
-      kermesseId: widget.kermesseId,
-      standId: widget.standId,
-      quantity: int.parse(_quantityController.text),
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<Null> response = await _interactionService.create(
+        kermesseId: widget.kermesseId,
+        standId: widget.standId,
+        quantity: int.parse(_quantityController.text),
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Participation successful'),
-        ),
-      );
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Participation successful'),
+          ),
+        );
+      }
     }
   }
 
@@ -143,26 +148,30 @@ class _KermesseInteractionDetailsScreenState
                     ),
                   ],
                 ),
-                const SizedBox(height: ThemeSize.s24),
-                data.type == "ACTIVITY"
-                    ? SizedBox(
-                        width: 0,
-                        height: 0,
-                        child: NumberInput(
-                          defaultValue: "1",
-                          controller: _quantityController,
-                          hintText: "Quantity",
-                        ),
-                      )
-                    : NumberInput(
-                        defaultValue: "1",
-                        controller: _quantityController,
-                        hintText: "Quantity",
-                      ),
-                Button(
-                  label: data.type == "ACTIVITY" ? "Participer" : "Acheter",
-                  onTap: _participate,
-                ),
+                const SizedBox(height: ThemeSize.s36),
+                FormColumn(
+                  formKey: _formKey,
+                  children: [
+                    data.type == "ACTIVITY"
+                        ? SizedBox(
+                            width: 0,
+                            height: 0,
+                            child: QuantityFormInput(
+                              controller: _quantityController,
+                              defaultValue: 1,
+                            ),
+                          )
+                        : QuantityFormInput(
+                            controller: _quantityController,
+                            defaultValue: 1,
+                          ),
+                    const SizedBox(height: ThemeSize.s8),
+                    Button(
+                      label: data.type == "ACTIVITY" ? "Participer" : "Acheter",
+                      onTap: _participate,
+                    ),
+                  ],
+                )
               ],
             );
           },
