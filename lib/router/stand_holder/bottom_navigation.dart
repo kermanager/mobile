@@ -46,16 +46,16 @@ class _StandHolderBottomNavigationState
           onTap: _goBranch,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.store),
               label: 'Mon stand',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.celebration),
               label: 'Kermesses',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: 'Profil',
             ),
           ],
         ),

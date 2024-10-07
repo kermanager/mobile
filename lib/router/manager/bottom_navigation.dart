@@ -47,16 +47,16 @@ class _ManagerBottomNavigationState extends State<ManagerBottomNavigation> {
           onTap: _goBranch,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.celebration),
               label: 'Kermesses',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.confirmation_num),
               label: 'Tickets',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: 'Profil',
             ),
           ],
         ),
