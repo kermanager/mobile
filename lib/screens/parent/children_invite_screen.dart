@@ -41,30 +41,27 @@ class _ChildrenInviteScreenState extends State<ChildrenInviteScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Child Invite",
+      children: [
+        const Text(
+          "Child Invite",
+        ),
+        TextField(
+          controller: _nameController,
+          decoration: const InputDecoration(
+            hintText: 'Name',
           ),
-          TextField(
-            controller: _nameController,
-            decoration: const InputDecoration(
-              hintText: 'Name',
-            ),
+        ),
+        TextField(
+          controller: _emailController,
+          decoration: const InputDecoration(
+            hintText: 'Email',
           ),
-          TextField(
-            controller: _emailController,
-            decoration: const InputDecoration(
-              hintText: 'Email',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

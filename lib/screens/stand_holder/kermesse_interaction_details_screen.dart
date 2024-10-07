@@ -66,46 +66,43 @@ class _KermesseInteractionDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Interaction Details",
-          ),
-          DetailsFutureBuilder<InteractionDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.type),
-                  Text(data.status),
-                  Text(data.user.name),
-                  Text(data.credit.toString()),
-                  Text(data.kermesse.name),
-                  Text(data.stand.name),
-                  data.type == "ACTIVITY" && data.status == "STARTED"
-                      ? Column(
-                          children: [
-                            NumberInput(
-                              controller: _pointController,
-                              defaultValue: "0",
-                              hintText: "Point",
-                            ),
-                            ElevatedButton(
-                              onPressed: _end,
-                              child: const Text("End"),
-                            ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Interaction Details",
+        ),
+        DetailsFutureBuilder<InteractionDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.type),
+                Text(data.status),
+                Text(data.user.name),
+                Text(data.credit.toString()),
+                Text(data.kermesse.name),
+                Text(data.stand.name),
+                data.type == "ACTIVITY" && data.status == "STARTED"
+                    ? Column(
+                        children: [
+                          NumberInput(
+                            controller: _pointController,
+                            defaultValue: "0",
+                            hintText: "Point",
+                          ),
+                          ElevatedButton(
+                            onPressed: _end,
+                            child: const Text("End"),
+                          ),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

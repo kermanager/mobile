@@ -63,49 +63,46 @@ class _KermesseInteractionDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Stand Details",
-          ),
-          DetailsFutureBuilder<StandDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.type),
-                  Text(data.name),
-                  Text(data.description),
-                  Text(data.price.toString()),
-                  Text(data.stock.toString()),
-                  data.type == "ACTIVITY"
-                      ? SizedBox(
-                          width: 0,
-                          height: 0,
-                          child: NumberInput(
-                            defaultValue: "1",
-                            controller: _quantityController,
-                            hintText: "Quantity",
-                          ),
-                        )
-                      : NumberInput(
+      children: [
+        const Text(
+          "Stand Details",
+        ),
+        DetailsFutureBuilder<StandDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.type),
+                Text(data.name),
+                Text(data.description),
+                Text(data.price.toString()),
+                Text(data.stock.toString()),
+                data.type == "ACTIVITY"
+                    ? SizedBox(
+                        width: 0,
+                        height: 0,
+                        child: NumberInput(
                           defaultValue: "1",
                           controller: _quantityController,
                           hintText: "Quantity",
                         ),
-                  ElevatedButton(
-                    onPressed: _participate,
-                    child: const Text("Participate"),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+                      )
+                    : NumberInput(
+                        defaultValue: "1",
+                        controller: _quantityController,
+                        hintText: "Quantity",
+                      ),
+                ElevatedButton(
+                  onPressed: _participate,
+                  child: const Text("Participate"),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 

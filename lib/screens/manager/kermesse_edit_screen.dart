@@ -61,38 +61,35 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Edit",
-          ),
-          DetailsFutureBuilder<KermesseDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextInput(
-                    hintText: "Name",
-                    controller: _nameController,
-                    defaultValue: data.name,
-                  ),
-                  TextInput(
-                    hintText: "Description",
-                    controller: _descriptionController,
-                    defaultValue: data.description,
-                  ),
-                  ElevatedButton(
-                    onPressed: _submit,
-                    child: const Text('Save'),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Kermesse Edit",
+        ),
+        DetailsFutureBuilder<KermesseDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextInput(
+                  hintText: "Name",
+                  controller: _nameController,
+                  defaultValue: data.name,
+                ),
+                TextInput(
+                  hintText: "Description",
+                  controller: _descriptionController,
+                  defaultValue: data.description,
+                ),
+                ElevatedButton(
+                  onPressed: _submit,
+                  child: const Text('Save'),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 

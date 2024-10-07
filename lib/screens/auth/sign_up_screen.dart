@@ -11,6 +11,7 @@ import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/link_button.dart';
 import 'package:kermanager/widgets/password_form_input.dart';
 import 'package:kermanager/widgets/role_select.dart';
+import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/text_form_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -57,68 +58,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return Screen(
+      children: [
+        FormColumn(
+          formKey: _formKey,
           children: [
-            FormColumn(
-              formKey: _formKey,
-              children: [
-                RoleSelect(
-                  defaultValue: _selectedRole,
-                  onChange: (value) {
-                    setState(() {
-                      _selectedRole = value;
-                    });
-                  },
-                ),
-                const SizedBox(height: ThemeSize.s16),
-                TextFormInput(
-                  hintText: "Nom complet",
-                  controller: _nameController,
-                  keyboardType: TextInputType.name,
-                ),
-                const SizedBox(height: ThemeSize.s16),
-                TextFormInput(
-                  hintText: "Email",
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                const SizedBox(height: ThemeSize.s16),
-                PasswordFormInput(
-                  hintText: "Mot de passe",
-                  controller: _passwordController,
-                ),
-                const SizedBox(height: ThemeSize.s16),
-                Button(
-                  label: "S'inscrire",
-                  onTap: _submit,
-                ),
-              ],
+            RoleSelect(
+              defaultValue: _selectedRole,
+              onChange: (value) {
+                setState(() {
+                  _selectedRole = value;
+                });
+              },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Déjà inscrit ?",
-                  style: TextStyle(
-                    fontSize: ThemeFontSize.s16,
-                    fontWeight: ThemeFontWeight.regular,
-                    color: ThemeColor.gray300,
-                  ),
-                ),
-                const SizedBox(width: ThemeSize.s8),
-                LinkButton(
-                  label: "Connectez-vous",
-                  onTap: () {
-                    context.pop();
-                  },
-                ),
-              ],
+            const SizedBox(height: ThemeSize.s16),
+            TextFormInput(
+              hintText: "Nom complet",
+              controller: _nameController,
+              keyboardType: TextInputType.name,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            TextFormInput(
+              hintText: "Email",
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            PasswordFormInput(
+              hintText: "Mot de passe",
+              controller: _passwordController,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            Button(
+              label: "S'inscrire",
+              onTap: _submit,
             ),
           ],
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Déjà inscrit ?",
+              style: TextStyle(
+                fontSize: ThemeFontSize.s16,
+                fontWeight: ThemeFontWeight.regular,
+                color: ThemeColor.gray300,
+              ),
+            ),
+            const SizedBox(width: ThemeSize.s8),
+            LinkButton(
+              label: "Connectez-vous",
+              onTap: () {
+                context.pop();
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 

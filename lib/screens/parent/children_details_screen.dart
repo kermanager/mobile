@@ -56,37 +56,34 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Children Details",
-          ),
-          DetailsFutureBuilder<UserDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.name),
-                  Text(data.email),
-                  Text(data.role),
-                  Text(data.credit.toString()),
-                  NumberInput(
-                    hintText: "Amount",
-                    controller: _amountController,
-                  ),
-                  ElevatedButton(
-                    onPressed: _send,
-                    child: const Text("Send credit"),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Children Details",
+        ),
+        DetailsFutureBuilder<UserDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.name),
+                Text(data.email),
+                Text(data.role),
+                Text(data.credit.toString()),
+                NumberInput(
+                  hintText: "Amount",
+                  controller: _amountController,
+                ),
+                ElevatedButton(
+                  onPressed: _send,
+                  child: const Text("Send credit"),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 

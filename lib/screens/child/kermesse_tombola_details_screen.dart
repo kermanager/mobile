@@ -59,33 +59,30 @@ class _KermesseTombolaDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Tombola Details",
-          ),
-          DetailsFutureBuilder<TombolaDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.name),
-                  Text(data.price.toString()),
-                  Text(data.gift),
-                  Text(data.status),
-                  ElevatedButton(
-                    onPressed: _participate,
-                    child: const Text("Participate"),
-                  )
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Tombola Details",
+        ),
+        DetailsFutureBuilder<TombolaDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.name),
+                Text(data.price.toString()),
+                Text(data.gift),
+                Text(data.status),
+                ElevatedButton(
+                  onPressed: _participate,
+                  child: const Text("Participate"),
+                )
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

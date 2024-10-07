@@ -59,104 +59,98 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Details",
-          ),
-          DetailsFutureBuilder<KermesseDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.name),
-                  Text(data.description),
-                  Text(data.status),
-                  data.status == "STARTED"
-                      ? Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                context.push(
-                                  ManagerRoutes.kermesseEdit,
-                                  extra: {
-                                    "kermesseId": data.id,
-                                  },
-                                );
-                              },
-                              child: const Text("Edit"),
-                            ),
-                            ElevatedButton(
-                              onPressed: _end,
-                              child: const Text("End"),
-                            )
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ManagerRoutes.kermesseDashboard,
-                        extra: {
-                          "kermesseId": data.id,
-                        },
-                      );
-                    },
-                    child: const Text("Dashboard"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ManagerRoutes.kermesseUserList,
-                        extra: {
-                          "kermesseId": data.id,
-                        },
-                      );
-                    },
-                    child: const Text("Users"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ManagerRoutes.kermesseStandList,
-                        extra: {
-                          "kermesseId": data.id,
-                        },
-                      );
-                    },
-                    child: const Text("Stands"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ManagerRoutes.kermesseTombolaList,
-                        extra: {
-                          "kermesseId": data.id,
-                        },
-                      );
-                    },
-                    child: const Text("Tombolas"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ManagerRoutes.kermesseInteractionList,
-                        extra: {
-                          "kermesseId": data.id,
-                        },
-                      );
-                    },
-                    child: const Text("Interactions"),
-                  )
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        DetailsFutureBuilder<KermesseDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.name),
+                Text(data.description),
+                Text(data.status),
+                data.status == "STARTED"
+                    ? Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              context.push(
+                                ManagerRoutes.kermesseEdit,
+                                extra: {
+                                  "kermesseId": data.id,
+                                },
+                              );
+                            },
+                            child: const Text("Edit"),
+                          ),
+                          ElevatedButton(
+                            onPressed: _end,
+                            child: const Text("End"),
+                          )
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ManagerRoutes.kermesseDashboard,
+                      extra: {
+                        "kermesseId": data.id,
+                      },
+                    );
+                  },
+                  child: const Text("Dashboard"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ManagerRoutes.kermesseUserList,
+                      extra: {
+                        "kermesseId": data.id,
+                      },
+                    );
+                  },
+                  child: const Text("Users"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ManagerRoutes.kermesseStandList,
+                      extra: {
+                        "kermesseId": data.id,
+                      },
+                    );
+                  },
+                  child: const Text("Stands"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ManagerRoutes.kermesseTombolaList,
+                      extra: {
+                        "kermesseId": data.id,
+                      },
+                    );
+                  },
+                  child: const Text("Tombolas"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ManagerRoutes.kermesseInteractionList,
+                      extra: {
+                        "kermesseId": data.id,
+                      },
+                    );
+                  },
+                  child: const Text("Interactions"),
+                )
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

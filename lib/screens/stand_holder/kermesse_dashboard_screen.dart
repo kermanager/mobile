@@ -35,27 +35,24 @@ class _KermesseDashboardScreenState extends State<KermesseDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Dashboard",
-          ),
-          DetailsFutureBuilder<KermesseDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Stand Count: ${data.standCount}"),
-                  Text("Interaction Count: ${data.interactionCount}"),
-                  Text("Interaction Income: ${data.interactionIncome}"),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Kermesse Dashboard",
+        ),
+        DetailsFutureBuilder<KermesseDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Stand Count: ${data.standCount}"),
+                Text("Interaction Count: ${data.interactionCount}"),
+                Text("Interaction Income: ${data.interactionIncome}"),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

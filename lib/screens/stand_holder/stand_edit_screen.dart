@@ -59,48 +59,45 @@ class _StandEditScreenState extends State<StandEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Stand Edit",
-          ),
-          DetailsFutureBuilder<StandDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextInput(
-                    hintText: "Name",
-                    controller: _nameController,
-                    defaultValue: data.name,
-                  ),
-                  TextInput(
-                    hintText: "Description",
-                    controller: _descriptionController,
-                    defaultValue: data.description,
-                  ),
-                  NumberInput(
-                    hintText: "Price",
-                    controller: _priceController,
-                    defaultValue: data.price.toString(),
-                  ),
-                  NumberInput(
-                    hintText: "Stock",
-                    controller: _stockController,
-                    defaultValue: data.stock.toString(),
-                  ),
-                  ElevatedButton(
-                    onPressed: _submit,
-                    child: const Text('Save'),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Stand Edit",
+        ),
+        DetailsFutureBuilder<StandDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextInput(
+                  hintText: "Name",
+                  controller: _nameController,
+                  defaultValue: data.name,
+                ),
+                TextInput(
+                  hintText: "Description",
+                  controller: _descriptionController,
+                  defaultValue: data.description,
+                ),
+                NumberInput(
+                  hintText: "Price",
+                  controller: _priceController,
+                  defaultValue: data.price.toString(),
+                ),
+                NumberInput(
+                  hintText: "Stock",
+                  controller: _stockController,
+                  defaultValue: data.stock.toString(),
+                ),
+                ElevatedButton(
+                  onPressed: _submit,
+                  child: const Text('Save'),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 

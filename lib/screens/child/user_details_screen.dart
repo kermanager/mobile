@@ -36,38 +36,35 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Profile",
-          ),
-          DetailsFutureBuilder<UserDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.name),
-                  Text(data.email),
-                  Text(data.role),
-                  Text(data.credit.toString()),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        ChildRoutes.userEdit,
-                      );
-                    },
-                    child: const Text("Update password"),
-                  ),
-                  const SignOutButton(),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Profile",
+        ),
+        DetailsFutureBuilder<UserDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.name),
+                Text(data.email),
+                Text(data.role),
+                Text(data.credit.toString()),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      ChildRoutes.userEdit,
+                    );
+                  },
+                  child: const Text("Update password"),
+                ),
+                const SignOutButton(),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

@@ -33,28 +33,25 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Ticket Details",
-          ),
-          DetailsFutureBuilder<TicketDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.isWinner ? 'Winner' : 'Loser'),
-                  Text(data.user.name),
-                  Text(data.tombola.name),
-                ],
-              );
-            },
-          )
-        ],
-      ),
+      children: [
+        const Text(
+          "Ticket Details",
+        ),
+        DetailsFutureBuilder<TicketDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.isWinner ? 'Winner' : 'Loser'),
+                Text(data.user.name),
+                Text(data.tombola.name),
+              ],
+            );
+          },
+        )
+      ],
     );
   }
 }

@@ -67,43 +67,40 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Tombola Edit",
-          ),
-          DetailsFutureBuilder<TombolaDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextInput(
-                    hintText: "Name",
-                    controller: _nameController,
-                    defaultValue: data.name,
-                  ),
-                  NumberInput(
-                    hintText: "Price",
-                    controller: _priceController,
-                    defaultValue: data.price.toString(),
-                  ),
-                  TextInput(
-                    hintText: "Gift",
-                    controller: _giftController,
-                    defaultValue: data.gift,
-                  ),
-                  ElevatedButton(
-                    onPressed: _submit,
-                    child: const Text('Save'),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Kermesse Tombola Edit",
+        ),
+        DetailsFutureBuilder<TombolaDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextInput(
+                  hintText: "Name",
+                  controller: _nameController,
+                  defaultValue: data.name,
+                ),
+                NumberInput(
+                  hintText: "Price",
+                  controller: _priceController,
+                  defaultValue: data.price.toString(),
+                ),
+                TextInput(
+                  hintText: "Gift",
+                  controller: _giftController,
+                  defaultValue: data.gift,
+                ),
+                ElevatedButton(
+                  onPressed: _submit,
+                  child: const Text('Save'),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 

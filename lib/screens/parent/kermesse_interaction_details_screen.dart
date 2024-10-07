@@ -38,30 +38,27 @@ class _KermesseInteractionDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Interaction Details",
-          ),
-          DetailsFutureBuilder<InteractionDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.type),
-                  Text(data.user.name),
-                  Text(data.credit.toString()),
-                  Text(data.kermesse.name),
-                  Text(data.stand.name),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Interaction Details",
+        ),
+        DetailsFutureBuilder<InteractionDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.type),
+                Text(data.user.name),
+                Text(data.credit.toString()),
+                Text(data.kermesse.name),
+                Text(data.stand.name),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

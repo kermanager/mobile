@@ -52,22 +52,19 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Credit Edit",
-          ),
-          NumberInput(
-            controller: _creditController,
-            hintText: "Points",
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Credit Edit",
+        ),
+        NumberInput(
+          controller: _creditController,
+          hintText: "Points",
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

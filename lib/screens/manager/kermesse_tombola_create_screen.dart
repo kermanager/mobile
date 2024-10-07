@@ -52,34 +52,31 @@ class _KermesseTombolaCreateScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Tombola Create",
+      children: [
+        const Text(
+          "Tombola Create",
+        ),
+        TextField(
+          controller: _nameController,
+          decoration: const InputDecoration(
+            hintText: 'Name',
           ),
-          TextField(
-            controller: _nameController,
-            decoration: const InputDecoration(
-              hintText: 'Name',
-            ),
+        ),
+        NumberInput(
+          hintText: "Price",
+          controller: _priceController,
+        ),
+        TextField(
+          controller: _giftController,
+          decoration: const InputDecoration(
+            hintText: 'Gift',
           ),
-          NumberInput(
-            hintText: "Price",
-            controller: _priceController,
-          ),
-          TextField(
-            controller: _giftController,
-            decoration: const InputDecoration(
-              hintText: 'Gift',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

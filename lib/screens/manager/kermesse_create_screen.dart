@@ -41,30 +41,27 @@ class _KermesseCreateScreenState extends State<KermesseCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Create",
+      children: [
+        const Text(
+          "Kermesse Create",
+        ),
+        TextField(
+          controller: _nameController,
+          decoration: const InputDecoration(
+            hintText: 'Name',
           ),
-          TextField(
-            controller: _nameController,
-            decoration: const InputDecoration(
-              hintText: 'Name',
-            ),
+        ),
+        TextField(
+          controller: _descriptionController,
+          decoration: const InputDecoration(
+            hintText: 'Description',
           ),
-          TextField(
-            controller: _descriptionController,
-            decoration: const InputDecoration(
-              hintText: 'Description',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

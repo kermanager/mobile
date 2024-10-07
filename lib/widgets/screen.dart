@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/theme/theme_size.dart';
 
 class Screen extends StatefulWidget {
-  final Widget child;
   final PreferredSizeWidget? appBar;
+  final List<Widget> children;
 
   const Screen({
     super.key,
-    required this.child,
     this.appBar,
+    required this.children,
   });
 
   @override
@@ -23,10 +24,16 @@ class _ScreenState extends State<Screen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
+              horizontal: ThemeSize.s16,
+              vertical: ThemeSize.s16,
             ),
-            child: widget.child,
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.children,
+              ),
+            ),
           ),
         ),
       ),

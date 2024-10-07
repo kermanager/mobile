@@ -30,38 +30,35 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Stand Details",
-          ),
-          DetailsFutureBuilder<StandDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.type),
-                  Text(data.name),
-                  Text(data.description),
-                  Text(data.stock.toString()),
-                  Text(data.price.toString()),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        StandHolderRoutes.standEdit,
-                      );
-                    },
-                    child: const Text('Edit'),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Stand Details",
+        ),
+        DetailsFutureBuilder<StandDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.type),
+                Text(data.name),
+                Text(data.description),
+                Text(data.stock.toString()),
+                Text(data.price.toString()),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(
+                      StandHolderRoutes.standEdit,
+                    );
+                  },
+                  child: const Text('Edit'),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

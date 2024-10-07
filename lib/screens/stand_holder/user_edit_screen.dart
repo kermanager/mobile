@@ -57,26 +57,23 @@ class _UserEditScreenState extends State<UserEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Password Edit",
-          ),
-          PasswordInput(
-            hintText: "Password",
-            controller: _passwordController,
-          ),
-          PasswordInput(
-            hintText: "New password",
-            controller: _newPasswordController,
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Password Edit",
+        ),
+        PasswordInput(
+          hintText: "Password",
+          controller: _passwordController,
+        ),
+        PasswordInput(
+          hintText: "New password",
+          controller: _newPasswordController,
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

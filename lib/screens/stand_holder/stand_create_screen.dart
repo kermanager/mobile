@@ -54,42 +54,39 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Stand Create",
-          ),
-          StandTypeSelect(
-            defaultValue: _selectedType,
-            onChange: (value) {
-              setState(() {
-                _selectedType = value;
-              });
-            },
-          ),
-          TextInput(
-            hintText: "Name",
-            controller: _nameController,
-          ),
-          TextInput(
-            hintText: "Description",
-            controller: _descriptionController,
-          ),
-          NumberInput(
-            hintText: "Price",
-            controller: _priceController,
-          ),
-          NumberInput(
-            hintText: "Stock",
-            controller: _stockController,
-          ),
-          ElevatedButton(
-            onPressed: _submit,
-            child: const Text('Save'),
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Stand Create",
+        ),
+        StandTypeSelect(
+          defaultValue: _selectedType,
+          onChange: (value) {
+            setState(() {
+              _selectedType = value;
+            });
+          },
+        ),
+        TextInput(
+          hintText: "Name",
+          controller: _nameController,
+        ),
+        TextInput(
+          hintText: "Description",
+          controller: _descriptionController,
+        ),
+        NumberInput(
+          hintText: "Price",
+          controller: _priceController,
+        ),
+        NumberInput(
+          hintText: "Stock",
+          controller: _stockController,
+        ),
+        ElevatedButton(
+          onPressed: _submit,
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
 

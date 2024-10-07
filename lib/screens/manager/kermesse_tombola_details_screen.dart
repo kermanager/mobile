@@ -63,51 +63,48 @@ class _KermesseTombolaDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Tombola Details",
-          ),
-          DetailsFutureBuilder<TombolaDetailsResponse>(
-            future: _get,
-            builder: (context, data) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(data.id.toString()),
-                  Text(data.name),
-                  Text(data.price.toString()),
-                  Text(data.gift),
-                  Text(data.status),
-                  data.status == "STARTED"
-                      ? Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                context.push(
-                                  ManagerRoutes.kermesseTombolaEdit,
-                                  extra: {
-                                    "kermesseId": widget.kermesseId,
-                                    "tombolaId": widget.tombolaId,
-                                  },
-                                );
-                              },
-                              child: const Text("Edit"),
-                            ),
-                            ElevatedButton(
-                              onPressed: _end,
-                              child: const Text("End"),
-                            )
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      children: [
+        const Text(
+          "Tombola Details",
+        ),
+        DetailsFutureBuilder<TombolaDetailsResponse>(
+          future: _get,
+          builder: (context, data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.id.toString()),
+                Text(data.name),
+                Text(data.price.toString()),
+                Text(data.gift),
+                Text(data.status),
+                data.status == "STARTED"
+                    ? Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              context.push(
+                                ManagerRoutes.kermesseTombolaEdit,
+                                extra: {
+                                  "kermesseId": widget.kermesseId,
+                                  "tombolaId": widget.tombolaId,
+                                },
+                              );
+                            },
+                            child: const Text("Edit"),
+                          ),
+                          ElevatedButton(
+                            onPressed: _end,
+                            child: const Text("End"),
+                          )
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }
