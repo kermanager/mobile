@@ -4,8 +4,13 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/status_label.dart';
 
 class KermesseTombolaDetailsScreen extends StatefulWidget {
   final int kermesseId;
@@ -63,7 +68,22 @@ class _KermesseTombolaDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push(
+                ManagerRoutes.kermesseTombolaEdit,
+                extra: {
+                  "kermesseId": widget.kermesseId,
+                  "tombolaId": widget.tombolaId,
+                },
+              );
+            },
+            icon: const Icon(Icons.edit),
+          ),
+        ],
+      ),
       children: [
         DetailsFutureBuilder<TombolaDetailsResponse>(
           future: _get,
@@ -71,31 +91,65 @@ class _KermesseTombolaDetailsScreenState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(data.id.toString()),
-                Text(data.name),
-                Text(data.price.toString()),
-                Text(data.gift),
-                Text(data.status),
+                Text(
+                  data.name,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s24,
+                    fontWeight: ThemeFontWeight.medium,
+                    color: ThemeColor.black,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                StatusLabel(status: data.status),
+                const SizedBox(height: ThemeSize.s16),
+                Row(
+                  children: [
+                    const Text(
+                      "Récompense:",
+                      style: TextStyle(
+                        fontSize: ThemeSize.s16,
+                        fontWeight: ThemeFontWeight.regular,
+                        color: ThemeColor.gray400,
+                      ),
+                    ),
+                    const SizedBox(width: ThemeSize.s8),
+                    Text(
+                      data.gift,
+                      style: const TextStyle(
+                        fontSize: ThemeSize.s16,
+                        fontWeight: ThemeFontWeight.medium,
+                        color: ThemeColor.black,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                Row(
+                  children: [
+                    const Text(
+                      "Prix du ticket:",
+                      style: TextStyle(
+                        fontSize: ThemeSize.s16,
+                        fontWeight: ThemeFontWeight.regular,
+                        color: ThemeColor.gray400,
+                      ),
+                    ),
+                    const SizedBox(width: ThemeSize.s8),
+                    Text(
+                      "${data.price.toString()} jetons",
+                      style: const TextStyle(
+                        fontSize: ThemeSize.s16,
+                        fontWeight: ThemeFontWeight.medium,
+                        color: ThemeColor.black,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: ThemeSize.s28),
                 data.status == "STARTED"
-                    ? Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              context.push(
-                                ManagerRoutes.kermesseTombolaEdit,
-                                extra: {
-                                  "kermesseId": widget.kermesseId,
-                                  "tombolaId": widget.tombolaId,
-                                },
-                              );
-                            },
-                            child: const Text("Edit"),
-                          ),
-                          ElevatedButton(
-                            onPressed: _end,
-                            child: const Text("End"),
-                          )
-                        ],
+                    ? Button(
+                        label: "Terminer la tombola",
+                        onTap: _end,
                       )
                     : const SizedBox.shrink(),
               ],

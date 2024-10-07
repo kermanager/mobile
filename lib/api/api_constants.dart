@@ -23,6 +23,8 @@ class ApiConstants {
     'NOT_ENOUGH_STOCK': 'Stock insuffisant pour finaliser l\'opération.',
     'IS_NOT_AN_ACTIVITY':
         'L\'activité sélectionnée n\'existe pas. Veuillez en choisir une autre.',
+    "TOMBOLA_NOT_ENDED":
+        'La kermesse a une tombola en cours. Veuillez la terminer avant de continuer.',
   };
 
   static String getMessage(String? errorKey) {

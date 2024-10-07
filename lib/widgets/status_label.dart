@@ -36,7 +36,7 @@ class _StatusLabelState extends State<StatusLabel> {
           style: const TextStyle(
             fontSize: ThemeFontSize.s14,
             fontWeight: ThemeFontWeight.regular,
-            color: ThemeColor.black,
+            color: ThemeColor.gray400,
           ),
         )
       ],

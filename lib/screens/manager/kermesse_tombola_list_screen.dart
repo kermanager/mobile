@@ -38,19 +38,21 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
     return ScreenList(
       appBar: AppBar(
         title: const Text("Tombolas"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.push(
+                ManagerRoutes.kermesseTombolaCreate,
+                extra: {
+                  "kermesseId": widget.kermesseId,
+                },
+              );
+            },
+          ),
+        ],
       ),
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.push(
-              ManagerRoutes.kermesseTombolaCreate,
-              extra: {
-                "kermesseId": widget.kermesseId,
-              },
-            );
-          },
-          child: const Text('Create'),
-        ),
         Expanded(
           child: ListFutureBuilder<TombolaListItem>(
             future: _getAll,

@@ -7,6 +7,7 @@ import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/link_arrow.dart';
 import 'package:kermanager/widgets/screen.dart';
@@ -178,16 +179,15 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                         );
                       },
                     ),
-                    const SizedBox(height: ThemeSize.s8),
-                    data.status == "STARTED"
-                        ? LinkArrow(
-                            label: "Terminer la kermesse",
-                            onTap: _end,
-                            isRed: true,
-                          )
-                        : const SizedBox.shrink(),
                   ],
                 ),
+                const SizedBox(height: ThemeSize.s28),
+                data.status == "STARTED"
+                    ? Button(
+                        label: "Terminer la kermesse",
+                        onTap: _end,
+                      )
+                    : const SizedBox.shrink(),
               ],
             );
           },

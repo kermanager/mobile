@@ -31,14 +31,16 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
     return ScreenList(
       appBar: AppBar(
         title: const Text('Mes kermesses'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.push(ManagerRoutes.kermesseCreate);
+            },
+          ),
+        ],
       ),
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.push(ManagerRoutes.kermesseCreate);
-          },
-          child: const Text('Create'),
-        ),
         Expanded(
           child: ListFutureBuilder<KermesseListItem>(
             future: _getAll,
