@@ -7,7 +7,7 @@ import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/button.dart';
-import 'package:kermanager/widgets/form.dart';
+import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/link_button.dart';
 import 'package:kermanager/widgets/password_form_input.dart';
 import 'package:kermanager/widgets/text_form_input.dart';
@@ -100,7 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 const SizedBox(height: ThemeSize.s16),
                 Button(
-                  label: 'Se connecter',
+                  label: "Se connecter",
                   onTap: _submit,
                 ),
               ],
@@ -118,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 const SizedBox(width: ThemeSize.s8),
                 LinkButton(
-                  label: 'Inscrivez-vous',
+                  label: "Inscrivez-vous",
                   onTap: () {
                     context.push(AuthRoutes.signUp);
                   },

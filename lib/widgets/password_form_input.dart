@@ -38,7 +38,7 @@ class _PasswordFormInputState extends State<PasswordFormInput> {
       isObscureText: isObscureText,
       icon: widget.icon,
       suffix: LinkButton(
-        label: isObscureText ? 'Show' : 'Hide',
+        label: isObscureText ? 'Afficher' : 'Masquer',
         onTap: _toggleObscureText,
       ),
       defaultValue: widget.defaultValue,

@@ -43,8 +43,8 @@ class _FormInputState extends State<FormInput> {
       ),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 20,
+          horizontal: ThemeSize.s16,
+          vertical: ThemeSize.s20,
         ),
         filled: true,
         fillColor: ThemeColor.gray100,

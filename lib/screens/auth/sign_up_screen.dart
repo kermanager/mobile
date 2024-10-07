@@ -3,9 +3,12 @@ import 'package:go_router/go_router.dart';
 
 import 'package:kermanager/services/auth_service.dart';
 import 'package:kermanager/api/api_response.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/button.dart';
-import 'package:kermanager/widgets/form.dart';
+import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/link_button.dart';
 import 'package:kermanager/widgets/password_form_input.dart';
 import 'package:kermanager/widgets/role_select.dart';
 import 'package:kermanager/widgets/text_form_input.dart';
@@ -42,12 +45,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         );
       } else {
+        context.pop();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Sign up successful'),
           ),
         );
-        context.pop();
       }
     }
   }
@@ -88,19 +91,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: ThemeSize.s16),
                 Button(
-                  label: 'S\'inscrire',
+                  label: "S'inscrire",
                   onTap: _submit,
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                context.pop();
-              },
-              child: const Text(
-                'Sign In',
-              ),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Déjà inscrit ?",
+                  style: TextStyle(
+                    fontSize: ThemeFontSize.s16,
+                    fontWeight: ThemeFontWeight.regular,
+                    color: ThemeColor.gray300,
+                  ),
+                ),
+                const SizedBox(width: ThemeSize.s8),
+                LinkButton(
+                  label: "Connectez-vous",
+                  onTap: () {
+                    context.pop();
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
