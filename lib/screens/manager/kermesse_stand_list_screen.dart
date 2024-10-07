@@ -38,19 +38,21 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
     return ScreenList(
       appBar: AppBar(
         title: const Text("Stands"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.push(
+                ManagerRoutes.kermesseStandInvite,
+                extra: {
+                  'kermesseId': widget.kermesseId,
+                },
+              );
+            },
+          ),
+        ],
       ),
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.push(
-              ManagerRoutes.kermesseStandInvite,
-              extra: {
-                'kermesseId': widget.kermesseId,
-              },
-            );
-          },
-          child: const Text('Invite'),
-        ),
         Expanded(
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,

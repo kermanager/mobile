@@ -37,19 +37,21 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
     return ScreenList(
       appBar: AppBar(
         title: const Text("Participants"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.push(
+                ManagerRoutes.kermesseUserInvite,
+                extra: {
+                  'kermesseId': widget.kermesseId,
+                },
+              );
+            },
+          ),
+        ],
       ),
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.push(
-              ManagerRoutes.kermesseUserInvite,
-              extra: {
-                'kermesseId': widget.kermesseId,
-              },
-            );
-          },
-          child: const Text('Invite'),
-        ),
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,

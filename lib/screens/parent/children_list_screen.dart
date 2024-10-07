@@ -33,16 +33,18 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
     return ScreenList(
       appBar: AppBar(
         title: const Text("Mes enfants"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.push(
+                ParentRoutes.childrenInvite,
+              );
+            },
+          ),
+        ],
       ),
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.push(
-              ParentRoutes.childrenInvite,
-            );
-          },
-          child: const Text('Invite'),
-        ),
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
