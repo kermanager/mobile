@@ -101,13 +101,14 @@ class _SignInScreenState extends State<SignInScreen> {
               hintText: "Mot de passe",
               controller: _passwordController,
             ),
-            const SizedBox(height: ThemeSize.s16),
+            const SizedBox(height: ThemeSize.s24),
             Button(
               label: "Se connecter",
               onTap: _submit,
             ),
           ],
         ),
+        const SizedBox(height: ThemeSize.s36),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

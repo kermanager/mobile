@@ -92,13 +92,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hintText: "Mot de passe",
               controller: _passwordController,
             ),
-            const SizedBox(height: ThemeSize.s16),
+            const SizedBox(height: ThemeSize.s24),
             Button(
               label: "S'inscrire",
               onTap: _submit,
             ),
           ],
         ),
+        const SizedBox(height: ThemeSize.s36),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
