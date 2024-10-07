@@ -36,34 +36,31 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Tombola List",
+      children: [
+        const Text(
+          "Kermesse Tombola List",
+        ),
+        Expanded(
+          child: ListFutureBuilder<TombolaListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.gift),
+                onTap: () {
+                  context.push(
+                    ChildRoutes.kermesseTombolaDetails,
+                    extra: {
+                      "tombolaId": item.id,
+                      "kermesseId": widget.kermesseId,
+                    },
+                  );
+                },
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<TombolaListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.gift),
-                  onTap: () {
-                    context.push(
-                      ChildRoutes.kermesseTombolaDetails,
-                      extra: {
-                        "tombolaId": item.id,
-                        "kermesseId": widget.kermesseId,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

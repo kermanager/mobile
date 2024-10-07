@@ -28,33 +28,30 @@ class _TicketListScreenState extends State<TicketListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Ticket List",
+      children: [
+        const Text(
+          "Ticket List",
+        ),
+        Expanded(
+          child: ListFutureBuilder<TicketListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.isWinner ? 'Winner' : 'Loser'),
+                subtitle: Text(item.user.name),
+                onTap: () {
+                  context.push(
+                    ChildRoutes.ticketDetails,
+                    extra: {
+                      "ticketId": item.id,
+                    },
+                  );
+                },
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<TicketListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.isWinner ? 'Winner' : 'Loser'),
-                  subtitle: Text(item.user.name),
-                  onTap: () {
-                    context.push(
-                      ChildRoutes.ticketDetails,
-                      extra: {
-                        "ticketId": item.id,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

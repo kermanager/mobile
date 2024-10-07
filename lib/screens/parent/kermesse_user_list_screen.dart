@@ -33,25 +33,22 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse User List",
+      children: [
+        const Text(
+          "Kermesse User List",
+        ),
+        Expanded(
+          child: ListFutureBuilder<UserListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text("${item.role} - ${item.points}"),
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<UserListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text("${item.role} - ${item.points}"),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

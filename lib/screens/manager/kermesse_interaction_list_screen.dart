@@ -38,34 +38,31 @@ class _KermesseInteractionListScreenState
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Interaction List",
+      children: [
+        const Text(
+          "Kermesse Interaction List",
+        ),
+        Expanded(
+          child: ListFutureBuilder<InteractionListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.user.name),
+                subtitle: Text(item.credit.toString()),
+                onTap: () {
+                  context.push(
+                    ManagerRoutes.kermesseInteractionDetails,
+                    extra: {
+                      "kermesseId": widget.kermesseId,
+                      "interactionId": item.id,
+                    },
+                  );
+                },
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<InteractionListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.user.name),
-                  subtitle: Text(item.credit.toString()),
-                  onTap: () {
-                    context.push(
-                      ManagerRoutes.kermesseInteractionDetails,
-                      extra: {
-                        "kermesseId": widget.kermesseId,
-                        "interactionId": item.id,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

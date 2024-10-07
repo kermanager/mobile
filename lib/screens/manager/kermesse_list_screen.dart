@@ -29,39 +29,36 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse List",
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.push(ManagerRoutes.kermesseCreate);
-            },
-            child: const Text('Create'),
-          ),
-          Expanded(
-            child: ListFutureBuilder<KermesseListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.description),
-                  onTap: () {
-                    context.push(
-                      ManagerRoutes.kermesseDetails,
-                      extra: {
-                        "kermesseId": item.id,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Mes kermesses'),
       ),
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            context.push(ManagerRoutes.kermesseCreate);
+          },
+          child: const Text('Create'),
+        ),
+        Expanded(
+          child: ListFutureBuilder<KermesseListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.description),
+                onTap: () {
+                  context.push(
+                    ManagerRoutes.kermesseDetails,
+                    extra: {
+                      "kermesseId": item.id,
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

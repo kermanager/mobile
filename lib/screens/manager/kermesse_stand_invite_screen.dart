@@ -56,31 +56,28 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Stand Invite",
+      children: [
+        const Text(
+          "Kermesse Stand Invite",
+        ),
+        Expanded(
+          child: ListFutureBuilder<StandListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.type),
+                leading: ElevatedButton(
+                  onPressed: () async {
+                    await _invite(item.id);
+                  },
+                  child: const Text('Invite'),
+                ),
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<StandListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.type),
-                  leading: ElevatedButton(
-                    onPressed: () async {
-                      await _invite(item.id);
-                    },
-                    child: const Text('Invite'),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

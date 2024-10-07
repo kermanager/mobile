@@ -35,36 +35,33 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse User List",
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.push(
-                ManagerRoutes.kermesseUserInvite,
-                extra: {
-                  'kermesseId': widget.kermesseId,
-                },
+      children: [
+        const Text(
+          "Kermesse User List",
+        ),
+        ElevatedButton(
+          onPressed: () {
+            context.push(
+              ManagerRoutes.kermesseUserInvite,
+              extra: {
+                'kermesseId': widget.kermesseId,
+              },
+            );
+          },
+          child: const Text('Invite'),
+        ),
+        Expanded(
+          child: ListFutureBuilder<UserListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text("${item.role} - ${item.points}"),
               );
             },
-            child: const Text('Invite'),
           ),
-          Expanded(
-            child: ListFutureBuilder<UserListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text("${item.role} - ${item.points}"),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

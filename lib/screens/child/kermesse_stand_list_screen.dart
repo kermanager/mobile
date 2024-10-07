@@ -36,34 +36,31 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Stand List",
+      children: [
+        const Text(
+          "Kermesse Stand List",
+        ),
+        Expanded(
+          child: ListFutureBuilder<StandListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.type),
+                onTap: () {
+                  context.push(
+                    ChildRoutes.kermesseStandDetails,
+                    extra: {
+                      "kermesseId": widget.kermesseId,
+                      "standId": item.id,
+                    },
+                  );
+                },
+              );
+            },
           ),
-          Expanded(
-            child: ListFutureBuilder<StandListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.type),
-                  onTap: () {
-                    context.push(
-                      ChildRoutes.kermesseStandDetails,
-                      extra: {
-                        "kermesseId": widget.kermesseId,
-                        "standId": item.id,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

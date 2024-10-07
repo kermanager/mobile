@@ -31,41 +31,38 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Children List",
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.push(
-                ParentRoutes.childrenInvite,
+      children: [
+        const Text(
+          "Children List",
+        ),
+        ElevatedButton(
+          onPressed: () {
+            context.push(
+              ParentRoutes.childrenInvite,
+            );
+          },
+          child: const Text('Invite'),
+        ),
+        Expanded(
+          child: ListFutureBuilder<UserListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.role),
+                onTap: () {
+                  context.push(
+                    ParentRoutes.childrenDetails,
+                    extra: {
+                      "userId": item.id,
+                    },
+                  );
+                },
               );
             },
-            child: const Text('Invite'),
           ),
-          Expanded(
-            child: ListFutureBuilder<UserListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.role),
-                  onTap: () {
-                    context.push(
-                      ParentRoutes.childrenDetails,
-                      extra: {
-                        "userId": item.id,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

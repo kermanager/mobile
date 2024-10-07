@@ -36,45 +36,42 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Kermesse Tombola List",
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.push(
-                ManagerRoutes.kermesseTombolaCreate,
-                extra: {
-                  "kermesseId": widget.kermesseId,
+      children: [
+        const Text(
+          "Kermesse Tombola List",
+        ),
+        ElevatedButton(
+          onPressed: () {
+            context.push(
+              ManagerRoutes.kermesseTombolaCreate,
+              extra: {
+                "kermesseId": widget.kermesseId,
+              },
+            );
+          },
+          child: const Text('Create'),
+        ),
+        Expanded(
+          child: ListFutureBuilder<TombolaListItem>(
+            future: _getAll,
+            builder: (context, item) {
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text(item.gift),
+                onTap: () {
+                  context.push(
+                    ManagerRoutes.kermesseTombolaDetails,
+                    extra: {
+                      "tombolaId": item.id,
+                      "kermesseId": widget.kermesseId,
+                    },
+                  );
                 },
               );
             },
-            child: const Text('Create'),
           ),
-          Expanded(
-            child: ListFutureBuilder<TombolaListItem>(
-              future: _getAll,
-              builder: (context, item) {
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.gift),
-                  onTap: () {
-                    context.push(
-                      ManagerRoutes.kermesseTombolaDetails,
-                      extra: {
-                        "tombolaId": item.id,
-                        "kermesseId": widget.kermesseId,
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
