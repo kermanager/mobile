@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
+import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/number_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/text_form_input.dart';
 
 class KermesseTombolaCreateScreen extends StatefulWidget {
   final int kermesseId;
@@ -20,6 +24,8 @@ class KermesseTombolaCreateScreen extends StatefulWidget {
 
 class _KermesseTombolaCreateScreenState
     extends State<KermesseTombolaCreateScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final TombolaService _tombolaService = TombolaService();
 
   final TextEditingController _nameController = TextEditingController();
@@ -27,54 +33,63 @@ class _KermesseTombolaCreateScreenState
   final TextEditingController _giftController = TextEditingController();
 
   Future<void> _submit() async {
-    ApiResponse<Null> response = await _tombolaService.create(
-      kermesseId: widget.kermesseId,
-      name: _nameController.text,
-      price: int.parse(_priceController.text),
-      gift: _giftController.text,
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<Null> response = await _tombolaService.create(
+        kermesseId: widget.kermesseId,
+        name: _nameController.text,
+        price: int.parse(_priceController.text),
+        gift: _giftController.text,
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Tombola created successfully'),
-        ),
-      );
-      context.pop();
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Tombola created successfully'),
+          ),
+        );
+        context.pop();
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("Créer une tombola"),
+      ),
       children: [
-        const Text(
-          "Tombola Create",
-        ),
-        TextField(
-          controller: _nameController,
-          decoration: const InputDecoration(
-            hintText: 'Name',
-          ),
-        ),
-        NumberInput(
-          hintText: "Price",
-          controller: _priceController,
-        ),
-        TextField(
-          controller: _giftController,
-          decoration: const InputDecoration(
-            hintText: 'Gift',
-          ),
-        ),
-        ElevatedButton(
-          onPressed: _submit,
-          child: const Text('Save'),
+        FormColumn(
+          formKey: _formKey,
+          children: [
+            TextFormInput(
+              hintText: "Nom",
+              controller: _nameController,
+              keyboardType: TextInputType.name,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            TextFormInput(
+              hintText: "Cadeau",
+              controller: _giftController,
+              keyboardType: TextInputType.name,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            NumberFormInput(
+              hintText: "Prix de participation",
+              unit: "jeton",
+              controller: _priceController,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            Button(
+              label: "Enregistrer",
+              onTap: _submit,
+            ),
+          ],
         ),
       ],
     );

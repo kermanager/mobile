@@ -3,10 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/number_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
-import 'package:kermanager/widgets/text_input.dart';
+import 'package:kermanager/widgets/text_form_input.dart';
 
 class KermesseTombolaEditScreen extends StatefulWidget {
   final int kermesseId;
@@ -24,6 +27,8 @@ class KermesseTombolaEditScreen extends StatefulWidget {
 }
 
 class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final TombolaService _tombolaService = TombolaService();
 
   final TextEditingController _nameController = TextEditingController();
@@ -67,34 +72,45 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("Modifier la tombola"),
+      ),
       children: [
-        const Text(
-          "Kermesse Tombola Edit",
-        ),
         DetailsFutureBuilder<TombolaDetailsResponse>(
           future: _get,
           builder: (context, data) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextInput(
-                  hintText: "Name",
-                  controller: _nameController,
-                  defaultValue: data.name,
-                ),
-                NumberInput(
-                  hintText: "Price",
-                  controller: _priceController,
-                  defaultValue: data.price.toString(),
-                ),
-                TextInput(
-                  hintText: "Gift",
-                  controller: _giftController,
-                  defaultValue: data.gift,
-                ),
-                ElevatedButton(
-                  onPressed: _submit,
-                  child: const Text('Save'),
+                FormColumn(
+                  formKey: _formKey,
+                  children: [
+                    TextFormInput(
+                      hintText: "Nom",
+                      controller: _nameController,
+                      defaultValue: data.name,
+                      keyboardType: TextInputType.name,
+                    ),
+                    const SizedBox(height: ThemeSize.s16),
+                    TextFormInput(
+                      hintText: "Cadeau",
+                      controller: _giftController,
+                      defaultValue: data.gift,
+                      keyboardType: TextInputType.name,
+                    ),
+                    const SizedBox(height: ThemeSize.s16),
+                    NumberFormInput(
+                      hintText: "Prix de participation",
+                      unit: "jeton",
+                      controller: _priceController,
+                      defaultValue: data.price.toString(),
+                    ),
+                    const SizedBox(height: ThemeSize.s16),
+                    Button(
+                      label: "Modifier",
+                      onTap: _submit,
+                    ),
+                  ],
                 ),
               ],
             );
