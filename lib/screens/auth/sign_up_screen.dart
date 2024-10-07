@@ -3,8 +3,12 @@ import 'package:go_router/go_router.dart';
 
 import 'package:kermanager/services/auth_service.dart';
 import 'package:kermanager/api/api_response.dart';
-import 'package:kermanager/widgets/password_input.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
+import 'package:kermanager/widgets/form.dart';
+import 'package:kermanager/widgets/password_form_input.dart';
 import 'package:kermanager/widgets/role_select.dart';
+import 'package:kermanager/widgets/text_form_input.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,6 +18,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final AuthService _authService = AuthService();
 
   String _selectedRole = 'MANAGER';
@@ -22,25 +28,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _submit() async {
-    ApiResponse<Null> response = await _authService.signUp(
-      role: _selectedRole,
-      name: _nameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<Null> response = await _authService.signUp(
+        role: _selectedRole,
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
       );
-    } else {
-      context.pop();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Sign up successful'),
-        ),
-      );
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Sign up successful'),
+          ),
+        );
+        context.pop();
+      }
     }
   }
 
@@ -50,38 +58,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const Text(
-              'Sign Up',
-            ),
-            RoleSelect(
-              defaultValue: _selectedRole,
-              onChange: (value) {
-                setState(() {
-                  _selectedRole = value;
-                });
-              },
-            ),
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                hintText: 'Name',
-              ),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                hintText: 'Email',
-              ),
-            ),
-            PasswordInput(
-              hintText: "Password",
-              controller: _passwordController,
-            ),
-            ElevatedButton(
-              onPressed: _submit,
-              child: const Text(
-                'Sign Up',
-              ),
+            FormColumn(
+              formKey: _formKey,
+              children: [
+                RoleSelect(
+                  defaultValue: _selectedRole,
+                  onChange: (value) {
+                    setState(() {
+                      _selectedRole = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                TextFormInput(
+                  hintText: "Nom complet",
+                  controller: _nameController,
+                  keyboardType: TextInputType.name,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                TextFormInput(
+                  hintText: "Email",
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                PasswordFormInput(
+                  hintText: "Mot de passe",
+                  controller: _passwordController,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                Button(
+                  label: 'S\'inscrire',
+                  onTap: _submit,
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () {

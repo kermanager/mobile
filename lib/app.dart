@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/theme/theme_color.dart';
 import 'package:provider/provider.dart';
 
 import 'package:kermanager/api/api_response.dart';
@@ -49,6 +50,7 @@ class _AppState extends State<App> {
       routerConfig: widget.router.goRouter(context),
       theme: ThemeData(
         fontFamily: ThemeFontFamily.poppins,
+        scaffoldBackgroundColor: ThemeColor.white,
       ),
     );
   }

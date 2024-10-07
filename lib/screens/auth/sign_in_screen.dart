@@ -3,10 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
-import 'package:kermanager/widgets/password_input.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
+import 'package:kermanager/widgets/form.dart';
+import 'package:kermanager/widgets/link_button.dart';
+import 'package:kermanager/widgets/password_form_input.dart';
+import 'package:kermanager/widgets/text_form_input.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/providers/auth_provider.dart';
 import 'package:kermanager/router/manager/routes.dart';
@@ -23,49 +29,53 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final AuthService _authService = AuthService();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _submit() async {
-    ApiResponse<SignInResponse> response = await _authService.signIn(
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<SignInResponse> response = await _authService.signIn(
+        email: _emailController.text,
+        password: _passwordController.text,
       );
-    } else {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      await preferences.setString(
-        ApiConstants.tokenKey,
-        response.data!.token,
-      );
-      Provider.of<AuthProvider>(context, listen: false).setUser(
-        response.data!.id,
-        response.data!.name,
-        response.data!.email,
-        response.data!.role,
-        response.data!.hasStand,
-      );
-      if (response.data!.role == "MANAGER") {
-        context.go(ManagerRoutes.kermesseList);
-      } else if (response.data!.role == "STAND_HOLDER") {
-        context.go(StandHolderRoutes.kermesseList);
-      } else if (response.data!.role == "PARENT") {
-        context.go(ParentRoutes.kermesseList);
-      } else if (response.data!.role == "CHILD") {
-        context.go(ChildRoutes.kermesseList);
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        await preferences.setString(
+          ApiConstants.tokenKey,
+          response.data!.token,
+        );
+        Provider.of<AuthProvider>(context, listen: false).setUser(
+          response.data!.id,
+          response.data!.name,
+          response.data!.email,
+          response.data!.role,
+          response.data!.hasStand,
+        );
+        if (response.data!.role == "MANAGER") {
+          context.go(ManagerRoutes.kermesseList);
+        } else if (response.data!.role == "STAND_HOLDER") {
+          context.go(StandHolderRoutes.kermesseList);
+        } else if (response.data!.role == "PARENT") {
+          context.go(ParentRoutes.kermesseList);
+        } else if (response.data!.role == "CHILD") {
+          context.go(ChildRoutes.kermesseList);
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Sign in successful'),
+          ),
+        );
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Sign in successful'),
-        ),
-      );
     }
   }
 
@@ -75,33 +85,46 @@ class _SignInScreenState extends State<SignInScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const Text(
-              'Sign In',
+            FormColumn(
+              formKey: _formKey,
+              children: [
+                TextFormInput(
+                  hintText: "Email",
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                PasswordFormInput(
+                  hintText: "Mot de passe",
+                  controller: _passwordController,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                Button(
+                  label: 'Se connecter',
+                  onTap: _submit,
+                ),
+              ],
             ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                hintText: 'Email',
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Pas encore inscrit ?",
+                  style: TextStyle(
+                    fontSize: ThemeFontSize.s16,
+                    fontWeight: ThemeFontWeight.regular,
+                    color: ThemeColor.gray300,
+                  ),
+                ),
+                const SizedBox(width: ThemeSize.s8),
+                LinkButton(
+                  label: 'Inscrivez-vous',
+                  onTap: () {
+                    context.push(AuthRoutes.signUp);
+                  },
+                ),
+              ],
             ),
-            PasswordInput(
-              hintText: "Password",
-              controller: _passwordController,
-            ),
-            ElevatedButton(
-              onPressed: _submit,
-              child: const Text(
-                'Sign In',
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.push(AuthRoutes.signUp);
-              },
-              child: const Text(
-                'Sign Up',
-              ),
-            )
           ],
         ),
       ),
