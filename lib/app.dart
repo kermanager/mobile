@@ -6,6 +6,7 @@ import 'package:kermanager/data/get_me_response.dart';
 import 'package:kermanager/providers/auth_provider.dart';
 import 'package:kermanager/router/app_router.dart';
 import 'package:kermanager/services/auth_service.dart';
+import 'package:kermanager/theme/theme_font.dart';
 
 class App extends StatefulWidget {
   final AppRouter router;
@@ -46,6 +47,9 @@ class _AppState extends State<App> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: widget.router.goRouter(context),
+      theme: ThemeData(
+        fontFamily: ThemeFontFamily.poppins,
+      ),
     );
   }
 }
