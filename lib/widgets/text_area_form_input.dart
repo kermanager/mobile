@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:kermanager/widgets/form_input.dart';
 
-class TextFormInput extends StatefulWidget {
+class TextAreaFormInput extends StatefulWidget {
   final String? defaultValue;
   final String hintText;
-  final TextInputType keyboardType;
-  final IconData? icon;
-  final Widget? suffix;
   final TextEditingController controller;
+  final int? maxLines;
 
-  const TextFormInput({
+  const TextAreaFormInput({
     super.key,
     required this.hintText,
-    required this.keyboardType,
     required this.controller,
-    this.icon,
-    this.suffix,
     this.defaultValue,
+    this.maxLines,
   });
 
   @override
-  State<TextFormInput> createState() => _TextFormInputState();
+  State<TextAreaFormInput> createState() => _TextAreaFormInputState();
 }
 
-class _TextFormInputState extends State<TextFormInput> {
+class _TextAreaFormInputState extends State<TextAreaFormInput> {
   @override
   Widget build(BuildContext context) {
     return FormInput(
       hintText: widget.hintText,
-      keyboardType: widget.keyboardType,
+      keyboardType: TextInputType.multiline,
       controller: widget.controller,
-      icon: widget.icon,
-      suffix: widget.suffix,
+      isObscureText: false,
       defaultValue: widget.defaultValue,
+      maxLines: widget.maxLines ?? 4,
     );
   }
 }

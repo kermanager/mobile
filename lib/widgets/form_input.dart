@@ -11,6 +11,7 @@ class FormInput extends StatefulWidget {
   final IconData? icon;
   final Widget? suffix;
   final TextEditingController controller;
+  final int? maxLines;
 
   const FormInput({
     super.key,
@@ -21,6 +22,7 @@ class FormInput extends StatefulWidget {
     this.suffix,
     required this.controller,
     this.defaultValue,
+    this.maxLines,
   });
 
   @override
@@ -36,6 +38,7 @@ class _FormInputState extends State<FormInput> {
 
     return TextFormField(
       controller: widget.controller,
+      maxLines: widget.maxLines ?? 1,
       style: const TextStyle(
         fontSize: ThemeFontSize.s16,
         fontWeight: ThemeFontWeight.medium,
