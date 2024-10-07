@@ -9,6 +9,7 @@ import 'package:kermanager/screens/stand_holder/kermesse_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_list_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_list_screen.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_stand_list_screen.dart';
 import 'package:kermanager/screens/stand_holder/stand_create_screen.dart';
 import 'package:kermanager/screens/stand_holder/stand_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/stand_edit_screen.dart';
@@ -71,6 +72,18 @@ class StandHolderRouter {
                   GoRouterState.of(context).extra as Map<String, int>;
               return NoTransitionPage(
                 child: KermesseDashboardScreen(
+                  kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: StandHolderRoutes.kermesseStandList,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseStandListScreen(
                   kermesseId: params['kermesseId']!,
                 ),
               );

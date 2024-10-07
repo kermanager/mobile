@@ -29,7 +29,7 @@ class _TicketListScreenState extends State<TicketListScreen> {
   Widget build(BuildContext context) {
     return ScreenList(
       appBar: AppBar(
-        title: const Text("Tickets"),
+        title: const Text("Mes tickets"),
       ),
       children: [
         Expanded(

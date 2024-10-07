@@ -39,7 +39,7 @@ class _KermesseInteractionListScreenState
   Widget build(BuildContext context) {
     return ScreenList(
       appBar: AppBar(
-        title: const Text("Interactions"),
+        title: const Text("Mes interactions"),
       ),
       children: [
         Expanded(
