@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kermanager/widgets/link_arrow.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,9 +31,10 @@ class _SignOutButtonState extends State<SignOutButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _signOut,
-      child: const Text("Sign Out"),
+    return LinkArrow(
+      label: "Se déconnecter",
+      onTap: _signOut,
+      isRed: true,
     );
   }
 }

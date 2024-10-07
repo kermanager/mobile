@@ -4,7 +4,14 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/avatar.dart';
+import 'package:kermanager/widgets/balance_label.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/link_arrow.dart';
+import 'package:kermanager/widgets/role_label.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/sign_out_button.dart';
 
@@ -44,22 +51,51 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
           future: _get,
           builder: (context, data) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(data.id.toString()),
-                Text(data.name),
-                Text(data.email),
-                Text(data.role),
-                Text(data.credit.toString()),
-                ElevatedButton(
-                  onPressed: () {
-                    context.push(
-                      ChildRoutes.userEdit,
-                    );
-                  },
-                  child: const Text("Update password"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    BalanceLabel(balance: data.credit),
+                  ],
                 ),
-                const SignOutButton(),
+                const SizedBox(height: ThemeSize.s8),
+                const Avatar(),
+                const SizedBox(height: ThemeSize.s16),
+                Text(
+                  data.name,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s20,
+                    fontWeight: ThemeFontWeight.medium,
+                    color: ThemeColor.black,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s8),
+                RoleLabel(role: data.role),
+                const SizedBox(height: ThemeSize.s8),
+                Text(
+                  data.email,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s16,
+                    fontWeight: ThemeFontWeight.regular,
+                    color: ThemeColor.gray400,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s36),
+                Column(
+                  children: [
+                    LinkArrow(
+                      label: "Changer le mot de passe",
+                      onTap: () {
+                        context.push(
+                          ChildRoutes.userEdit,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: ThemeSize.s8),
+                    const SignOutButton(),
+                  ],
+                ),
               ],
             );
           },
