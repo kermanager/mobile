@@ -47,11 +47,11 @@ class _StandHolderBottomNavigationState
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Kermesses',
+              label: 'Mon stand',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Stand',
+              label: 'Kermesses',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

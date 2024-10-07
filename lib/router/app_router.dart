@@ -31,7 +31,7 @@ class AppRouter {
           if (user.role == "MANAGER") {
             return ManagerRoutes.kermesseList;
           } else if (user.role == "STAND_HOLDER") {
-            return StandHolderRoutes.kermesseList;
+            return StandHolderRoutes.standDetails;
           } else if (user.role == "PARENT") {
             return ParentRoutes.kermesseList;
           } else if (user.role == "CHILD") {

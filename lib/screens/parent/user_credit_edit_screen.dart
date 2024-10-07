@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/services/stripe_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/button.dart';
-import 'package:kermanager/widgets/credit_form_input.dart';
 import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/number_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class UserCreditEditScreen extends StatefulWidget {
@@ -66,8 +66,9 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
         FormColumn(
           formKey: _formKey,
           children: [
-            CreditFormInput(
+            NumberFormInput(
               hintText: "Nombre de jetons",
+              unit: "jeton",
               controller: _creditController,
             ),
             const SizedBox(height: ThemeSize.s16),

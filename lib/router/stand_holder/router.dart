@@ -25,6 +25,28 @@ class StandHolderRouter {
       StatefulShellBranch(
         routes: [
           GoRoute(
+            path: StandHolderRoutes.standDetails,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: StandDetailsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: StandHolderRoutes.standEdit,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: StandEditScreen(),
+            ),
+          ),
+          GoRoute(
+            path: StandHolderRoutes.standCreate,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: StandCreateScreen(),
+            ),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
             path: StandHolderRoutes.kermesseList,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: KermesseListScreen(),
@@ -78,28 +100,6 @@ class StandHolderRouter {
                 ),
               );
             },
-          ),
-        ],
-      ),
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-            path: StandHolderRoutes.standDetails,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: StandDetailsScreen(),
-            ),
-          ),
-          GoRoute(
-            path: StandHolderRoutes.standEdit,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: StandEditScreen(),
-            ),
-          ),
-          GoRoute(
-            path: StandHolderRoutes.standCreate,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: StandCreateScreen(),
-            ),
           ),
         ],
       ),

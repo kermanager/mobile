@@ -65,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
         if (response.data!.role == "MANAGER") {
           context.go(ManagerRoutes.kermesseList);
         } else if (response.data!.role == "STAND_HOLDER") {
-          context.go(StandHolderRoutes.kermesseList);
+          context.go(StandHolderRoutes.standDetails);
         } else if (response.data!.role == "PARENT") {
           context.go(ParentRoutes.kermesseList);
         } else if (response.data!.role == "CHILD") {
