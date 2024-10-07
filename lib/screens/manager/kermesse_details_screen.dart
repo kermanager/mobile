@@ -59,6 +59,9 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("Kermesse Details"),
+      ),
       children: [
         DetailsFutureBuilder<KermesseDetailsResponse>(
           future: _get,

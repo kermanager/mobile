@@ -83,6 +83,10 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text('Se connecter'),
+      ),
+      withoutBottomBar: true,
       children: [
         FormColumn(
           formKey: _formKey,

@@ -59,6 +59,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("S'inscrire"),
+      ),
+      withoutBottomBar: true,
       children: [
         FormColumn(
           formKey: _formKey,

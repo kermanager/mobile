@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_size.dart';
 import 'package:provider/provider.dart';
 
 import 'package:kermanager/api/api_response.dart';
@@ -51,6 +53,23 @@ class _AppState extends State<App> {
       theme: ThemeData(
         fontFamily: ThemeFontFamily.poppins,
         scaffoldBackgroundColor: ThemeColor.white,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          color: ThemeColor.gray100,
+          toolbarHeight: ThemeSize.s56,
+          titleTextStyle: TextStyle(
+            fontSize: ThemeFontSize.s24,
+            fontWeight: ThemeFontWeight.semiBold,
+            color: ThemeColor.black,
+          ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
+          selectedItemColor: ThemeColor.primary,
+          unselectedItemColor: ThemeColor.gray300,
+          backgroundColor: ThemeColor.gray100,
+        ),
       ),
     );
   }
