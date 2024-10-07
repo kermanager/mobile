@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kermanager/services/stripe_service.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
+import 'package:kermanager/widgets/credit_form_input.dart';
+import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class UserCreditEditScreen extends StatefulWidget {
@@ -16,53 +19,63 @@ class UserCreditEditScreen extends StatefulWidget {
 }
 
 class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final StripeService _stripeService = StripeService();
 
   final TextEditingController _creditController = TextEditingController();
 
   Future<void> _submit() async {
-    await _stripeService.stripePaymentCheckout(
-      widget.userId,
-      int.parse(_creditController.text),
-      context,
-      onSuccess: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Credit buyed successfully'),
-          ),
-        );
-      },
-      onCancel: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Credit buying canceled'),
-          ),
-        );
-      },
-      onError: (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Credit buying error'),
-          ),
-        );
-      },
-    );
+    if (_formKey.currentState!.validate()) {
+      await _stripeService.stripePaymentCheckout(
+        widget.userId,
+        int.parse(_creditController.text),
+        context,
+        onSuccess: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Credit buyed successfully'),
+            ),
+          );
+        },
+        onCancel: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Credit buying canceled'),
+            ),
+          );
+        },
+        onError: (error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Credit buying error'),
+            ),
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text('Acheter des jetons'),
+      ),
       children: [
-        const Text(
-          "Credit Edit",
-        ),
-        NumberInput(
-          controller: _creditController,
-          hintText: "Points",
-        ),
-        ElevatedButton(
-          onPressed: _submit,
-          child: const Text('Save'),
+        FormColumn(
+          formKey: _formKey,
+          children: [
+            CreditFormInput(
+              hintText: "Nombre de jetons",
+              controller: _creditController,
+            ),
+            const SizedBox(height: ThemeSize.s16),
+            Button(
+              onTap: _submit,
+              label: 'Payer',
+            ),
+          ],
         ),
       ],
     );

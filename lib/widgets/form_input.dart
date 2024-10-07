@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
@@ -12,6 +13,7 @@ class FormInput extends StatefulWidget {
   final Widget? suffix;
   final TextEditingController controller;
   final int? maxLines;
+  final List<TextInputFormatter>? inputFormatters;
 
   const FormInput({
     super.key,
@@ -23,6 +25,7 @@ class FormInput extends StatefulWidget {
     required this.controller,
     this.defaultValue,
     this.maxLines,
+    this.inputFormatters,
   });
 
   @override
@@ -95,6 +98,7 @@ class _FormInputState extends State<FormInput> {
       ),
       obscureText: widget.isObscureText ?? false,
       keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
     );
   }
 }
