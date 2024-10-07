@@ -3,7 +3,12 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/interaction_service.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/icon_box.dart';
 import 'package:kermanager/widgets/number_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
@@ -71,12 +76,74 @@ class _KermesseInteractionDetailsScreenState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(data.id.toString()),
-                Text(data.type),
-                Text(data.name),
-                Text(data.description),
-                Text(data.price.toString()),
-                Text(data.stock.toString()),
+                IconBox(
+                  icon: data.type == "CONSUMPTION"
+                      ? Icons.fastfood
+                      : Icons.gamepad,
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                Text(
+                  data.name,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s24,
+                    fontWeight: ThemeFontWeight.medium,
+                    color: ThemeColor.black,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s16),
+                Text(
+                  data.description,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s16,
+                    fontWeight: ThemeFontWeight.medium,
+                    color: ThemeColor.gray400,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s24),
+                data.type == "CONSUMPTION"
+                    ? Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.inventory,
+                                color: ThemeColor.gray400,
+                                size: ThemeSize.s24,
+                              ),
+                              const SizedBox(width: ThemeSize.s16),
+                              Text(
+                                "${data.stock.toString()} pièces",
+                                style: const TextStyle(
+                                  fontSize: ThemeSize.s16,
+                                  fontWeight: ThemeFontWeight.medium,
+                                  color: ThemeColor.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: ThemeSize.s16),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.monetization_on,
+                      color: ThemeColor.gray400,
+                      size: ThemeSize.s24,
+                    ),
+                    const SizedBox(width: ThemeSize.s16),
+                    Text(
+                      "${data.price.toString()} jetons",
+                      style: const TextStyle(
+                        fontSize: ThemeSize.s16,
+                        fontWeight: ThemeFontWeight.medium,
+                        color: ThemeColor.black,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: ThemeSize.s24),
                 data.type == "ACTIVITY"
                     ? SizedBox(
                         width: 0,
@@ -92,9 +159,9 @@ class _KermesseInteractionDetailsScreenState
                         controller: _quantityController,
                         hintText: "Quantity",
                       ),
-                ElevatedButton(
-                  onPressed: _participate,
-                  child: const Text("Participate"),
+                Button(
+                  label: data.type == "ACTIVITY" ? "Participer" : "Acheter",
+                  onTap: _participate,
                 ),
               ],
             );
