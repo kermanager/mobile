@@ -36,10 +36,10 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Tombolas"),
+      ),
       children: [
-        const Text(
-          "Kermesse Tombola List",
-        ),
         ElevatedButton(
           onPressed: () {
             context.push(

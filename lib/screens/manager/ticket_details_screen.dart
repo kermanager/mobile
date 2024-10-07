@@ -33,10 +33,8 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(),
       children: [
-        const Text(
-          "Ticket Details",
-        ),
         DetailsFutureBuilder<TicketDetailsResponse>(
           future: _get,
           builder: (context, data) {

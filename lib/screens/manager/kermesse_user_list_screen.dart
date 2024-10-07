@@ -35,10 +35,10 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Participants"),
+      ),
       children: [
-        const Text(
-          "Kermesse User List",
-        ),
         ElevatedButton(
           onPressed: () {
             context.push(

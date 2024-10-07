@@ -36,10 +36,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("Profil"),
+      ),
       children: [
-        const Text(
-          "Profile",
-        ),
         DetailsFutureBuilder<UserDetailsResponse>(
           future: _get,
           builder: (context, data) {

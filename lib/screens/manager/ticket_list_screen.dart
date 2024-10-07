@@ -28,10 +28,10 @@ class _TicketListScreenState extends State<TicketListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Tickets"),
+      ),
       children: [
-        const Text(
-          "Ticket List",
-        ),
         Expanded(
           child: ListFutureBuilder<TicketListItem>(
             future: _getAll,

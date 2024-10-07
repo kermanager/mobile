@@ -61,7 +61,7 @@ class _KermesseTombolaCreateScreenState
   Widget build(BuildContext context) {
     return Screen(
       appBar: AppBar(
-        title: const Text("Créer une tombola"),
+        title: const Text("Lancer une tombola"),
       ),
       children: [
         FormColumn(
@@ -86,7 +86,7 @@ class _KermesseTombolaCreateScreenState
             ),
             const SizedBox(height: ThemeSize.s16),
             Button(
-              label: "Enregistrer",
+              label: "Lancer",
               onTap: _submit,
             ),
           ],

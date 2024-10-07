@@ -56,10 +56,10 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Inviter un stand"),
+      ),
       children: [
-        const Text(
-          "Kermesse Stand Invite",
-        ),
         Expanded(
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,
