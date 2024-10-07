@@ -33,10 +33,10 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Mes enfants"),
+      ),
       children: [
-        const Text(
-          "Kermesse User List",
-        ),
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,

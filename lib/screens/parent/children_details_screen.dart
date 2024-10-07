@@ -56,10 +56,8 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(),
       children: [
-        const Text(
-          "Children Details",
-        ),
         DetailsFutureBuilder<UserDetailsResponse>(
           future: _get,
           builder: (context, data) {

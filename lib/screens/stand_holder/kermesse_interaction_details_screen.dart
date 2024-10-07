@@ -66,10 +66,8 @@ class _KermesseInteractionDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(),
       children: [
-        const Text(
-          "Interaction Details",
-        ),
         DetailsFutureBuilder<InteractionDetailsResponse>(
           future: _get,
           builder: (context, data) {

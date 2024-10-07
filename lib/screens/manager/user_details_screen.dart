@@ -37,7 +37,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   Widget build(BuildContext context) {
     return Screen(
       appBar: AppBar(
-        title: const Text("Profil"),
+        title: const Text("Mon profil"),
       ),
       children: [
         DetailsFutureBuilder<UserDetailsResponse>(

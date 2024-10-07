@@ -36,10 +36,10 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Stands"),
+      ),
       children: [
-        const Text(
-          "Kermesse Stand List",
-        ),
         Expanded(
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,

@@ -38,10 +38,10 @@ class _KermesseInteractionListScreenState
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Interactions"),
+      ),
       children: [
-        const Text(
-          "Kermesse Interaction List",
-        ),
         Expanded(
           child: ListFutureBuilder<InteractionListItem>(
             future: _getAll,

@@ -30,10 +30,10 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text('Mon stand'),
+      ),
       children: [
-        const Text(
-          "Stand Details",
-        ),
         DetailsFutureBuilder<StandDetailsResponse>(
           future: _get,
           builder: (context, data) {

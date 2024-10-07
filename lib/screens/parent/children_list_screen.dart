@@ -31,10 +31,10 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Mes enfants"),
+      ),
       children: [
-        const Text(
-          "Children List",
-        ),
         ElevatedButton(
           onPressed: () {
             context.push(

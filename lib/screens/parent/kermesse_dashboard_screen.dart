@@ -35,10 +35,10 @@ class _KermesseDashboardScreenState extends State<KermesseDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+      ),
       children: [
-        const Text(
-          "Kermesse Dashboard",
-        ),
         DetailsFutureBuilder<KermesseDetailsResponse>(
           future: _get,
           builder: (context, data) {

@@ -30,10 +30,10 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenList(
+      appBar: AppBar(
+        title: const Text("Mes kermesses"),
+      ),
       children: [
-        const Text(
-          "Kermesse List",
-        ),
         Expanded(
           child: ListFutureBuilder<KermesseListItem>(
             future: _getAll,
