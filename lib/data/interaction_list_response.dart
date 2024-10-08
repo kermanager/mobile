@@ -97,7 +97,7 @@ class InteractionListItem {
     return InteractionListItem.fromMap(json.decode(source));
   }
 
-  get formattedCreatedAt => DateFormat("MMM d, y 'à' HH:mm").format(createdAt);
+  get formattedCreatedAt => DateFormat("MMM d 'à' HH:mm").format(createdAt);
 }
 
 class InteractionListResponse {
