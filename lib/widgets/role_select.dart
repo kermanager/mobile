@@ -40,6 +40,7 @@ class _RoleSelectState extends State<RoleSelect> {
           },
           dropdownColor: ThemeColor.white,
           style: const TextStyle(
+            fontFamily: ThemeFontFamily.poppins,
             fontSize: ThemeFontSize.s16,
             fontWeight: ThemeFontWeight.medium,
             color: ThemeColor.black,

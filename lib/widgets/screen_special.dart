@@ -37,7 +37,7 @@ class _ScreenSpecialState extends State<ScreenSpecial> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
               horizontal: ThemeSize.s16,
-              vertical: ThemeSize.s16,
+              vertical: ThemeSize.s24,
             ),
             constraints: BoxConstraints(
               minHeight: safeHeight,

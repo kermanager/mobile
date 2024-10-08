@@ -37,7 +37,7 @@ class _ScreenState extends State<Screen> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
               horizontal: ThemeSize.s16,
-              vertical: ThemeSize.s16,
+              vertical: ThemeSize.s24,
             ),
             constraints: BoxConstraints(
               minHeight: safeHeight,

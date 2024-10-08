@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +69,20 @@ class _AppState extends State<App> {
           selectedItemColor: ThemeColor.primary,
           unselectedItemColor: ThemeColor.gray300,
           backgroundColor: ThemeColor.gray100,
+          selectedLabelStyle: TextStyle(
+            fontSize: ThemeFontSize.s12,
+            fontWeight: ThemeFontWeight.medium,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontSize: ThemeFontSize.s12,
+            fontWeight: ThemeFontWeight.medium,
+          ),
+          selectedIconTheme: IconThemeData(
+            size: ThemeSize.s28,
+          ),
+          unselectedIconTheme: IconThemeData(
+            size: ThemeSize.s28,
+          ),
         ),
       ),
     );

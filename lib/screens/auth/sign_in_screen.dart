@@ -88,6 +88,17 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
       withoutBottomBar: true,
       children: [
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.celebration_rounded,
+              size: 100,
+              color: ThemeColor.primary,
+            ),
+          ],
+        ),
+        const SizedBox(height: ThemeSize.s24),
         FormColumn(
           formKey: _formKey,
           children: [

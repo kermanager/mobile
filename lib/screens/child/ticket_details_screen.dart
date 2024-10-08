@@ -41,7 +41,7 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
     double safeAreaHeight = MediaQuery.paddingOf(context).top;
     double appBarHeight = ThemeSize.s56;
     double bottomBarHeight = ThemeSize.s80;
-    double paddingsHeight = ThemeSize.s16 * 2;
+    double paddingsHeight = ThemeSize.s24 * 2;
     double safeHeight = screenHeight -
         appBarHeight -
         bottomBarHeight -
