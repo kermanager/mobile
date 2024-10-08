@@ -56,6 +56,7 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
+            noResultMessage: "Aucun participant trouvé pour cette kermesse",
             builder: (context, item) {
               return ParticipantCard(user: item);
             },

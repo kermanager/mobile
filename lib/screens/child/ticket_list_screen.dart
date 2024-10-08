@@ -36,6 +36,7 @@ class _TicketListScreenState extends State<TicketListScreen> {
         Expanded(
           child: ListFutureBuilder<TicketListItem>(
             future: _getAll,
+            noResultMessage: "Vous n'avez pas encore acheté de ticket",
             builder: (context, item) {
               return TicketCard(
                 ticket: item,

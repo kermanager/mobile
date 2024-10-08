@@ -44,6 +44,8 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
         Expanded(
           child: ListFutureBuilder<TombolaListItem>(
             future: _getAll,
+            noResultMessage:
+                "Aucune tombola n'a été trouvée pour cette kermesse",
             builder: (context, item) {
               return TombolaCard(
                 tombola: item,

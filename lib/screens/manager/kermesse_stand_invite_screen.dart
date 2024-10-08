@@ -66,6 +66,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
         Expanded(
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,
+            noResultMessage: "Aucun stand disponible pour l'invitation",
             builder: (context, item) {
               return StandInviteCard(
                 stand: item,

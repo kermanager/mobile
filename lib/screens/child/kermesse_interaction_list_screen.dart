@@ -46,6 +46,8 @@ class _KermesseInteractionListScreenState
         Expanded(
           child: ListFutureBuilder<InteractionListItem>(
             future: _getAll,
+            noResultMessage:
+                "Vous n'avez pas encore fait d'interaction pour cette kermesse",
             builder: (context, item) {
               return InteractionCard(
                 interaction: item,

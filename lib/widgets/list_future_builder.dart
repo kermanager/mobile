@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/widgets/no_result_card.dart';
 
 class ListFutureBuilder<T> extends StatefulWidget {
   final Future<List<T>> Function() future;
   final Widget Function(BuildContext, T) builder;
+  final String noResultMessage;
 
   const ListFutureBuilder({
     super.key,
     required this.future,
     required this.builder,
+    required this.noResultMessage,
   });
 
   @override
@@ -34,8 +37,8 @@ class _ListFutureBuilderState<T> extends State<ListFutureBuilder<T>> {
         }
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('No items found'),
+            return Center(
+              child: NoResultCard(message: widget.noResultMessage),
             );
           }
           return ListView.builder(

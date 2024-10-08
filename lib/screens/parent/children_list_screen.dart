@@ -49,6 +49,7 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
+            noResultMessage: "Vous n'avez pas encore ajouté d'enfant",
             builder: (context, item) {
               return ChildCard(
                 user: item,

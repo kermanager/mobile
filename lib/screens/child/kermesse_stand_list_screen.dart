@@ -43,6 +43,7 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
         Expanded(
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,
+            noResultMessage: "Aucun stand trouvé pour cette kermesse",
             builder: (context, item) {
               return ListTile(
                 title: Text(item.name),

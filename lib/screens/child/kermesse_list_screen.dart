@@ -37,6 +37,7 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
         Expanded(
           child: ListFutureBuilder<KermesseListItem>(
             future: _getAll,
+            noResultMessage: "Vous êtes pas encore invité à une kermesse",
             builder: (context, item) {
               return KermesseCard(
                 kermesse: item,

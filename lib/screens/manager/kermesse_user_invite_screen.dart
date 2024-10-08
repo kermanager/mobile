@@ -65,6 +65,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
         Expanded(
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
+            noResultMessage: "Aucun enfant trouvé",
             builder: (context, item) {
               return ChildInviteCard(
                 user: item,
