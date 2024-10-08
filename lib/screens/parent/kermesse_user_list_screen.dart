@@ -3,6 +3,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
+import 'package:kermanager/widgets/participant_card.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
 class KermesseUserListScreen extends StatefulWidget {
@@ -41,10 +42,7 @@ class _KermesseUserListScreenState extends State<KermesseUserListScreen> {
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text("${item.role} - ${item.points}"),
-              );
+              return ParticipantCard(user: item);
             },
           ),
         ),
