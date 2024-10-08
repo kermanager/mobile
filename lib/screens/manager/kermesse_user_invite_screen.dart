@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/child_invite_card.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
@@ -65,15 +66,11 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.email),
-                leading: ElevatedButton(
-                  onPressed: () async {
-                    await _invite(item.id);
-                  },
-                  child: const Text('Invite'),
-                ),
+              return ChildInviteCard(
+                user: item,
+                onTap: () {
+                  _invite(item.id);
+                },
               );
             },
           ),

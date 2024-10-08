@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
+import 'package:kermanager/widgets/stand_invite_card.dart';
 
 class KermesseStandInviteScreen extends StatefulWidget {
   final int kermesseId;
@@ -50,6 +52,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
           content: Text('Stand invité avec succès'),
         ),
       );
+      context.pop();
     }
   }
 
@@ -64,15 +67,11 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
           child: ListFutureBuilder<StandListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.type),
-                leading: ElevatedButton(
-                  onPressed: () async {
-                    await _invite(item.id);
-                  },
-                  child: const Text('Invite'),
-                ),
+              return StandInviteCard(
+                stand: item,
+                onTap: () {
+                  _invite(item.id);
+                },
               );
             },
           ),
