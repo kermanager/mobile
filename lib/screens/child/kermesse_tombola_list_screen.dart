@@ -6,6 +6,7 @@ import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
+import 'package:kermanager/widgets/tombola_card.dart';
 
 class KermesseTombolaListScreen extends StatefulWidget {
   final int kermesseId;
@@ -44,9 +45,8 @@ class _KermesseTombolaListScreenState extends State<KermesseTombolaListScreen> {
           child: ListFutureBuilder<TombolaListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.gift),
+              return TombolaCard(
+                tombola: item,
                 onTap: () {
                   context.push(
                     ChildRoutes.kermesseTombolaDetails,

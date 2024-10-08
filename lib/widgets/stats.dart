@@ -38,6 +38,7 @@ class _StatsState extends State<Stats> {
                 color: ThemeColor.black,
               ),
             ),
+            const SizedBox(height: ThemeSize.s4),
             Text(
               widget.label,
               style: const TextStyle(
