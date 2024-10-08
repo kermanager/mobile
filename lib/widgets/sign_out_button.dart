@@ -24,7 +24,7 @@ class _SignOutButtonState extends State<SignOutButton> {
     context.go(AuthRoutes.signIn);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text("Signed out successfully"),
+        content: Text("Déconnexion réussie"),
       ),
     );
   }

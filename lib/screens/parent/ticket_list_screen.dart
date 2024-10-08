@@ -6,6 +6,7 @@ import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/ticket_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
+import 'package:kermanager/widgets/ticket_card.dart';
 
 class TicketListScreen extends StatefulWidget {
   const TicketListScreen({super.key});
@@ -36,9 +37,8 @@ class _TicketListScreenState extends State<TicketListScreen> {
           child: ListFutureBuilder<TicketListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.isWinner ? 'Winner' : 'Loser'),
-                subtitle: Text(item.user.name),
+              return TicketCard(
+                ticket: item,
                 onTap: () {
                   context.push(
                     ParentRoutes.ticketDetails,
