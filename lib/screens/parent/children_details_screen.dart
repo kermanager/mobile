@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/number_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class ChildrenDetailsScreen extends StatefulWidget {
@@ -19,6 +22,7 @@ class ChildrenDetailsScreen extends StatefulWidget {
 }
 
 class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
+  final _formKey = GlobalKey<FormState>();
   final UserService _userService = UserService();
 
   final TextEditingController _amountController = TextEditingController();
@@ -34,22 +38,24 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
   }
 
   Future<void> _send() async {
-    ApiResponse<Null> response = await _userService.sendCredit(
-      childId: widget.userId,
-      amount: int.parse(_amountController.text),
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<Null> response = await _userService.sendCredit(
+        childId: widget.userId,
+        amount: int.parse(_amountController.text),
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Credit sent successfully'),
-        ),
-      );
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Credit sent successfully'),
+          ),
+        );
+      }
     }
   }
 
@@ -69,13 +75,20 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
                 Text(data.email),
                 Text(data.role),
                 Text(data.credit.toString()),
-                NumberInput(
-                  hintText: "Amount",
-                  controller: _amountController,
-                ),
-                ElevatedButton(
-                  onPressed: _send,
-                  child: const Text("Send credit"),
+                FormColumn(
+                  formKey: _formKey,
+                  children: [
+                    NumberFormInput(
+                      hintText: "Nombre de jetons",
+                      controller: _amountController,
+                      unit: "jeton",
+                    ),
+                    const SizedBox(height: ThemeSize.s16),
+                    Button(
+                      onTap: _send,
+                      label: "Envoyer les jetons",
+                    ),
+                  ],
                 ),
               ],
             );

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/interaction_details_response.dart';
 import 'package:kermanager/services/interaction_service.dart';
+import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
-import 'package:kermanager/widgets/number_input.dart';
+import 'package:kermanager/widgets/form_column.dart';
+import 'package:kermanager/widgets/number_form_input.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class KermesseInteractionDetailsScreen extends StatefulWidget {
@@ -23,6 +26,8 @@ class KermesseInteractionDetailsScreen extends StatefulWidget {
 
 class _KermesseInteractionDetailsScreenState
     extends State<KermesseInteractionDetailsScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final InteractionService _interactionService = InteractionService();
 
   final TextEditingController _pointController = TextEditingController();
@@ -39,23 +44,25 @@ class _KermesseInteractionDetailsScreenState
   }
 
   Future<void> _end() async {
-    ApiResponse<Null> response = await _interactionService.end(
-      interactionId: widget.interactionId,
-      point: int.parse(_pointController.text),
-    );
-    if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage),
-        ),
+    if (_formKey.currentState!.validate()) {
+      ApiResponse<Null> response = await _interactionService.end(
+        interactionId: widget.interactionId,
+        point: int.parse(_pointController.text),
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Interaction ended successfully'),
-        ),
-      );
-      _refresh();
+      if (response.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Interaction ended successfully'),
+          ),
+        );
+        _refresh();
+      }
     }
   }
 
@@ -82,16 +89,18 @@ class _KermesseInteractionDetailsScreenState
                 Text(data.kermesse.name),
                 Text(data.stand.name),
                 data.type == "ACTIVITY" && data.status == "STARTED"
-                    ? Column(
+                    ? FormColumn(
+                        formKey: _formKey,
                         children: [
-                          NumberInput(
+                          NumberFormInput(
+                            hintText: "Points gagnés",
+                            unit: "point",
                             controller: _pointController,
-                            defaultValue: "0",
-                            hintText: "Point",
                           ),
-                          ElevatedButton(
-                            onPressed: _end,
-                            child: const Text("End"),
+                          const SizedBox(height: ThemeSize.s8),
+                          Button(
+                            label: "Terminer et noter",
+                            onTap: _end,
                           ),
                         ],
                       )
