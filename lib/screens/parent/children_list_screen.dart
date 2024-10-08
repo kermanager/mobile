@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/router/parent/routes.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/widgets/child_card.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
@@ -49,9 +50,8 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
           child: ListFutureBuilder<UserListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.role),
+              return ChildCard(
+                user: item,
                 onTap: () {
                   context.push(
                     ParentRoutes.childrenDetails,
