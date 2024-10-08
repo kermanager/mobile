@@ -60,6 +60,15 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
               return ListTile(
                 title: Text(item.name),
                 subtitle: Text(item.type),
+                onTap: () {
+                  context.push(
+                    ManagerRoutes.kermesseStandDetails,
+                    extra: {
+                      "kermesseId": widget.kermesseId,
+                      "standId": item.id,
+                    },
+                  );
+                },
               );
             },
           ),

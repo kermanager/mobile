@@ -22,6 +22,7 @@ import 'package:kermanager/screens/manager/ticket_details_screen.dart';
 import 'package:kermanager/screens/manager/ticket_list_screen.dart';
 import 'package:kermanager/screens/manager/user_details_screen.dart';
 import 'package:kermanager/screens/manager/user_edit_screen.dart';
+import 'package:kermanager/screens/manager/kermesse_stand_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ManagerRouter {
@@ -100,6 +101,19 @@ class ManagerRouter {
               return NoTransitionPage(
                 child: KermesseStandListScreen(
                   kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: ManagerRoutes.kermesseStandDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseStandDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                  standId: params['standId']!,
                 ),
               );
             },

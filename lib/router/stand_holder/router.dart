@@ -4,6 +4,7 @@ import 'package:kermanager/providers/auth_user.dart';
 
 import 'package:kermanager/router/stand_holder/bottom_navigation.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
+import 'package:kermanager/screens/stand_holder/kermesse_stand_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_details_screen.dart';
 import 'package:kermanager/screens/stand_holder/kermesse_interaction_list_screen.dart';
@@ -72,6 +73,19 @@ class StandHolderRouter {
               return NoTransitionPage(
                 child: KermesseStandListScreen(
                   kermesseId: params['kermesseId']!,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: StandHolderRoutes.kermesseStandDetails,
+            pageBuilder: (context, state) {
+              final params =
+                  GoRouterState.of(context).extra as Map<String, int>;
+              return NoTransitionPage(
+                child: KermesseStandDetailsScreen(
+                  kermesseId: params['kermesseId']!,
+                  standId: params['standId']!,
                 ),
               );
             },

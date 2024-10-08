@@ -8,6 +8,7 @@ class ManagerRoutes {
   static const String kermesseUserList = '/manager/kermesse-user-list';
   static const String kermesseUserInvite = '/manager/kermesse-user-invite';
   static const String kermesseStandList = '/manager/kermesse-stand-list';
+  static const String kermesseStandDetails = '/manager/kermesse-stand-details';
   static const String kermesseStandInvite = '/manager/kermesse-stand-invite';
   static const String kermesseTombolaList = '/manager/kermesse-tombola-list';
   static const String kermesseTombolaDetails =
