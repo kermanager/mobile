@@ -93,7 +93,7 @@ class _KermesseInteractionDetailsScreenState
                     IconBox(
                       icon: data.type == "CONSUMPTION"
                           ? Icons.fastfood
-                          : Icons.gamepad,
+                          : Icons.sports_esports,
                       isLarge: true,
                     ),
                     Column(

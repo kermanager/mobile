@@ -57,7 +57,8 @@ class _StandDetailsScreenState extends State<StandDetailsScreen> {
                 IconBox(
                   icon: data.type == "CONSUMPTION"
                       ? Icons.fastfood
-                      : Icons.gamepad,
+                      : Icons.sports_esports,
+                  isLarge: true,
                 ),
                 const SizedBox(height: ThemeSize.s16),
                 Text(

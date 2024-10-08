@@ -37,7 +37,7 @@ class _InteractionCardState extends State<InteractionCard> {
               IconBox(
                 icon: widget.interaction.type == "CONSUMPTION"
                     ? Icons.fastfood
-                    : Icons.gamepad,
+                    : Icons.sports_esports,
                 isLarge: true,
               ),
               const SizedBox(width: ThemeSize.s16),

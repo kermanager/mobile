@@ -9,6 +9,7 @@ import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
+import 'package:kermanager/widgets/icon_box.dart';
 import 'package:kermanager/widgets/screen.dart';
 import 'package:kermanager/widgets/status_label.dart';
 
@@ -63,6 +64,56 @@ class _KermesseTombolaDetailsScreenState
 
   void _refresh() {
     setState(() {});
+  }
+
+  void _showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(
+            top: ThemeSize.s24,
+            left: ThemeSize.s16,
+            right: ThemeSize.s16,
+            bottom: ThemeSize.s48,
+          ),
+          decoration: const BoxDecoration(
+            color: ThemeColor.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(ThemeSize.s16),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const IconBox(
+                icon: Icons.warning,
+                isLarge: true,
+              ),
+              const SizedBox(height: ThemeSize.s16),
+              const Text(
+                "Êtes-vous sûr de vouloir terminer la tombola ?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: ThemeSize.s18,
+                  fontWeight: ThemeFontWeight.medium,
+                  color: ThemeColor.black,
+                ),
+              ),
+              const SizedBox(height: ThemeSize.s32),
+              Button(
+                label: "Terminer la tombola",
+                onTap: () {
+                  context.pop();
+                  _end();
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -149,7 +200,7 @@ class _KermesseTombolaDetailsScreenState
                 data.status == "STARTED"
                     ? Button(
                         label: "Terminer la tombola",
-                        onTap: _end,
+                        onTap: _showBottomSheet,
                       )
                     : const SizedBox.shrink(),
               ],

@@ -32,7 +32,7 @@ class _IconBoxState extends State<IconBox> {
       child: Icon(
         widget.icon,
         color: ThemeColor.primary,
-        size: ThemeFontSize.s24,
+        size: ThemeFontSize.s28,
       ),
     );
   }

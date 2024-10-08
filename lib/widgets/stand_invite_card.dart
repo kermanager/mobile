@@ -31,7 +31,7 @@ class _StandInviteCardState extends State<StandInviteCard> {
             IconBox(
               icon: widget.stand.type == "CONSUMPTION"
                   ? Icons.fastfood
-                  : Icons.gamepad,
+                  : Icons.sports_esports,
               isLarge: true,
             ),
             const SizedBox(width: ThemeSize.s16),
