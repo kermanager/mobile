@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_list_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/kermesse_service.dart';
+import 'package:kermanager/widgets/kermesse_card.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
@@ -37,9 +38,8 @@ class _KermesseListScreenState extends State<KermesseListScreen> {
           child: ListFutureBuilder<KermesseListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.description),
+              return KermesseCard(
+                kermesse: item,
                 onTap: () {
                   context.push(
                     ChildRoutes.kermesseDetails,

@@ -5,10 +5,12 @@ import 'package:kermanager/theme/theme_size.dart';
 
 class StatusLabel extends StatefulWidget {
   final String status;
+  final bool? isSmall;
 
   const StatusLabel({
     super.key,
     required this.status,
+    this.isSmall = false,
   });
 
   @override
@@ -21,8 +23,8 @@ class _StatusLabelState extends State<StatusLabel> {
     return Row(
       children: [
         Container(
-          width: ThemeSize.s18,
-          height: ThemeSize.s18,
+          width: widget.isSmall == true ? ThemeSize.s12 : ThemeSize.s18,
+          height: widget.isSmall == true ? ThemeSize.s12 : ThemeSize.s18,
           decoration: BoxDecoration(
             color: widget.status == 'STARTED'
                 ? ThemeColor.primary
