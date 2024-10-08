@@ -24,7 +24,7 @@ class _ScreenListState extends State<ScreenList> {
     double safeAreaHeight = MediaQuery.paddingOf(context).top;
     double appBarHeight = widget.appBar?.preferredSize.height ?? 0;
     double bottomBarHeight =
-        (widget.withoutBottomBar ?? false) ? 0 : ThemeSize.s64;
+        (widget.withoutBottomBar ?? false) ? 0 : ThemeSize.s80;
     double paddingsHeight = ThemeSize.s16 * 2;
     double safeHeight = screenHeight -
         appBarHeight -

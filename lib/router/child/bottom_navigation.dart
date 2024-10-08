@@ -39,7 +39,7 @@ class _ChildBottomNavigationState extends State<ChildBottomNavigation> {
         },
       ),
       bottomNavigationBar: SizedBox(
-        height: ThemeSize.s64,
+        height: ThemeSize.s80,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: widget.navigationShell.currentIndex,

@@ -50,7 +50,7 @@ class _ListFutureBuilderState<T> extends State<ListFutureBuilder<T>> {
           );
         }
         return const Center(
-          child: Text('Something went wrong'),
+          child: Text('Aucune donnée'),
         );
       },
     );

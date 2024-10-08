@@ -38,7 +38,7 @@ class _DetailsFutureBuilderState<T> extends State<DetailsFutureBuilder<T>> {
           return widget.builder(context, data);
         }
         return const Center(
-          child: Text('Something went wrong'),
+          child: Text('Aucune donnée'),
         );
       },
     );
