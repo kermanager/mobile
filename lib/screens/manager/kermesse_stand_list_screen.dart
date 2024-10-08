@@ -6,6 +6,7 @@ import 'package:kermanager/router/manager/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
+import 'package:kermanager/widgets/stand_card.dart';
 
 class KermesseStandListScreen extends StatefulWidget {
   final int kermesseId;
@@ -58,9 +59,8 @@ class _KermesseStandListScreenState extends State<KermesseStandListScreen> {
             future: _getAll,
             noResultMessage: "Aucun stand trouvé pour cette kermesse",
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text(item.type),
+              return StandCard(
+                stand: item,
                 onTap: () {
                   context.push(
                     ManagerRoutes.kermesseStandDetails,
