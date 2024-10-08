@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_details_response.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/theme/theme_color.dart';
+import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/widgets/avatar.dart';
+import 'package:kermanager/widgets/balance_label.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/number_form_input.dart';
+import 'package:kermanager/widgets/role_label.dart';
 import 'package:kermanager/widgets/screen.dart';
 
 class ChildrenDetailsScreen extends StatefulWidget {
@@ -55,8 +60,13 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
             content: Text('Jetons envoyés avec succès'),
           ),
         );
+        _refresh();
       }
     }
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 
   @override
@@ -68,13 +78,37 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
           future: _get,
           builder: (context, data) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(data.id.toString()),
-                Text(data.name),
-                Text(data.email),
-                Text(data.role),
-                Text(data.credit.toString()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    BalanceLabel(balance: data.credit),
+                  ],
+                ),
+                const SizedBox(height: ThemeSize.s8),
+                const Avatar(),
+                const SizedBox(height: ThemeSize.s16),
+                Text(
+                  data.name,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s20,
+                    fontWeight: ThemeFontWeight.medium,
+                    color: ThemeColor.black,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s8),
+                RoleLabel(role: data.role),
+                const SizedBox(height: ThemeSize.s8),
+                Text(
+                  data.email,
+                  style: const TextStyle(
+                    fontSize: ThemeSize.s16,
+                    fontWeight: ThemeFontWeight.regular,
+                    color: ThemeColor.gray400,
+                  ),
+                ),
+                const SizedBox(height: ThemeSize.s36),
                 FormColumn(
                   formKey: _formKey,
                   children: [
@@ -89,7 +123,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
                       label: "Envoyer les jetons",
                     ),
                   ],
-                ),
+                )
               ],
             );
           },
