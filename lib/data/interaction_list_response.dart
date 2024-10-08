@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class InteractionUser {
   final int id;
   final String name;
@@ -94,6 +96,8 @@ class InteractionListItem {
   factory InteractionListItem.fromJson(String source) {
     return InteractionListItem.fromMap(json.decode(source));
   }
+
+  get formattedCreatedAt => DateFormat("MMM d, y 'à' HH:mm").format(createdAt);
 }
 
 class InteractionListResponse {

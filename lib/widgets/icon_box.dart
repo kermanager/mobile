@@ -5,10 +5,12 @@ import 'package:kermanager/theme/theme_size.dart';
 
 class IconBox extends StatefulWidget {
   final IconData icon;
+  final bool? isLarge;
 
   const IconBox({
     super.key,
     required this.icon,
+    this.isLarge = false,
   });
 
   @override
@@ -24,7 +26,9 @@ class _IconBoxState extends State<IconBox> {
         border: Border.all(color: ThemeColor.gray200),
         borderRadius: BorderRadius.circular(ThemeSize.s12),
       ),
-      padding: const EdgeInsets.all(ThemeSize.s12),
+      padding: EdgeInsets.all(
+        widget.isLarge == true ? ThemeSize.s16 : ThemeSize.s12,
+      ),
       child: Icon(
         widget.icon,
         color: ThemeColor.primary,

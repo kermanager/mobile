@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class TicketUser {
   final int id;
   final String name;
@@ -115,4 +117,6 @@ class TicketDetailsResponse {
   factory TicketDetailsResponse.fromJson(String source) {
     return TicketDetailsResponse.fromMap(json.decode(source));
   }
+
+  get formattedCreatedAt => DateFormat("MMM d, y 'à' HH:mm").format(createdAt);
 }

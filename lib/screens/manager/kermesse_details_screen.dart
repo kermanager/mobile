@@ -112,14 +112,14 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
                   children: [
                     Expanded(
                       child: Stats(
-                        label: "Stands (en €)",
+                        label: "Stands (en jetons)",
                         value: data.interactionIncome,
                       ),
                     ),
                     const SizedBox(width: ThemeSize.s8),
                     Expanded(
                       child: Stats(
-                        label: "Tombolas (en €)",
+                        label: "Tombolas (en jetons)",
                         value: data.tombolaIncome,
                       ),
                     ),

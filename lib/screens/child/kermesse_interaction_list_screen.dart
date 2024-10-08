@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/interaction_list_response.dart';
 import 'package:kermanager/router/child/routes.dart';
 import 'package:kermanager/services/interaction_service.dart';
+import 'package:kermanager/widgets/interaction_card.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 
@@ -46,9 +47,9 @@ class _KermesseInteractionListScreenState
           child: ListFutureBuilder<InteractionListItem>(
             future: _getAll,
             builder: (context, item) {
-              return ListTile(
-                title: Text(item.user.name),
-                subtitle: Text(item.credit.toString()),
+              return InteractionCard(
+                interaction: item,
+                isMinus: true,
                 onTap: () {
                   context.push(
                     ChildRoutes.kermesseInteractionDetails,
