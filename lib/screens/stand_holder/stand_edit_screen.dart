@@ -100,13 +100,28 @@ class _StandEditScreenState extends State<StandEditScreen> {
                       defaultValue: data.price.toString(),
                     ),
                     const SizedBox(height: ThemeSize.s16),
-                    NumberFormInput(
-                      hintText: "Stock",
-                      unit: "pièce",
-                      controller: _stockController,
-                      defaultValue: data.stock.toString(),
-                    ),
-                    const SizedBox(height: ThemeSize.s16),
+                    data.type == "CONSUMPTION"
+                        ? Column(
+                            children: [
+                              NumberFormInput(
+                                hintText: "Stock",
+                                unit: "pièce",
+                                controller: _stockController,
+                                defaultValue: data.stock.toString(),
+                              ),
+                              const SizedBox(height: ThemeSize.s16),
+                            ],
+                          )
+                        : SizedBox(
+                            width: 0,
+                            height: 0,
+                            child: NumberFormInput(
+                              hintText: "Stock",
+                              unit: "pièce",
+                              controller: _stockController,
+                              defaultValue: data.stock.toString(),
+                            ),
+                          ),
                     Button(
                       label: "Modifier",
                       onTap: _submit,

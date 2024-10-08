@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kermanager/theme/theme_size.dart';
 
 class StandHolderBottomNavigation extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -40,6 +41,7 @@ class _StandHolderBottomNavigationState
         },
       ),
       bottomNavigationBar: SizedBox(
+        height: ThemeSize.s80,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: widget.navigationShell.currentIndex,

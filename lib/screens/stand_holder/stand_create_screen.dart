@@ -95,12 +95,27 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
               controller: _priceController,
             ),
             const SizedBox(height: ThemeSize.s16),
-            NumberFormInput(
-              hintText: "Stock",
-              unit: "pièce",
-              controller: _stockController,
-            ),
-            const SizedBox(height: ThemeSize.s16),
+            _selectedType == "CONSUMPTION"
+                ? Column(
+                    children: [
+                      NumberFormInput(
+                        hintText: "Stock",
+                        unit: "pièce",
+                        controller: _stockController,
+                      ),
+                      const SizedBox(height: ThemeSize.s16),
+                    ],
+                  )
+                : SizedBox(
+                    width: 0,
+                    height: 0,
+                    child: NumberFormInput(
+                      hintText: "Stock",
+                      unit: "pièce",
+                      controller: _stockController,
+                      defaultValue: "0",
+                    ),
+                  ),
             Button(
               label: "Enregistrer",
               onTap: _submit,
