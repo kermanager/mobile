@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/link_arrow.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,10 +23,10 @@ class _SignOutButtonState extends State<SignOutButton> {
     Provider.of<AuthProvider>(context, listen: false)
         .setUser(-1, "", "", "", false);
     context.go(AuthRoutes.signIn);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Déconnexion réussie"),
-      ),
+    SnackBarUtils.showCustomSnackBar(
+      context,
+      "Déconnexion réussie",
+      SnackBarVariant.success,
     );
   }
 

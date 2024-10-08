@@ -6,6 +6,7 @@ import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/screen.dart';
@@ -47,16 +48,16 @@ class _KermesseTombolaDetailsScreenState
       tombolaId: widget.tombolaId,
     );
     if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        response.error!,
+        SnackBarVariant.error,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Ticket acheté avec succès'),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        'Ticket acheté avec succès',
+        SnackBarVariant.success,
       );
     }
   }

@@ -6,6 +6,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/link_button.dart';
@@ -40,17 +41,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         password: _passwordController.text,
       );
       if (response.error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.error!),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          response.error!,
+          SnackBarVariant.error,
         );
       } else {
         context.pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Inscription réussie'),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          'Inscription réussie',
+          SnackBarVariant.success,
         );
       }
     }

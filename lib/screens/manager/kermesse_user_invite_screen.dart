@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/user_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/services/user_service.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/child_invite_card.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
@@ -40,16 +41,16 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
       userId: userId,
     );
     if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        response.error!,
+        SnackBarVariant.error,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Enfant et son parent invités avec succès'),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        'Enfant et son parent invités avec succès',
+        SnackBarVariant.success,
       );
       context.pop();
     }

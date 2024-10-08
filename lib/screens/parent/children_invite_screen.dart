@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/screen.dart';
@@ -30,16 +31,16 @@ class _ChildrenInviteScreenState extends State<ChildrenInviteScreen> {
         email: _emailController.text,
       );
       if (response.error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.error!),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          response.error!,
+          SnackBarVariant.error,
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Enfant invité avec succès'),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          'Enfant invité avec succès',
+          SnackBarVariant.success,
         );
         context.pop();
       }

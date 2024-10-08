@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/kermesse_details_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -50,16 +51,16 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
         description: _descriptionController.text,
       );
       if (response.error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.error!),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          response.error!,
+          SnackBarVariant.error,
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kermesse modifiée avec succès'),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          'Kermesse modifiée avec succès',
+          SnackBarVariant.success,
         );
         context.pop();
       }

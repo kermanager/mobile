@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/tombola_details_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -54,16 +55,16 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
       gift: _giftController.text,
     );
     if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        response.error!,
+        SnackBarVariant.error,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Tombola modifiée avec succès'),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        'Tombola modifiée avec succès',
+        SnackBarVariant.success,
       );
       context.pop();
     }

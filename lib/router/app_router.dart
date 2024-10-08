@@ -18,7 +18,7 @@ import 'package:kermanager/router/child/router.dart';
 class AppRouter {
   GoRouter goRouter(BuildContext context) {
     return GoRouter(
-      initialLocation: AuthRoutes.signUp,
+      initialLocation: AuthRoutes.signIn,
       refreshListenable: Provider.of<AuthProvider>(context, listen: false),
       redirect: (BuildContext context, GoRouterState state) {
         AuthUser user = Provider.of<AuthProvider>(context, listen: false).user;

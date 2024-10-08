@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/data/stand_list_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/services/stand_service.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/list_future_builder.dart';
 import 'package:kermanager/widgets/screen_list.dart';
 import 'package:kermanager/widgets/stand_invite_card.dart';
@@ -41,16 +42,16 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
       standId: standId,
     );
     if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        response.error!,
+        SnackBarVariant.error,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Stand invité avec succès'),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        'Stand invité avec succès',
+        SnackBarVariant.success,
       );
       context.pop();
     }

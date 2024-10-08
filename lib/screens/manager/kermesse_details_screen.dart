@@ -7,6 +7,7 @@ import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/icon_box.dart';
@@ -45,16 +46,16 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
     ApiResponse<Null> response =
         await _kermesseService.end(id: widget.kermesseId);
     if (response.error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.error!),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        response.error!,
+        SnackBarVariant.error,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Kermesse terminée avec succès'),
-        ),
+      SnackBarUtils.showCustomSnackBar(
+        context,
+        'Kermesse terminée avec succès',
+        SnackBarVariant.success,
       );
       _refresh();
     }

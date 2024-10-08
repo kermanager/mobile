@@ -6,6 +6,7 @@ import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -55,18 +56,16 @@ class _KermesseInteractionDetailsScreenState
         quantity: int.parse(_quantityController.text),
       );
       if (response.error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.error!),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          response.error!,
+          SnackBarVariant.error,
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              type == "ACTIVITY" ? "Participation réussie" : "Achat réussi",
-            ),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          type == "ACTIVITY" ? "Participation réussie" : "Achat réussi",
+          SnackBarVariant.success,
         );
       }
     }

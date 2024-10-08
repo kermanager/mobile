@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kermanager/services/stripe_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/number_form_input.dart';
@@ -34,24 +35,24 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
         context,
         onSuccess: () {
           context.pop();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Jetons achetés avec succès'),
-            ),
+          SnackBarUtils.showCustomSnackBar(
+            context,
+            'Jetons achetés avec succès',
+            SnackBarVariant.success,
           );
         },
         onCancel: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Achat des jetons annulé'),
-            ),
+          SnackBarUtils.showCustomSnackBar(
+            context,
+            'Achat des jetons annulé',
+            SnackBarVariant.success,
           );
         },
         onError: (error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Erreur d'achat de jetons, veuillez réessayer"),
-            ),
+          SnackBarUtils.showCustomSnackBar(
+            context,
+            "Erreur d'achat de jetons, veuillez réessayer",
+            SnackBarVariant.error,
           );
         },
       );

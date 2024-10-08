@@ -5,6 +5,7 @@ import 'package:kermanager/providers/auth_provider.dart';
 import 'package:kermanager/router/stand_holder/routes.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
+import 'package:kermanager/utils/snackbar.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/number_form_input.dart';
@@ -42,18 +43,18 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
         stock: int.parse(_stockController.text),
       );
       if (response.error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.error!),
-          ),
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          response.error!,
+          SnackBarVariant.error,
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Stand créé avec succès'),
-          ),
-        );
         Provider.of<AuthProvider>(context, listen: false).setHasStand(true);
+        SnackBarUtils.showCustomSnackBar(
+          context,
+          'Stand créé avec succès',
+          SnackBarVariant.success,
+        );
         context.go(StandHolderRoutes.standDetails);
       }
     }

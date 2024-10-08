@@ -84,6 +84,13 @@ class _AppState extends State<App> {
             size: ThemeSize.s28,
           ),
         ),
+        snackBarTheme: SnackBarThemeData(
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ThemeSize.s12),
+          ),
+          contentTextStyle: const TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
