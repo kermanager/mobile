@@ -3,7 +3,6 @@ class StandHolderRoutes {
   static const String userEdit = '/stand-holder/user-edit';
   static const String kermesseList = '/stand-holder/kermesse-list';
   static const String kermesseDetails = '/stand-holder/kermesse-details';
-  static const String kermesseDashboard = '/stand-holder/kermesse-dashboard';
   static const String kermesseStandList = '/stand-holder/kermesse-stand-list';
   static const String kermesseInteractionList =
       '/stand-holder/kermesse-interaction-list';
