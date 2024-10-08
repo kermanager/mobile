@@ -55,7 +55,7 @@ class _KermesseTombolaDetailsScreenState
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Participation successful'),
+          content: Text('Ticket acheté avec succès'),
         ),
       );
     }

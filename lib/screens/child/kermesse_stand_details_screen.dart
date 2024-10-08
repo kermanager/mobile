@@ -47,7 +47,7 @@ class _KermesseInteractionDetailsScreenState
     return response.data!;
   }
 
-  Future<void> _participate() async {
+  Future<void> _participate(String type) async {
     if (_formKey.currentState!.validate()) {
       ApiResponse<Null> response = await _interactionService.create(
         kermesseId: widget.kermesseId,
@@ -62,8 +62,10 @@ class _KermesseInteractionDetailsScreenState
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Participation successful'),
+          SnackBar(
+            content: Text(
+              type == "ACTIVITY" ? "Participation réussie" : "Achat réussi",
+            ),
           ),
         );
       }
@@ -168,7 +170,9 @@ class _KermesseInteractionDetailsScreenState
                     const SizedBox(height: ThemeSize.s8),
                     Button(
                       label: data.type == "ACTIVITY" ? "Participer" : "Acheter",
-                      onTap: _participate,
+                      onTap: () {
+                        _participate(data.type);
+                      },
                     ),
                   ],
                 )

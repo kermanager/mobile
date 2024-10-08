@@ -47,7 +47,7 @@ class _KermesseStandInviteScreenState extends State<KermesseStandInviteScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Stand invited successfully'),
+          content: Text('Stand invité avec succès'),
         ),
       );
     }

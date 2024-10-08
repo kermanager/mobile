@@ -49,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         context.pop();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Sign up successful'),
+            content: Text('Inscription réussie'),
           ),
         );
       }

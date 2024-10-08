@@ -52,7 +52,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Credit sent successfully'),
+            content: Text('Jetons envoyés avec succès'),
           ),
         );
       }

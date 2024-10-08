@@ -47,7 +47,7 @@ class _KermesseUserInviteScreenState extends State<KermesseUserInviteScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User invited successfully'),
+          content: Text('Enfant et son parent invités avec succès'),
         ),
       );
       context.pop();

@@ -52,7 +52,7 @@ class _KermesseDetailsScreenState extends State<KermesseDetailsScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Kermesse Ended successfully'),
+          content: Text('Kermesse terminée avec succès'),
         ),
       );
       _refresh();

@@ -62,7 +62,7 @@ class _KermesseTombolaEditScreenState extends State<KermesseTombolaEditScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Tombola edited successfully'),
+          content: Text('Tombola modifiée avec succès'),
         ),
       );
       context.pop();

@@ -50,7 +50,7 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Stand created successfully'),
+            content: Text('Stand créé avec succès'),
           ),
         );
         Provider.of<AuthProvider>(context, listen: false).setHasStand(true);

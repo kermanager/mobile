@@ -34,21 +34,21 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
         onSuccess: () {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Credit buyed successfully'),
+              content: Text('Jetons achetés avec succès'),
             ),
           );
         },
         onCancel: () {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Credit buying canceled'),
+              content: Text('Achat des jetons annulé'),
             ),
           );
         },
         onError: (error) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Credit buying error'),
+              content: Text('Erreur d\'achat de jetons'),
             ),
           );
         },

@@ -39,7 +39,7 @@ class _KermesseCreateScreenState extends State<KermesseCreateScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Kermesse created successfully'),
+            content: Text('Kermesse créée avec succès'),
           ),
         );
         context.pop();

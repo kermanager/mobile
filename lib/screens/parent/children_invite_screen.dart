@@ -38,7 +38,7 @@ class _ChildrenInviteScreenState extends State<ChildrenInviteScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('User invited successfully'),
+            content: Text('Enfant invité avec succès'),
           ),
         );
         context.pop();

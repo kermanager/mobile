@@ -56,7 +56,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Stand edited successfully'),
+            content: Text('Stand modifié avec succès'),
           ),
         );
         context.pop();

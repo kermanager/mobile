@@ -58,7 +58,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Kermesse edited successfully'),
+            content: Text('Kermesse modifiée avec succès'),
           ),
         );
         context.pop();

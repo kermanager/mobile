@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Sign in successful'),
+            content: Text('Connexion réussie'),
           ),
         );
       }

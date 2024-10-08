@@ -54,7 +54,7 @@ class _KermesseTombolaDetailsScreenState
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Tombola ended successfully'),
+          content: Text('Tombola terminée avec succès'),
         ),
       );
       _refresh();

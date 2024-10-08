@@ -54,7 +54,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
         context.go(AuthRoutes.signIn);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Password edited successfully'),
+            content: Text('Mot de passe modifié avec succès'),
           ),
         );
       }

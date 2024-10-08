@@ -49,7 +49,7 @@ class _KermesseTombolaCreateScreenState
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Tombola created successfully'),
+            content: Text('Tombola créée avec succès'),
           ),
         );
         context.pop();
