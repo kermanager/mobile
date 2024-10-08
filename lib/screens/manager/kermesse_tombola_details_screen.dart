@@ -37,7 +37,7 @@ class _KermesseTombolaDetailsScreenState
       tombolaId: widget.tombolaId,
     );
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }
@@ -48,7 +48,7 @@ class _KermesseTombolaDetailsScreenState
     if (response.error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.errorMessage),
+          content: Text(response.error!),
         ),
       );
     } else {

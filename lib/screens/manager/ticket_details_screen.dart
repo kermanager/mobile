@@ -25,7 +25,7 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
       ticketId: widget.ticketId,
     );
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }

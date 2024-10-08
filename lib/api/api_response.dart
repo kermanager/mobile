@@ -1,5 +1,3 @@
-import 'package:kermanager/api/api_constants.dart';
-
 class ApiResponse<T> {
   final T? data;
   final String? error;
@@ -8,6 +6,4 @@ class ApiResponse<T> {
     this.data,
     this.error,
   });
-
-  String get errorMessage => ApiConstants.getMessage(error);
 }

@@ -44,7 +44,7 @@ class _StandCreateScreenState extends State<StandCreateScreen> {
       if (response.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage),
+            content: Text(response.error!),
           ),
         );
       } else {

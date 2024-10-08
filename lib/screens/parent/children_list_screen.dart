@@ -23,7 +23,7 @@ class _ChildrenListScreenState extends State<ChildrenListScreen> {
     ApiResponse<List<UserListItem>> response =
         await _userService.listChildren();
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }

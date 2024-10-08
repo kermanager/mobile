@@ -20,7 +20,7 @@ class _TicketListScreenState extends State<TicketListScreen> {
   Future<List<TicketListItem>> _getAll() async {
     ApiResponse<List<TicketListItem>> response = await _ticketService.list();
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }

@@ -33,7 +33,7 @@ class _KermesseCreateScreenState extends State<KermesseCreateScreen> {
       if (response.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage),
+            content: Text(response.error!),
           ),
         );
       } else {

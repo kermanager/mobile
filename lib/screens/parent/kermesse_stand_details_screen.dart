@@ -42,7 +42,7 @@ class _KermesseInteractionDetailsScreenState
       standId: widget.standId,
     );
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }
@@ -57,7 +57,7 @@ class _KermesseInteractionDetailsScreenState
       if (response.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage),
+            content: Text(response.error!),
           ),
         );
       } else {

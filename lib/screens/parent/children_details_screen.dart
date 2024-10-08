@@ -32,7 +32,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
       userId: widget.userId,
     );
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }
@@ -46,7 +46,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
       if (response.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage),
+            content: Text(response.error!),
           ),
         );
       } else {

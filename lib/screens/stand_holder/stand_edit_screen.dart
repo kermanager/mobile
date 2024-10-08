@@ -34,7 +34,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
   Future<StandDetailsResponse> _get() async {
     ApiResponse<StandDetailsResponse> response = await _standService.current();
     if (response.error != null) {
-      throw Exception(response.errorMessage);
+      throw Exception(response.error!);
     }
     return response.data!;
   }
@@ -50,7 +50,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
       if (response.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage),
+            content: Text(response.error!),
           ),
         );
       } else {
