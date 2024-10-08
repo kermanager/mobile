@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_size.dart';
 
-class Screen extends StatefulWidget {
+class ScreenSpecial extends StatefulWidget {
   final PreferredSizeWidget? appBar;
   final List<Widget> children;
   final bool? withoutBottomBar;
 
-  const Screen({
+  const ScreenSpecial({
     super.key,
     this.appBar,
     required this.children,
@@ -15,10 +15,10 @@ class Screen extends StatefulWidget {
   });
 
   @override
-  State<Screen> createState() => _ScreenState();
+  State<ScreenSpecial> createState() => _ScreenSpecialState();
 }
 
-class _ScreenState extends State<Screen> {
+class _ScreenSpecialState extends State<ScreenSpecial> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -42,10 +42,8 @@ class _ScreenState extends State<Screen> {
             constraints: BoxConstraints(
               minHeight: safeHeight,
             ),
-            decoration: BoxDecoration(
-              color: ThemeColor.white,
-              borderRadius: BorderRadius.circular(ThemeSize.s24),
-              border: Border.all(color: ThemeColor.gray200),
+            decoration: const BoxDecoration(
+              color: ThemeColor.gray100,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

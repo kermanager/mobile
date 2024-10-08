@@ -51,7 +51,7 @@ class _AppState extends State<App> {
       routerConfig: widget.router.goRouter(context),
       theme: ThemeData(
         fontFamily: ThemeFontFamily.poppins,
-        scaffoldBackgroundColor: ThemeColor.white,
+        scaffoldBackgroundColor: ThemeColor.gray100,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           color: ThemeColor.gray100,

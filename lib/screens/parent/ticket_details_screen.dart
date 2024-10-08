@@ -7,7 +7,7 @@ import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
-import 'package:kermanager/widgets/screen.dart';
+import 'package:kermanager/widgets/screen_special.dart';
 import 'package:kermanager/widgets/ticket_clipper.dart';
 
 class TicketDetailsScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _TicketDetailsScreenState extends State<TicketDetailsScreen> {
         paddingsHeight -
         safeAreaHeight;
 
-    return Screen(
+    return ScreenSpecial(
       appBar: AppBar(),
       children: [
         DetailsFutureBuilder<TicketDetailsResponse>(

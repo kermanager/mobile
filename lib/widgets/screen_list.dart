@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_size.dart';
 
 class ScreenList extends StatefulWidget {
@@ -25,30 +26,29 @@ class _ScreenListState extends State<ScreenList> {
     double appBarHeight = widget.appBar?.preferredSize.height ?? 0;
     double bottomBarHeight =
         (widget.withoutBottomBar ?? false) ? 0 : ThemeSize.s80;
-    double paddingsHeight = ThemeSize.s16 * 2;
-    double safeHeight = screenHeight -
-        appBarHeight -
-        bottomBarHeight -
-        paddingsHeight -
-        safeAreaHeight;
+    double safeHeight =
+        screenHeight - appBarHeight - bottomBarHeight - safeAreaHeight;
 
     return Scaffold(
       appBar: widget.appBar,
       body: SafeArea(
-        child: Padding(
+        child: Container(
+          width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: ThemeSize.s16,
             vertical: ThemeSize.s16,
           ),
-          child: Container(
-            width: double.infinity,
-            constraints: BoxConstraints(
-              minHeight: safeHeight,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.children,
-            ),
+          constraints: BoxConstraints(
+            minHeight: safeHeight,
+          ),
+          decoration: BoxDecoration(
+            color: ThemeColor.white,
+            borderRadius: BorderRadius.circular(ThemeSize.s24),
+            border: Border.all(color: ThemeColor.gray200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: widget.children,
           ),
         ),
       ),
