@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kermanager/theme/theme_color.dart';
 
 class DetailsFutureBuilder<T> extends StatefulWidget {
   final Future<T> Function() future;
@@ -23,7 +24,9 @@ class _DetailsFutureBuilderState<T> extends State<DetailsFutureBuilder<T>> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: ThemeColor.primary,
+            ),
           );
         }
         if (snapshot.hasError) {
