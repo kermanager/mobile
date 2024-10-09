@@ -6,6 +6,7 @@ import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/avatar.dart';
 import 'package:kermanager/widgets/balance_label.dart';
 import 'package:kermanager/widgets/button.dart';
@@ -117,6 +118,7 @@ class _ChildrenDetailsScreenState extends State<ChildrenDetailsScreen> {
                       hintText: "Nombre de jetons",
                       controller: _amountController,
                       unit: "jeton",
+                      validator: InputValidationUtil.validateQuantity,
                     ),
                     const SizedBox(height: ThemeSize.s16),
                     Button(

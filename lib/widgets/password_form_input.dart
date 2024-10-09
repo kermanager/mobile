@@ -7,6 +7,7 @@ class PasswordFormInput extends StatefulWidget {
   final String hintText;
   final IconData? icon;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const PasswordFormInput({
     super.key,
@@ -14,6 +15,7 @@ class PasswordFormInput extends StatefulWidget {
     required this.controller,
     this.icon,
     this.defaultValue,
+    this.validator,
   });
 
   @override
@@ -32,6 +34,7 @@ class _PasswordFormInputState extends State<PasswordFormInput> {
   @override
   Widget build(BuildContext context) {
     return FormInput(
+      validator: widget.validator,
       hintText: widget.hintText,
       keyboardType: TextInputType.visiblePassword,
       controller: widget.controller,

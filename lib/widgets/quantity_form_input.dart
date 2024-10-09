@@ -7,11 +7,13 @@ import 'package:kermanager/theme/theme_size.dart';
 class QuantityFormInput extends StatefulWidget {
   final int defaultValue;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const QuantityFormInput({
     super.key,
     required this.controller,
     required this.defaultValue,
+    this.validator,
   });
 
   @override
@@ -38,6 +40,7 @@ class _QuantityFormInputState extends State<QuantityFormInput> {
     }
 
     return TextFormField(
+      validator: widget.validator,
       controller: widget.controller,
       textAlign: TextAlign.center,
       readOnly: true,
@@ -63,6 +66,13 @@ class _QuantityFormInputState extends State<QuantityFormInput> {
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: ThemeColor.primary,
+            width: ThemeSize.s2,
+          ),
+          borderRadius: BorderRadius.circular(ThemeSize.s12),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ThemeColor.red200,
             width: ThemeSize.s2,
           ),
           borderRadius: BorderRadius.circular(ThemeSize.s12),

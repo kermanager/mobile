@@ -7,6 +7,7 @@ import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/link_button.dart';
@@ -107,11 +108,13 @@ class _SignInScreenState extends State<SignInScreen> {
               hintText: "Email",
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+              validator: InputValidationUtil.validateEmail,
             ),
             const SizedBox(height: ThemeSize.s16),
             PasswordFormInput(
               hintText: "Mot de passe",
               controller: _passwordController,
+              validator: InputValidationUtil.validatePassword,
             ),
             const SizedBox(height: ThemeSize.s24),
             Button(

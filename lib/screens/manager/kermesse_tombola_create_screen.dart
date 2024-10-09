@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/services/tombola_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/number_form_input.dart';
@@ -72,18 +73,21 @@ class _KermesseTombolaCreateScreenState
               hintText: "Nom",
               controller: _nameController,
               keyboardType: TextInputType.name,
+              validator: InputValidationUtil.validateName,
             ),
             const SizedBox(height: ThemeSize.s16),
             TextFormInput(
               hintText: "Cadeau",
               controller: _giftController,
               keyboardType: TextInputType.name,
+              validator: InputValidationUtil.validateName,
             ),
             const SizedBox(height: ThemeSize.s16),
             NumberFormInput(
               hintText: "Prix de participation",
               unit: "jeton",
               controller: _priceController,
+              validator: InputValidationUtil.validateNumber,
             ),
             const SizedBox(height: ThemeSize.s16),
             Button(

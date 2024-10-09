@@ -4,6 +4,7 @@ import 'package:kermanager/api/api_response.dart';
 import 'package:kermanager/services/user_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/password_form_input.dart';
@@ -66,11 +67,13 @@ class _UserEditScreenState extends State<UserEditScreen> {
             PasswordFormInput(
               hintText: "Mot de passe",
               controller: _passwordController,
+              validator: InputValidationUtil.validatePassword,
             ),
             const SizedBox(height: ThemeSize.s16),
             PasswordFormInput(
               hintText: "Nouveau mot de passe",
               controller: _newPasswordController,
+              validator: InputValidationUtil.validatePassword,
             ),
             const SizedBox(height: ThemeSize.s16),
             Button(

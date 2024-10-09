@@ -5,6 +5,7 @@ import 'package:kermanager/data/kermesse_details_response.dart';
 import 'package:kermanager/services/kermesse_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -88,6 +89,7 @@ class _KermesseEditScreenState extends State<KermesseEditScreen> {
                       controller: _nameController,
                       defaultValue: data.name,
                       keyboardType: TextInputType.name,
+                      validator: InputValidationUtil.validateName,
                     ),
                     const SizedBox(height: ThemeSize.s16),
                     TextAreaFormInput(

@@ -7,6 +7,7 @@ import 'package:kermanager/theme/theme_color.dart';
 import 'package:kermanager/theme/theme_font.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -161,11 +162,13 @@ class _KermesseInteractionDetailsScreenState
                             child: QuantityFormInput(
                               controller: _quantityController,
                               defaultValue: 1,
+                              validator: InputValidationUtil.validateQuantity,
                             ),
                           )
                         : QuantityFormInput(
                             controller: _quantityController,
                             defaultValue: 1,
+                            validator: InputValidationUtil.validateQuantity,
                           ),
                     const SizedBox(height: ThemeSize.s8),
                     Button(

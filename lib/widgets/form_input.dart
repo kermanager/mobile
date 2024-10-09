@@ -14,6 +14,7 @@ class FormInput extends StatefulWidget {
   final TextEditingController controller;
   final int? maxLines;
   final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
 
   const FormInput({
     super.key,
@@ -26,6 +27,7 @@ class FormInput extends StatefulWidget {
     this.defaultValue,
     this.maxLines,
     this.inputFormatters,
+    this.validator,
   });
 
   @override
@@ -40,6 +42,7 @@ class _FormInputState extends State<FormInput> {
     }
 
     return TextFormField(
+      validator: widget.validator,
       controller: widget.controller,
       maxLines: widget.maxLines ?? 1,
       style: const TextStyle(
@@ -54,6 +57,13 @@ class _FormInputState extends State<FormInput> {
         ),
         filled: true,
         fillColor: ThemeColor.gray100,
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ThemeColor.red200,
+            width: ThemeSize.s2,
+          ),
+          borderRadius: BorderRadius.circular(ThemeSize.s12),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: ThemeColor.gray200,

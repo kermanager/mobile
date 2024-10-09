@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kermanager/services/stripe_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/form_column.dart';
 import 'package:kermanager/widgets/number_form_input.dart';
@@ -73,6 +74,7 @@ class _UserCreditEditScreenState extends State<UserCreditEditScreen> {
               hintText: "Nombre de jetons",
               unit: "jeton",
               controller: _creditController,
+              validator: InputValidationUtil.validateQuantity,
             ),
             const SizedBox(height: ThemeSize.s16),
             Button(

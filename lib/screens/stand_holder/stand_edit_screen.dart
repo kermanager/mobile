@@ -5,6 +5,7 @@ import 'package:kermanager/data/stand_details_response.dart';
 import 'package:kermanager/services/stand_service.dart';
 import 'package:kermanager/theme/theme_size.dart';
 import 'package:kermanager/utils/snackbar.dart';
+import 'package:kermanager/utils/validator.dart';
 import 'package:kermanager/widgets/button.dart';
 import 'package:kermanager/widgets/details_future_builder.dart';
 import 'package:kermanager/widgets/form_column.dart';
@@ -86,6 +87,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
                       controller: _nameController,
                       defaultValue: data.name,
                       keyboardType: TextInputType.name,
+                      validator: InputValidationUtil.validateName,
                     ),
                     const SizedBox(height: ThemeSize.s16),
                     TextAreaFormInput(
@@ -99,6 +101,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
                       unit: "jeton",
                       controller: _priceController,
                       defaultValue: data.price.toString(),
+                      validator: InputValidationUtil.validateNumber,
                     ),
                     const SizedBox(height: ThemeSize.s16),
                     data.type == "CONSUMPTION"
@@ -109,6 +112,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
                                 unit: "pièce",
                                 controller: _stockController,
                                 defaultValue: data.stock.toString(),
+                                validator: InputValidationUtil.validateNumber,
                               ),
                               const SizedBox(height: ThemeSize.s16),
                             ],
@@ -121,6 +125,7 @@ class _StandEditScreenState extends State<StandEditScreen> {
                               unit: "pièce",
                               controller: _stockController,
                               defaultValue: data.stock.toString(),
+                              validator: InputValidationUtil.validateNumber,
                             ),
                           ),
                     Button(

@@ -8,6 +8,7 @@ class TextFormInput extends StatefulWidget {
   final IconData? icon;
   final Widget? suffix;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const TextFormInput({
     super.key,
@@ -17,6 +18,7 @@ class TextFormInput extends StatefulWidget {
     this.icon,
     this.suffix,
     this.defaultValue,
+    this.validator,
   });
 
   @override
@@ -27,6 +29,7 @@ class _TextFormInputState extends State<TextFormInput> {
   @override
   Widget build(BuildContext context) {
     return FormInput(
+      validator: widget.validator,
       hintText: widget.hintText,
       keyboardType: widget.keyboardType,
       controller: widget.controller,
